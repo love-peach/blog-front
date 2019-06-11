@@ -1,0 +1,106 @@
+html,
+body {
+  height: 100%;
+}
+
+#app {
+  height: 100%;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #515a6e;
+  background-color: #f0f4f7;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fr {
+  float: right;
+}
+
+.fl {
+  float: left;
+}
+
+.clearfix:after {
+  content: "";
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+
+.color-primary {
+  color: @colorPrimary;
+}
+
+.color-info {
+  color: @colorInfo;
+}
+
+.color-success {
+  color: @colorSuccess;
+}
+
+.color-warning {
+  color: @colorWarning;
+}
+
+.color-error {
+  color: @colorError;
+}
+
+// 无限旋转
+.z-load-loop {
+  -webkit-animation: ani-load-loop 1s linear infinite;
+  animation: ani-load-loop 1s linear infinite
+}
+
+@-webkit-keyframes ani-load-loop {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0)
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg)
+  }
+
+  to {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn)
+  }
+}
+
+@keyframes ani-load-loop {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0)
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg)
+  }
+
+  to {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn)
+  }
+}
