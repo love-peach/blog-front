@@ -9,6 +9,15 @@ const BlogContentDetail = () => import(/* webpackChunkName: 'BlogContentDetail' 
 const BlogSideDetail = () => import(/* webpackChunkName: 'BlogContentDetail' */ '@/views/blog/blog-side-detail/');
 const BlogSideList = () => import(/* webpackChunkName: 'BlogContentDetail' */ '@/views/blog/blog-side-list/');
 
+const AdminLayout = () => import(/* webpackChunkName: 'AdminLayout' */ '@/components/framework/admin-layout/');
+const AdminHome = () => import(/* webpackChunkName: 'AdminHome' */ '@/views/admin/home/');
+const AdminWrite = () => import(/* webpackChunkName: 'AdminWrite' */ '@/views/admin/admin-write/');
+const AdminArticle = () => import(/* webpackChunkName: 'AdminArticle' */ '@/views/admin/admin-article/');
+const AdminCatgory = () => import(/* webpackChunkName: 'AdminCatgory' */ '@/views/admin/admin-category/');
+const AdminTag = () => import(/* webpackChunkName: 'AdminTag' */ '@/views/admin/admin-tag/');
+const AdminResource = () => import(/* webpackChunkName: 'AdminResource' */ '@/views/admin/admin-resource/');
+const AdminUser = () => import(/* webpackChunkName: 'AdminUser' */ '@/views/admin/admin-user/');
+
 export default [
   {
     path: '/',
@@ -56,5 +65,46 @@ export default [
     path: '/login',
     name: 'login',
     component: LoginPage,
+  },
+  {
+    path: '/admin',
+    component: AdminLayout,
+    children: [
+      {
+        path: '',
+        name: '管理后台-首页',
+        component: AdminHome,
+      },
+      {
+        path: 'write',
+        name: '写文章',
+        component: AdminWrite,
+      },
+      {
+        path: 'article',
+        name: '文章管理',
+        component: AdminArticle,
+      },
+      {
+        path: 'category',
+        name: '文章分类管理',
+        component: AdminCatgory,
+      },
+      {
+        path: 'tag',
+        name: '文章标签管理',
+        component: AdminTag,
+      },
+      {
+        path: 'resource',
+        name: '前端资源管理',
+        component: AdminResource,
+      },
+      {
+        path: 'user',
+        name: '用户管理',
+        component: AdminUser,
+      },
+    ],
   },
 ];

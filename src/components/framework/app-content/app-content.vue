@@ -4,7 +4,11 @@
   </div>
 </template>
 
-<script src="./app-content.js"></script>
+<script>
+export default {
+  name: 'AppContent',
+};
+</script>
 
 <style lang="less" scoped>
 .app-content {

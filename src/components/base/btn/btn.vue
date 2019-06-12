@@ -28,6 +28,7 @@ export default {
       default: 'default',
     },
     shape: {
+      type: String,
       validator(value) {
         return oneOf(value, ['rect', 'radius', 'circle']);
       },

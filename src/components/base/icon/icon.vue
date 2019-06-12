@@ -1,5 +1,5 @@
 <template>
-  <i :class="`z-icon iconfont icon-${type}`" :style="styles"></i>
+  <i :class="`z-icon iconfont icon-${type}`" :style="styles" @click="handleClick"></i>
 </template>
 
 <script>
@@ -25,6 +25,11 @@ export default {
         fontSize: typeof this.size === 'number' ? `${this.size}px` : this.size,
         color: this.color,
       };
+    },
+  },
+  methods: {
+    handleClick(event) {
+      this.$emit('click', event);
     },
   },
 };

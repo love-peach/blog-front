@@ -1,12 +1,10 @@
 import Card from '@/components/base/card/';
-import Tag from '@/components/base/tag/';
 import Icon from '@/components/base/icon/';
 
 export default {
   name: 'CardTopic',
   components: {
     Card,
-    Tag,
     Icon,
   },
   props: {

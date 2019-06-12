@@ -3,15 +3,44 @@
     <div class="z-container">
       <div class="app-header">
         <router-link to="/" active-class="current" exact class="app-header-brand">
-          <i class="iconfont icon-logo"></i>
+          <Icon type="logo" :size="166" />
         </router-link>
-        <div class="app-header-menu">
-          <router-link v-for="(nav, index) in navList" :key="index" :to="nav.path" active-class="current" class="menu-link">{{ nav.name }}</router-link>
-        </div>
+        <AppMenu />
       </div>
     </div>
   </div>
 </template>
 
-<script src="./app-header.js"></script>
-<style src="./app-header.less" lang="less" scoped></style>
+<script>
+import Icon from '@/components/base/icon/';
+import AppMenu from '@/components/framework/app-menu/';
+
+export default {
+  name: 'AppHeader',
+  components: {
+    Icon,
+    AppMenu,
+  },
+};
+</script>
+
+<style lang="less" scoped>
+.app-header-wrap {
+  background-color: #fff;
+  margin-bottom: 20px;
+  .app-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .app-header-brand {
+    margin-right: 30px;
+    color: @colorTextContent;
+    .iconfont {
+      line-height: @heightHeader;
+      &:before {
+        display: block;
+      }
+    }
+  }
+}
+</style>
