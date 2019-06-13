@@ -3,7 +3,7 @@
     <div class="z-tag-content">
       <slot></slot>
     </div>
-    <icon v-if="closable" type="close" @click.native.stop="handleClose"></icon>
+    <icon v-if="closeable" type="close" @click.native.stop="handleClose"></icon>
   </div>
 </template>
 
@@ -43,7 +43,7 @@ export default {
       type: [Number, String],
       default: '0.3em',
     },
-    closable: {
+    closeable: {
       type: Boolean,
       default: false,
     },
@@ -54,7 +54,7 @@ export default {
         `${prefixCls}`,
         `${prefixCls}-${this.theme}`,
         {
-          [`${prefixCls}-closeable`]: this.closable,
+          [`${prefixCls}-closeable`]: this.closeable,
           [`${prefixCls}-${this.type}`]: this.type !== 'default',
           [`${prefixCls}-${this.size}`]: this.size !== 'default',
         },

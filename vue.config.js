@@ -13,7 +13,7 @@ const externals = {
 
 const cdn = {
   dev: {
-    css: ['//at.alicdn.com/t/font_1226722_6xuzinetree.css'],
+    css: ['//at.alicdn.com/t/font_1226722_glira5nqeql.css'],
     js: [
       'https://cdn.bootcss.com/vue/2.6.6/vue.js',
       'https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js',
@@ -22,7 +22,7 @@ const cdn = {
     ],
   },
   pro: {
-    css: ['//at.alicdn.com/t/font_1226722_6xuzinetree.css'],
+    css: ['//at.alicdn.com/t/font_1226722_glira5nqeql.css'],
     js: [
       'https://cdn.bootcss.com/vue/2.6.6/vue.min.js',
       'https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js',

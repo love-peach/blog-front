@@ -25,6 +25,22 @@ a {
   color: inherit;
 }
 
+input {
+  outline: none;
+  margin: 5px 0;
+  padding: 0 10px;
+  line-height: 40px;
+  height: 40px;
+  font-size: 14px;
+  background-color: @colorBgBody;
+  border: 1px solid darken(@colorBgBody, 5%);
+  border-radius: 5px;
+}
+
+input:focus {
+  border-color: @colorInfo;
+}
+
 .text-center {
   text-align: center;
 }

@@ -25,9 +25,6 @@ export default {
       isShowSignInModal: 'getIsShowSignInModal',
     }),
   },
-  mounted() {
-    console.log(webStore.getUserInfo(), 'userInfo');
-  },
   methods: {
     ...mapActions({
       toggleSignInModal: 'common/toggleSignInModal',

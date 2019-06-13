@@ -1,33 +1,28 @@
 <template>
   <div class="admin-write-wrap">
-    admin-write
-    <Tag closable>张</Tag>
-    <input v-model="formData.title" class="write-input title" type="text" placeholder="标题: 月光下的奔跑" />
+    <div>{{ formData }}</div>
+    <div>{{ formData.poster }}</div>
+    <input v-model="formData.title" class="title" type="text" placeholder="标题: 月光下的奔跑" />
     <div class="z-row">
-      <div class="z-col-12">
-        <multiselect v-model="formData.category" :options="categoryList.slice(1)" track-by="name" label="name" :allow-empty="false" :close-on-select="true" :show-labels="false" placeholder="请选择文章分类"> </multiselect>
+      <div class="z-col-xl-6 z-col-lg-12">
+        <ZSelect v-model="formData.category" placeholder="请选择文章分类" :options="categoryList.slice(1)" labelKey="name" valueKey="_id"></ZSelect>
       </div>
-      <div class="z-col-12">
-        <multiselect
-          v-model="formData.tag"
-          :options="tagList"
-          :multiple="true"
-          track-by="name"
-          label="name"
-          :close-on-select="false"
-          :show-labels="false"
-          tag-placeholder="添加新标签"
-          :taggable="true"
-          placeholder="请填写文章标签"
-        >
-          <template slot="tag" slot-scope="props">
-            <Tag theme="info" closable @close="props.remove(props.option)">{{props.option.name}}</Tag>
-          </template>
-        </multiselect>
+      <div class="z-col-xl-6 z-col-lg-12">
+        <ZSelect v-model="formData.tag" placeholder="请填写文章标签" :options="tagList" multiple labelKey="name" valueKey="_id"></ZSelect>
+      </div>
+      <div class="z-col-xl-12">
+        <div class="z-row">
+          <div class="z-col-19">
+            <input v-model="formData.poster" class="poster" type="text" placeholder="粘贴图片URL" />
+          </div>
+          <div class="z-col-5">
+            <Upload action="/api/upload" :format="['png', 'jpeg', 'jpg']" :max-size="2048" :on-format-error="handleFormatError" :on-exceeded-size="handleMaxSize" :on-success="handleUploadSuccess">
+              <Btn theme="info" icon="tag" style="margin:5px 0;height: 38px;" long>选择文件</Btn>
+            </Upload>
+          </div>
+        </div>
       </div>
     </div>
-    <input v-model="formData.poster"  class="write-input poster" type="text" placeholder="粘贴图片URL">
-
   </div>
 </template>
 
@@ -35,32 +30,15 @@
 
 <style lang="less" scoped>
 .admin-write-wrap {
-  input,
-  select {
-    width: 200px;
-    height: 36px;
-    line-height: 36px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    border: 1px solid @colorTextContent;
-    outline: none;
-    vertical-align: middle;
-  }
   input {
     padding: 0 10px;
   }
-  select {
-    vertical-align: top;
-  }
 
   .title {
-    height: 40px;
-    line-height: 40px;
     width: 100%;
     font-size: 18px;
   }
   .poster {
-    margin-top: 10px;
     width: 100%;
   }
 }
