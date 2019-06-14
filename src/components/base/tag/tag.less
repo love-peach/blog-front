@@ -5,9 +5,9 @@
   font-size: 14px;
   vertical-align: middle;
   overflow: hidden;
-  color: @colorTextSub;
-  border: 1px solid @colorTextSub;
-  background-color: #f7f7f7;
+  color: @colorTextContent;
+  border: 1px solid @colorBorder;
+  background-color: @colorBg;
   align-items: stretch;
 
   &-content {
@@ -16,7 +16,7 @@
 
   &:hover {
     background-color: fade(#fff, 50%);
-    border-color: lighten(@colorTextSub, 10%);
+    border-color: lighten(@colorBorder, 10%);
     .iconfont:after {
       opacity: 0.6;
     }
@@ -69,8 +69,8 @@
     border-color: @colorPrimary;
     background-color: @colorPrimary;
     &:hover {
-      background-color: lighten(@colorPrimary, 10%);
-      border-color: lighten(@colorPrimary, 10%);
+      background-color: @colorPrimaryLight;
+      border-color: @colorPrimaryLight;
     }
   }
   &-info {
@@ -78,8 +78,8 @@
     border-color: @colorInfo;
     background-color: @colorInfo;
     &:hover {
-      background-color: lighten(@colorInfo, 10%);
-      border-color: lighten(@colorInfo, 10%);
+      background-color: @colorInfoLight;
+      border-color: @colorInfoLight;
     }
   }
   &-success {
@@ -87,8 +87,8 @@
     border-color: @colorSuccess;
     background-color: @colorSuccess;
     &:hover {
-      background-color: lighten(@colorSuccess, 10%);
-      border-color: lighten(@colorSuccess, 10%);
+      background-color: @colorSuccessLight;
+      border-color: @colorSuccessLight;
     }
   }
   &-warning {
@@ -96,8 +96,8 @@
     border-color: @colorWarning;
     background-color: @colorWarning;
     &:hover {
-      background-color: lighten(@colorWarning, 10%);
-      border-color: lighten(@colorWarning, 10%);
+      background-color: @colorWarningLight;
+      border-color: @colorWarningLight;
     }
   }
   &-error {
@@ -105,8 +105,8 @@
     border-color: @colorError;
     background-color: @colorError;
     &:hover {
-      background-color: lighten(@colorError, 10%);
-      border-color: lighten(@colorError, 10%);
+      background-color: @colorErrorLight;
+      border-color: @colorErrorLight;
     }
   }
 
@@ -119,35 +119,35 @@
   &-border&-primary {
     color: @colorPrimary;
     &:hover {
-      background-color: fade(@colorPrimary, 10%);
+      background-color: @colorPrimaryFade;
     }
   }
   &-dashed&-info,
   &-border&-info {
     color: @colorInfo;
     &:hover {
-      background-color: fade(@colorInfo, 10%);
+      background-color: @colorInfo;
     }
   }
   &-dashed&-success,
   &-border&-success {
     color: @colorSuccess;
     &:hover {
-      background-color: fade(@colorSuccess, 10%);
+      background-color: @colorInfoFade;
     }
   }
   &-dashed&-warning,
   &-border&-warning {
     color: @colorWarning;
     &:hover {
-      background-color: fade(@colorWarning, 10%);
+      background-color: @colorWarningFade;
     }
   }
   &-dashed&-error,
   &-border&-error {
     color: @colorError;
     &:hover {
-      background-color: fade(@colorError, 10%);
+      background-color: @colorErrorFade;
     }
   }
 

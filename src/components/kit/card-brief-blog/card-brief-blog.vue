@@ -65,7 +65,7 @@ export default {
     width: 38.2%;
     margin: -19% auto 0;
     border-radius: 100%;
-    border: 5px solid rgba(255, 255, 255, 0.4);
+    border: 5px solid @colorBorderLight;
     box-sizing: content-box;
   }
   .author-avatar-box {

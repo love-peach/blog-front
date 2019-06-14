@@ -70,26 +70,23 @@ export default {
     }
   }
   .admin-side-menu {
-    background-color: #001529;
+    background-color: @colorBgSideMenu;
     flex: 1;
   }
   .menu-link {
     display: block;
     padding: 15px 24px;
-    color: #f1f1f1;
-    background-color: #515a6e;
+    color: @colorTextSilver;
+    background-color: @colorBgSideMenuItem;
     transition: background-color 0.2s ease;
     &:hover {
       color: #fff;
-      background-color: darken(#515a6e, 5%);
+      background-color: darken(@colorBgSideMenuItem, 5%);
     }
     &.current {
       color: #fff;
-      background-color: #363e4f;
+      background-color: @colorBgSideMenuItemActive;
     }
   }
-  // .menu-link.current {
-  //   background-color: #363e4f;
-  // }
 }
 </style>

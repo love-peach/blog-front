@@ -25,6 +25,7 @@ export default {
   flex: 1;
   height: 100%;
   .admin-content {
+    display: flex;
     flex: 1;
     padding: 16px;
   }

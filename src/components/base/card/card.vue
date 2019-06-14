@@ -44,7 +44,7 @@ export default {
     font-size: 18px;
     line-height: 40px;
     text-align: center;
-    border-bottom: 1px solid @colorBorderSilver;
+    border-bottom: 1px solid @colorBorderLight;
     color: @colorTextTitle;
   }
   .card-body {

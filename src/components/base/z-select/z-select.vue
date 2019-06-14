@@ -56,14 +56,14 @@ button {
   padding-left: 10px;
   padding-right: 30px;
   border-radius: 5px;
-  border: 1px solid darken(@colorBgBody, 5%);
+  border: 1px solid @colorBorder;
   background-color: #fff;
 
   &:focus {
     border-color: @colorInfo;
   }
   &-placeholder {
-    color: @colorTextSub;
+    color: @colorTextLight;
     font-size: 14px;
   }
   &-label {
@@ -89,7 +89,7 @@ button {
     background-color: #fff;
     max-height: 300px;
     overflow: auto;
-    // border: 1px solid darken(@colorBgBody, 5%);
+    border: 1px solid @colorBorder;
   }
   &-options-item {
     padding: 10px;

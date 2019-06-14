@@ -2,6 +2,7 @@ import Multiselect from 'vue-multiselect';
 import ZSelect from '@/components/base/z-select/';
 import Btn from '@/components/base/btn/';
 import Upload from '@/components/base/upload/';
+import MdEditor from '@/components/kit/md-editor/';
 
 import api from '@/api/';
 
@@ -16,9 +17,11 @@ export default {
     ZSelect,
     Btn,
     Upload,
+    MdEditor,
   },
   data() {
     return {
+      isPostBlogLoading: false,
       formData: {
         poster: '',
       },
@@ -71,6 +74,33 @@ export default {
     handleUploadSuccess(res) {
       console.log(res.result.path, 'res.result.path');
       this.formData.poster = res.result.path;
+    },
+
+    /**
+     * @desc 提交
+     */
+    handleSubmit() {
+      console.log(this.formData, 'formData');
+    },
+
+    /**
+     * @desc 请求 发布文章
+     */
+    requestArticle() {
+      const params = {
+        ...this.formData,
+        author: 'zhangjinpei',
+      };
+      this.isPostBlogLoading = true;
+      api
+        .backendPostArticle(params)
+        .then(res => {
+          this.isPostBlogLoading = false;
+          this.$router.push({ path: `/detail/wordpress/${res.data._id}` });
+        })
+        .catch(() => {
+          this.isPostBlogLoading = false;
+        });
     },
   },
 };

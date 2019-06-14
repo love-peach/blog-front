@@ -32,8 +32,8 @@ input {
   line-height: 40px;
   height: 40px;
   font-size: 14px;
-  background-color: @colorBgBody;
-  border: 1px solid darken(@colorBgBody, 5%);
+  background-color: @colorBg;
+  border: 1px solid @colorBorderLight;
   border-radius: 5px;
 }
 
@@ -59,26 +59,6 @@ input:focus {
   height: 0;
   visibility: hidden;
   clear: both;
-}
-
-.color-primary {
-  color: @colorPrimary;
-}
-
-.color-info {
-  color: @colorInfo;
-}
-
-.color-success {
-  color: @colorSuccess;
-}
-
-.color-warning {
-  color: @colorWarning;
-}
-
-.color-error {
-  color: @colorError;
 }
 
 // 无限旋转
