@@ -1,5 +1,14 @@
 <template>
-  <button :class="`${prefixCls}`" @click="handleClick" @focus="handleFocus" @blur="handleBlur">
+  <button
+    ref="zSelect"
+    :class="`${prefixCls} ${isShowOptions ? prefixCls + '-open' : ''}`"
+    @click="handleClick"
+    @focus="handleFocus"
+    @blur="handleBlur"
+    @keyup.enter="handleEnter"
+    @keyup.up="handleKeyupUp"
+    @keyup.down="handleKeyupDown"
+  >
     <template v-if="selectedArray.length === 0">
       <span :class="`${prefixCls}-placeholder`">{{ placeholder }}</span>
     </template>
@@ -14,8 +23,14 @@
     </template>
 
     <Icon :class="`${prefixCls}-icon`" type="arrow-down" size="1.6em" />
-    <ul :class="`${prefixCls}-options`" v-show="isShowOptions">
-      <li :class="`${prefixCls}-options-item ${includeSomeValue(item, selectedArray) ? prefixCls + '-checked' : ''}`" v-for="(item, index) in options" :key="index" @click.stop="handleSelect(item)">
+    <ul ref="zSelectOptions" :class="`${prefixCls}-options`" v-show="isShowOptions">
+      <li
+        v-for="(item, index) in options"
+        :key="index"
+        :class="`${prefixCls}-options-item ${includeSomeValue(item, selectedArray) ? prefixCls + '-checked' : ''} ${cursorIndex === index ? prefixCls + '-cursor' : ''}`"
+        @click.stop="handleSelect(item)"
+        @mouseover="handleMouseoverOptionItem(index)"
+      >
         <span>{{ item[labelKey] }}</span>
         <Icon :class="`${prefixCls}-check-icon`" type="check" />
       </li>
@@ -59,16 +74,22 @@ button {
     position: absolute;
     top: 50%;
     right: 0;
-    transform: translate(0, -50%);
+    transform: translate(0, -50%) rotate(0);
+    transition: all 0.2s ease;
+  }
+  &-open &-icon {
+    transform: translate(0, -50%) rotate(180deg);
   }
   &-options {
     position: absolute;
     z-index: 999;
-    top: 100%;
+    top: 41px;
     left: 0;
     right: 0;
     background-color: #fff;
-    border: 1px solid darken(@colorBgBody, 5%);
+    max-height: 300px;
+    overflow: auto;
+    // border: 1px solid darken(@colorBgBody, 5%);
   }
   &-options-item {
     padding: 10px;
@@ -95,6 +116,15 @@ button {
   }
   &-options-item&-checked &-check-icon {
     display: block;
+  }
+
+  &-options-item&-cursor {
+    color: #fff;
+    background-color: @colorPrimary;
+  }
+  &-options-item&-cursor&-checked {
+    color: #fff;
+    background-color: @colorError;
   }
 }
 </style>

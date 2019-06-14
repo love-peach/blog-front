@@ -33,6 +33,7 @@ export default {
       prefixCls: 'z-select',
       isShowOptions: false,
       selectedArray: [],
+      cursorIndex: 0,
     };
   },
   computed: {
@@ -132,6 +133,51 @@ export default {
       this.handleHideOptions();
     },
 
+    handleEnter() {
+      if (this.isShowOptions) {
+        this.handleSelect(this.options[this.cursorIndex]);
+      } else {
+        this.handleHideOptions();
+      }
+    },
+
+    handleKeyupUp() {
+      if (this.cursorIndex <= 0) {
+        this.cursorIndex = this.options.length - 1;
+      } else {
+        this.cursorIndex -= 1;
+      }
+      this.makeOptionItemVisable();
+    },
+
+    handleKeyupDown() {
+      if (this.cursorIndex >= this.options.length - 1) {
+        this.cursorIndex = 0;
+      } else {
+        this.cursorIndex += 1;
+      }
+      this.makeOptionItemVisable();
+    },
+
+    handleMouseoverOptionItem(index) {
+      this.cursorIndex = index;
+    },
+
+    makeOptionItemVisable() {
+      const optionsUl = this.$refs.zSelectOptions;
+      const optionsUlHeight = optionsUl.clientHeight;
+      const optionsUlScrollTop = optionsUl.scrollTop;
+      const optionsUlItem = optionsUl.getElementsByTagName('li')[this.cursorIndex];
+      const optionsUlItemHeight = optionsUlItem.clientHeight;
+      const optionsUlItemOffsetTop = optionsUlItem.offsetTop;
+
+      if (optionsUlScrollTop <= optionsUlItemOffsetTop && optionsUlItemOffsetTop + optionsUlItemHeight <= optionsUlScrollTop + optionsUlHeight) {
+        // 在 options 盒子里可见
+      } else {
+        optionsUl.scrollTop = optionsUlItemOffsetTop;
+      }
+    },
+
     /**
      * @desc 显示 options
      */
@@ -144,6 +190,8 @@ export default {
      */
     handleHideOptions() {
       this.isShowOptions = false;
+      this.$refs.zSelect.blur();
+      this.cursorIndex = 0;
     },
   },
 };
