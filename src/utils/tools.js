@@ -1,5 +1,5 @@
 /**
- * @description 绑定事件 on(element, event, handler)
+ * @desc 绑定事件 on(element, event, handler)
  */
 export const on = (function() {
   if (document.addEventListener) {
@@ -18,7 +18,7 @@ export const on = (function() {
 })();
 
 /**
- * @description 解绑事件 off(element, event, handler)
+ * @desc 解绑事件 off(element, event, handler)
  */
 export const off = (function() {
   if (document.removeEventListener) {
@@ -36,13 +36,89 @@ export const off = (function() {
   }
 })();
 
+// https://www.cnblogs.com/momo798/p/9177767.html
+
 /**
- * @description 检测是不是空对象
+ * @desc 防抖 如 input。核心：在给定的时间间隔内 只触发一次 取消上一次。连续的操作 只触发一次。
+ */
+export const debounce = (fn, wait = 500) => {
+  console.log(fn);
+  var timer = null;
+
+  return function() {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(this, arguments);
+    }, wait);
+    // timer = setTimeout(fn, wait);
+  };
+};
+
+/**
+ * @desc 节流 对高频事件的优化  如 scroll。
+ * 与防抖区别：防抖在连续的操作过程中只触发一次，而节流可能触发多次，但是频率变低了。
+ */
+export const throttle = (fn, interval = 300) => {
+  var timer = null;
+  var timeStart = new Date();
+
+  return function() {
+    const now = new Date();
+    const space = now - timeStart;
+    if (space > interval) {
+      fn.apply(this, arguments);
+      timeStart = now;
+    } else {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        // 这个 时候 currentTarget 为 null
+        fn.apply(this, arguments);
+      }, interval);
+    }
+  };
+};
+
+/**
+ * @desc 节流（定时器方案） 对高频事件的优化  如 scroll。核心：间隔时间内 打开可执行标志。
+ * 优点：确保最终结果，因为是延迟执行。
+ * 缺点：不能马上触发 （方向键操作试下）
+ */
+export const throttle1 = (fn, interval = 1000) => {
+  var timer = null;
+  return function() {
+    if (!timer) {
+      timer = setTimeout(() => {
+        fn.apply(this, arguments);
+        clearTimeout(timer);
+        timer = null;
+      }, interval);
+    }
+  };
+};
+
+/**
+ * @desc 节流（时间戳方案） 对高频事件的优化  如 scroll。 核心： 每隔给定时间，触发一次。
+ * 优点：立即触发
+ * 缺点：如果上一次停止操作的时间 跟下次操作时间没有超过给定的时间 将不会触发。（时间设置大一点 方向键操作试下）
+ */
+export const throttle2 = (fn, interval = 2000) => {
+  var timeStart = new Date();
+  return function() {
+    const now = new Date();
+    if (now - timeStart > interval) {
+      fn.apply(this, arguments);
+      timeStart = now;
+    }
+  };
+};
+
+/**
+ * @desc 检测是不是空对象
  */
 export const isEmptyObject = obj => obj && Object.keys(obj).length === 0;
 
 /**
- * @description 对象 深合并
+ * @desc 对象 深合并
  */
 export const deepMerge = (obj1, obj2) => {
   var key;
@@ -54,7 +130,7 @@ export const deepMerge = (obj1, obj2) => {
 };
 
 /**
- * @description url 上获取参数
+ * @desc url 上获取参数
  */
 export const getQueryString = name => {
   var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
@@ -70,6 +146,11 @@ export const getQueryString = name => {
   }
 };
 
+/**
+ * @desc 检测 value 是否在 validList 中
+ * @param value 需要检测的值
+ * @param validList 检测列表
+ */
 export function oneOf(value, validList) {
   for (let i = 0; i < validList.length; i++) {
     if (value === validList[i]) {
@@ -80,7 +161,7 @@ export function oneOf(value, validList) {
 }
 
 /**
- * @description 下载文件 张杰
+ * @desc 下载文件 张杰
  */
 export const downloadfile = (name, res) => {
   var blob = new Blob([res], {
@@ -97,7 +178,7 @@ export const downloadfile = (name, res) => {
 };
 
 /**
- * @description 下载文件 张晋佩
+ * @desc 下载文件 张晋佩
  */
 export const DownLoadFile = options => {
   let config = { method: 'post' };
@@ -118,46 +199,4 @@ export const DownLoadFile = options => {
   tempIframe.appendChild(tempForm);
   document.body.appendChild(tempIframe);
   tempForm.submit();
-};
-
-/**
- * @description 表单校验
- */
-export const validatorsFrom = {
-  // 验证自然数
-  naturalNumber: /^(([0-9]*[1-9][0-9]*)|(0+))$/,
-  naturalNumberMsg: '请输入自然数',
-  // 英文
-  english: /^.[A-Za-z]+$/,
-  englishMsg: '请输入英文字符',
-  // 座机
-  telephone: /^\d{3}-\d{7,8}|\d{4}-\d{7,8}$/,
-  telephoneMsg: '请输入正确的座机号',
-  // 银行卡号码
-  bankCard: /^[1-9]\d{9,19}$/,
-  bankCardMsg: '请输入正确的银行卡号码',
-  // 证件号码
-  IDNumber: /^[a-z0-9A-Z]{0,50}$/,
-  IDNumberMsg: '请输入正确的证件号码',
-  // 身份证号码,包括15位和18位的
-  IDCard: /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{7}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}$)/,
-  IDCardMsg: '请输入正确的身份证号码',
-  // QQ号码
-  qq: /^[1-9]\d{4,11}$/,
-  qqMsg: '请输入正确的QQ号码',
-  // 网址, 仅支持http和https开头的
-  url: /^(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-.,@?^=%&:/~+#]*[\w\-@?^=%&/~+#])?$/,
-  urlMsg: '请输入以http和https开头的网址',
-  // 0到20位的英文字符和数字
-  enNum0to20: /^[a-z0-9A-Z]{0,20}$/,
-  enNum0to20Msg: '请输入20位以内的英文字符和数字',
-  // 2到100位的中英文字符和空格
-  cnEnSpace2to100: /^[a-zA-Z\u4E00-\u9FA5\s*]{2,100}$/,
-  cnEnSpace2to100Msg: '请输入2到100位的中英文字符和空格',
-  // 数字和换行符
-  numLinefeed: /^[0-9\n*]+$/,
-  numLinefeedMsg: '请输入数字和换行符',
-  // 255位以内的字符
-  char0to255: /^.{0,255}$/,
-  char0to255Msg: '请输入255位以内的字符',
 };

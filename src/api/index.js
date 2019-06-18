@@ -13,6 +13,9 @@ export default {
   // 获取文章列表
   GetBlogDetail: (params, options) => request.get(`/blogs/${params.blogId}`, params, options),
 
+  // 发布文章
+  PostBlog: (params, options) => request.post('/blogs', params, options),
+
   // 用户 - 注册
   PostUserSignup: (params, options) => request.post('/users/signup', params, options),
 

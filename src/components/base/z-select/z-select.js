@@ -8,6 +8,12 @@ export default {
     Tag,
   },
   props: {
+    value: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
     options: {
       type: Array,
       default() {
@@ -45,10 +51,28 @@ export default {
     },
   },
 
-  updated() {
-    this.updateValue();
+  mounted() {
+    this.$nextTick(() => {
+      this.initValue();
+    });
+  },
+
+  watch: {
+    options() {
+      this.initValue();
+    },
   },
   methods: {
+    /**
+     * @desc 初始化数据
+     */
+    initValue() {
+      let { value, options } = this;
+      if (value && value.length > 0 && options && options.length > 0) {
+        this.selectedArray = options.filter(item => value.includes(item._id));
+      }
+    },
+
     /**
      * @desc 将值发射给 v-model 绑定的值
      */
@@ -77,10 +101,11 @@ export default {
       } else {
         this.selectedArray = [option];
       }
+      this.updateValue();
     },
 
     /**
-     * @desc 选择 option 单选
+     * @desc 选择 option 多选
      */
     handleSelectMultiple(option) {
       if (this.includeSomeValue(option, this.selectedArray)) {
@@ -88,6 +113,7 @@ export default {
       } else {
         this.selectedArray.push(option);
       }
+      this.updateValue();
     },
 
     /**

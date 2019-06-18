@@ -55,7 +55,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 240px;
+  width: 100%;
   .admin-side-brand {
     display: block;
     background-color: @colorPrimary;

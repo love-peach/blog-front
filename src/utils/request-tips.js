@@ -1,4 +1,6 @@
 // 根据请求报错状态码 格式化错误信息
+import store from '@/store/';
+
 function transformErrMsg(response) {
   let message = '';
   switch (response.status) {
@@ -6,7 +8,7 @@ function transformErrMsg(response) {
       message = '错误请求';
       break;
     case 401:
-      message = '未授权，请重新登录';
+      message = '未授权 或 授权失效，请重新登录';
       break;
     case 403:
       message = '拒绝访问';
@@ -54,6 +56,7 @@ function checkHttpStatus(response) {
   }
   if (response && response.status === 401) {
     console.log('登录过期了', 'response');
+    store.dispatch('common/toggleSignInModal', true);
   }
   if (response && response.data) {
     console.log('http Status 似乎不太正常', response);

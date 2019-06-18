@@ -1,11 +1,17 @@
 import api from '@/api/';
 const { mapMutations, mapActions } = Vuex;
 import Btn from '@/components/base/btn/';
+// import { on, throttle } from '@/utils/tools';
+import ZInputDebounce from '@/components/base/z-input-debounce/';
+
+import MdPreview from '@/components/kit/md-preview/';
 
 export default {
   name: 'BlogDetail',
   components: {
     Btn,
+    ZInputDebounce,
+    MdPreview,
   },
   data() {
     return {
@@ -17,6 +23,12 @@ export default {
     this.requestBlogDetail();
     this.$toast('1212');
   },
+  mounted() {
+    // on(window, 'scroll', throttle(this.handleScrollEvent));
+  },
+  beforeDestroy() {
+    // off(window, 'scroll', this.handleScroll());
+  },
   methods: {
     ...mapActions({
       toggleSignInModal: 'common/toggleSignInModal',
@@ -24,6 +36,14 @@ export default {
     ...mapMutations({
       setBlogResult: 'common/setBlogResult',
     }),
+
+    handleChange(e) {
+      console.log(e.target.value, '33');
+    },
+
+    handleScrollEvent(e) {
+      console.log(e, 'e');
+    },
 
     handleLogin() {
       this.toggleSignInModal(true);

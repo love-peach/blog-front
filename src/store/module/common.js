@@ -8,6 +8,7 @@ const common = {
     showSignInModal: false,
     showSignUpModal: false,
     userInfo: {},
+    highLightIndex: 0, // markdown 目录高亮索引
   },
   getters: {
     getBlogResult: state => state.blogResult,
@@ -18,6 +19,7 @@ const common = {
     getIsShowSignInModal: state => state.showSignInModal,
     getIsShowSignUpModal: state => state.showSignUpModal,
     getUserInfo: state => state.userInfo,
+    getHighLightIndex: state => state.highLightIndex,
   },
   mutations: {
     setCatgoryList(state, data) {
@@ -35,6 +37,9 @@ const common = {
     setUserInfo(state, data) {
       state.userInfo = data;
     },
+    setHighLightIndex(state, { index }) {
+      state.highLightIndex = index;
+    },
   },
   actions: {
     async getCategoryList({ commit }) {
@@ -49,6 +54,9 @@ const common = {
     },
     changeUserInfo({ commit }, data) {
       commit('setUserInfo', data);
+    },
+    changeHighLightIndex({ commit }, data) {
+      commit('setHighLightIndex', data);
     },
   },
 };

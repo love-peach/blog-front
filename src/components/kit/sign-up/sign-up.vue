@@ -27,13 +27,13 @@
     line-height: 40px;
     height: 40px;
     font-size: 14px;
-    background-color: @colorBg;
+    background-color: @colorBgBody;
     border: 1px solid transparent;
     border-radius: 5px;
   }
 
   input:hover {
-    background-color: lighten(@colorBg, 2%);
+    background-color: lighten(@colorBgBody, 2%);
   }
 
   input:focus {
