@@ -16,6 +16,12 @@ export default {
   // 发布文章
   PostBlog: (params, options) => request.post('/blogs', params, options),
 
+  // 修改文章
+  PutBlog: (params, options) => request.put(`/blogs/${params.blogId}`, params, options),
+
+  // 删除文章
+  DeleteBlog: (params, options) => request.delete(`/blogs/${params.blogId}`, params, options),
+
   // 用户 - 注册
   PostUserSignup: (params, options) => request.post('/users/signup', params, options),
 

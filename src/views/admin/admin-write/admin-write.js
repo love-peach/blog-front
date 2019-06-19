@@ -21,13 +21,13 @@ export default {
   data() {
     return {
       isPostBlogLoading: false,
+      isBlogDetailLoading: false,
       formData: {
         poster: '',
-        // category: ['5cf7730fea7ea70d94de1c68'],
-        // tag: ['5cf73f39580230054b3356a1', '5cf73dc2091b54048a88aabc'],
       },
       isTagLoading: false,
       tagList: [],
+      blogId: this.$route.params.blogId,
     };
   },
   computed: {
@@ -35,13 +35,36 @@ export default {
       categoryList: 'getCategoryList',
     }),
   },
-  mounted() {
+  created() {
     this.requestTagList();
+    if (this.blogId) {
+      this.requestBlogDetail();
+    }
   },
   methods: {
     ...mapActions({
       toggleSignInModal: 'common/toggleSignInModal',
     }),
+
+    /**
+     * @desc 请求 博客详情 编辑
+     */
+    requestBlogDetail() {
+      const params = {
+        blogId: this.$route.params.blogId,
+      };
+      this.isBlogDetailLoading = true;
+      api
+        .GetBlogDetail(params)
+        .then(res => {
+          this.isBlogDetailLoading = false;
+          this.handleRecoveryBlogDetail(res.result);
+        })
+        .catch(() => {
+          this.isBlogDetailLoading = false;
+        });
+    },
+
     /**
      * @desc 请求 标签列表
      */
@@ -56,6 +79,21 @@ export default {
         .catch(() => {
           this.isTagLoading = false;
         });
+    },
+
+    /**
+     * @desc 编辑的时候 博客详情回显
+     */
+    handleRecoveryBlogDetail(data) {
+      const { title, category, tag, poster, content, status } = data;
+      this.formData = {
+        title,
+        category: [category],
+        tag,
+        poster,
+        content,
+        status,
+      };
     },
 
     /**
@@ -80,6 +118,9 @@ export default {
       this.formData.poster = res.result.path;
     },
 
+    /**
+     * @desc 检查表单填写是否合格
+     */
     checkIsReadyPost() {
       const { title, category, tag, poster, content } = this.formData;
       const userInfo = webStore.getUserInfo();
@@ -106,7 +147,14 @@ export default {
      * @desc 提交
      */
     handleSubmit() {
-      this.checkIsReadyPost() && this.requestArticle();
+      if (!this.checkIsReadyPost()) {
+        return;
+      }
+      if (this.blogId) {
+        this.requestEditArticle();
+      } else {
+        this.requestArticle();
+      }
     },
 
     /**
@@ -120,6 +168,27 @@ export default {
       this.isPostBlogLoading = true;
       api
         .PostBlog(params)
+        .then(res => {
+          this.isPostBlogLoading = false;
+          this.$router.push({ path: `/blog/detail/${res.result._id}` });
+        })
+        .catch(() => {
+          this.isPostBlogLoading = false;
+        });
+    },
+
+    /**
+     * @desc 请求 修改文章
+     */
+    requestEditArticle() {
+      const params = {
+        ...this.formData,
+        blogId: this.blogId,
+        author: webStore.getUserInfo()._id,
+      };
+      this.isPostBlogLoading = true;
+      api
+        .PutBlog(params)
         .then(res => {
           this.isPostBlogLoading = false;
           this.$router.push({ path: `/blog/detail/${res.result._id}` });

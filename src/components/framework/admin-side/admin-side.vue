@@ -62,7 +62,7 @@ export default {
     color: #fff;
     & > .iconfont {
       display: block;
-      line-height: 60px;
+      line-height: @heightHeader;
       text-align: center;
       &:before {
         display: block;

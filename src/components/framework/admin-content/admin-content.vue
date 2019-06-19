@@ -20,14 +20,10 @@ export default {
 
 <style lang="less" scoped>
 .admin-content-wrap {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
   height: 100%;
   .admin-content {
-    display: flex;
-    flex: 1;
     padding: 16px;
+    height: calc(100% - @heightHeader);
   }
 }
 </style>

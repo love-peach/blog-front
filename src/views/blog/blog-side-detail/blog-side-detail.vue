@@ -17,8 +17,6 @@
   position: fixed;
   top: 15px;
   width: 100%;
-  // overflow: auto;
-  // max-width: @pageMaxWidthLg * 15 / 60 - 20;
   @media screen and (min-width: @breakpoints-xs) {
     // min-width: 320px;
   }

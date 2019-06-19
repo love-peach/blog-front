@@ -81,6 +81,11 @@ export default [
         component: AdminWrite,
       },
       {
+        path: 'write/:blogId',
+        name: '编辑文章',
+        component: AdminWrite,
+      },
+      {
         path: 'article',
         name: '文章管理',
         component: AdminArticle,

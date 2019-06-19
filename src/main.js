@@ -6,6 +6,7 @@ import store from './store';
 import './styles/index.less';
 
 import * as filters from './filters';
+import importDirective from './directive/';
 
 import Toast from './components/base/toast/';
 
@@ -13,6 +14,8 @@ import Toast from './components/base/toast/';
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key]);
 });
+
+importDirective(Vue);
 
 Vue.use(Toast);
 

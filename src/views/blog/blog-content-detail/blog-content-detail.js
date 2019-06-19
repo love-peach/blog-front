@@ -21,7 +21,6 @@ export default {
   },
   created() {
     this.requestBlogDetail();
-    this.$toast('1212');
   },
   mounted() {
     // on(window, 'scroll', throttle(this.handleScrollEvent));

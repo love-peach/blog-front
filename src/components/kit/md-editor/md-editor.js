@@ -15,6 +15,13 @@ export default {
       editorMode: 'liveMode',
     };
   },
+  watch: {
+    value(value, oldValue) {
+      if (!oldValue) {
+        this.mdText = value;
+      }
+    },
+  },
   methods: {
     setEditorMode(mode) {
       this.editorMode = mode;

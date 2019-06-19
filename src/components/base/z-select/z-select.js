@@ -61,6 +61,9 @@ export default {
     options() {
       this.initValue();
     },
+    value() {
+      this.initValue();
+    },
   },
   methods: {
     /**

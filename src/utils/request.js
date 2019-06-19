@@ -150,4 +150,44 @@ export default {
         }
       });
   },
+  put(url, data, options) {
+    return instance({
+      method: 'put',
+      url,
+      data, // post 请求时带的参数 叫 'data'
+      customHeaders: { ...options },
+    })
+      .then(response => checkHttpStatus(response))
+      .then(res => checkBackendCode(res))
+      .catch(err => {
+        // 可配置需不需要要自动报错 默认会自动报错 如不需要 需在请求中明确将 hideError 设置为 false
+        if (options && options.hideAutoError && err.code !== 'cancel') {
+          return Promise.reject(err);
+        } else {
+          // window.$toast 是在 App.vue 中 声明的
+          window.$toast.error(err.message);
+          return Promise.reject(err);
+        }
+      });
+  },
+  delete(url, data, options) {
+    return instance({
+      method: 'delete',
+      url,
+      data, // post 请求时带的参数 叫 'data'
+      customHeaders: { ...options },
+    })
+      .then(response => checkHttpStatus(response))
+      .then(res => checkBackendCode(res))
+      .catch(err => {
+        // 可配置需不需要要自动报错 默认会自动报错 如不需要 需在请求中明确将 hideError 设置为 false
+        if (options && options.hideAutoError && err.code !== 'cancel') {
+          return Promise.reject(err);
+        } else {
+          // window.$toast 是在 App.vue 中 声明的
+          window.$toast.error(err.message);
+          return Promise.reject(err);
+        }
+      });
+  },
 };
