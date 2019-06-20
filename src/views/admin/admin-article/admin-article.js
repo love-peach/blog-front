@@ -3,6 +3,8 @@ import ZTable from '@/components/base/table/';
 import Btn from '@/components/base/btn/';
 import ZSwitch from '@/components/base/z-switch/';
 import Pagenation from '@/components/base/pagenation/';
+import Modal from '@/components/base/modal/';
+
 import api from '@/api/';
 
 export default {
@@ -11,6 +13,8 @@ export default {
     ZPanel,
     ZTable,
     Pagenation,
+    Modal,
+    Btn,
   },
   data() {
     return {
@@ -19,10 +23,12 @@ export default {
       pageTotal: 0,
       tableData: [],
       isLoading: false,
-      isDelateLoading: false,
+      isDeleteLoading: false,
+      currentRow: {},
+      isShowDeleteModal: false,
       columns: [
         {
-          name: '海报',
+          title: '海报',
           key: 'poster',
           width: '80px',
           render: (h, parama) => {
@@ -52,7 +58,7 @@ export default {
           },
         },
         {
-          name: '标题',
+          title: '标题',
           key: 'title',
           align: 'left',
           render: (h, parama) => {
@@ -73,20 +79,20 @@ export default {
           },
         },
         {
-          name: '作者',
+          title: '作者',
           render: (h, parama) => {
             return h('span', parama.row.authorObj.userName);
           },
         },
         {
-          name: '分类',
+          title: '分类',
           key: 'category',
           render: (h, parama) => {
             return h('span', parama.row.categoryObj.name);
           },
         },
         {
-          name: '标签',
+          title: '标签',
           key: 'tagArr',
           width: '',
           align: 'center',
@@ -97,7 +103,7 @@ export default {
           },
         },
         {
-          name: '时间',
+          title: '时间',
           key: 'createAt',
           render: (h, params) => {
             const createdAtFormat = this.$options.filters.dateFormatFilter(params.row.createdAt, 'YYYY-MM-DD HH:MM');
@@ -106,19 +112,19 @@ export default {
           },
         },
         {
-          name: '浏览',
+          title: '浏览',
           key: 'viewed',
         },
         {
-          name: '赞',
+          title: '赞',
           key: 'liked',
         },
         {
-          name: '评论',
+          title: '评论',
           key: 'comment',
         },
         {
-          name: '状态',
+          title: '状态',
           render: (h, params) => {
             return h(ZSwitch, {
               props: {
@@ -162,7 +168,8 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.requestDeleteBlog(params.row._id);
+                      this.currentRow = params.row;
+                      this.handleShowDeleteBlogModal();
                     },
                   },
                 },
@@ -231,18 +238,33 @@ export default {
     /**
      * @desc 请求 删除文章
      */
-    requestDeleteBlog(id) {
-      this.isDelateLoading = true;
+    requestDeleteBlog() {
+      this.isDeleteLoading = true;
       api
-        .DeleteBlog({ blogId: id })
+        .DeleteBlog({ blogId: this.currentRow._id })
         .then(() => {
-          this.isDelateLoading = false;
+          this.isDeleteLoading = false;
+          this.handleHideDeleteBlogModal();
           this.$toast.success('删除成功！');
           this.requestblogList();
         })
         .catch(() => {
-          this.isDelateLoading = false;
+          this.isDeleteLoading = false;
         });
+    },
+
+    /**
+     * @desc 显示删除文章弹框
+     */
+    handleShowDeleteBlogModal() {
+      this.isShowDeleteModal = true;
+    },
+
+    /**
+     * @desc 隐藏删除文章弹框
+     */
+    handleHideDeleteBlogModal() {
+      this.isShowDeleteModal = false;
     },
   },
 };

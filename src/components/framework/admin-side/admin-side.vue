@@ -33,8 +33,12 @@ export default {
           path: '/admin/category',
         },
         {
-          name: '文章标签挂你',
+          name: '文章标签管理',
           path: '/admin/tag',
+        },
+        {
+          name: '前端资源类别管理',
+          path: '/admin/resourceType',
         },
         {
           name: '前端资源管理',

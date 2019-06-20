@@ -79,7 +79,6 @@ export default {
      * @desc 校验表单数据是否符合要求
      */
     validateFormData() {
-      console.log(validatorsExp.phone.test(this.formData.phone), '99');
       const { userName, phone, email, password, confirmPassword } = this.formData;
       return new Promise(resolve => {
         if (!userName) {

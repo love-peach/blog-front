@@ -43,7 +43,7 @@ const common = {
   },
   actions: {
     async getCategoryList({ commit }) {
-      const { result } = await api.GetBlogCategory();
+      const { result } = await api.GetCategory();
       commit('setCatgoryList', result);
     },
     toggleSignInModal({ commit }, isShow) {

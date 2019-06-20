@@ -15,6 +15,7 @@ const AdminWrite = () => import(/* webpackChunkName: 'AdminWrite' */ '@/views/ad
 const AdminArticle = () => import(/* webpackChunkName: 'AdminArticle' */ '@/views/admin/admin-article/');
 const AdminCatgory = () => import(/* webpackChunkName: 'AdminCatgory' */ '@/views/admin/admin-category/');
 const AdminTag = () => import(/* webpackChunkName: 'AdminTag' */ '@/views/admin/admin-tag/');
+const AdminResourceType = () => import(/* webpackChunkName: 'AdminResourceType' */ '@/views/admin/admin-resource-type/');
 const AdminResource = () => import(/* webpackChunkName: 'AdminResource' */ '@/views/admin/admin-resource/');
 const AdminUser = () => import(/* webpackChunkName: 'AdminUser' */ '@/views/admin/admin-user/');
 
@@ -99,6 +100,11 @@ export default [
         path: 'tag',
         name: '文章标签管理',
         component: AdminTag,
+      },
+      {
+        path: 'resourceType',
+        name: '前端资源类别管理',
+        component: AdminResourceType,
       },
       {
         path: 'resource',

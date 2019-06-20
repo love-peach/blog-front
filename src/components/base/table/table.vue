@@ -3,7 +3,7 @@
     <tbody>
       <tr>
         <th v-for="(col, colIndex) in columns" :key="colIndex" :style="col | stylesTh">
-          {{ col.name }}
+          {{ col.title }}
         </th>
       </tr>
       <template v-if="data && data.length > 0">

@@ -71,7 +71,7 @@ export default {
     requestTagList() {
       this.isTagLoading = true;
       api
-        .GetTagList()
+        .GetTag()
         .then(res => {
           this.tagList = res.result;
           this.isTagLoading = false;

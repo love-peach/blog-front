@@ -25,6 +25,27 @@ a {
   color: inherit;
 }
 
+input.common-input {
+  width: 100%;
+  outline: none;
+  margin: 5px 0;
+  padding: 0 10px;
+  line-height: 40px;
+  height: 40px;
+  font-size: 14px;
+  background-color: @colorBgBody;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+input.common-input:hover {
+  background-color: lighten(@colorBgBody, 2%);
+}
+
+input.common-input:focus {
+  border-color: @colorInfo;
+}
+
 
 .text-center {
   text-align: center;
