@@ -46,6 +46,28 @@ input.common-input:focus {
   border-color: @colorInfo;
 }
 
+textarea.common-textarea {
+  width: 100%;
+  outline: none;
+  margin: 5px 0;
+  padding: 10px;
+  font-size: 14px;
+  background-color: @colorBgBody;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  min-height: 40px;
+  min-height: 100px;
+}
+
+
+textarea.common-textarea:hover {
+  background-color: lighten(@colorBgBody, 2%);
+}
+
+textarea.common-textarea:focus {
+  border-color: @colorInfo;
+}
+
 
 .text-center {
   text-align: center;

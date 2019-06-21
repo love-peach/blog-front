@@ -41,7 +41,7 @@ export default {
           width: 60,
         },
         {
-          title: 'poster',
+          title: '海报',
           key: 'poster',
           width: '80px',
           render: (h, parama) => {
@@ -56,25 +56,29 @@ export default {
           },
         },
         {
+          title: '名称',
+          key: 'name',
+        },
+        {
+          title: '地址',
+          key: 'url',
+        },
+        {
+          title: '简介',
+          key: 'desc',
+        },
+        {
           title: '资源分类',
           render: (h, params) => {
             return h('span', params.row.resourceTypeObj.name);
           },
         },
         {
-          title: '名称',
-          key: 'name',
-        },
-        {
-          title: '创建时间',
+          title: '时间',
           render: (h, params) => {
-            return h('div', this.$options.filters.dateFormatFilter(params.row.createdAt, 'YYYY-MM-DD HH:MM'));
-          },
-        },
-        {
-          title: '修改时间',
-          render: (h, params) => {
-            return h('div', this.$options.filters.dateFormatFilter(params.row.updatedAt, 'YYYY-MM-DD HH:MM'));
+            const createdAtFormat = this.$options.filters.dateFormatFilter(params.row.createdAt, 'YYYY-MM-DD HH:MM');
+            const updatedAtFormat = this.$options.filters.dateFormatFilter(params.row.updatedAt, 'YYYY-MM-DD HH:MM');
+            return h('div', [h('div', createdAtFormat), h('div', updatedAtFormat)]);
           },
         },
         {
@@ -249,7 +253,7 @@ export default {
       this.formData = {
         name: data.name,
         poster: data.poster,
-        resourceType: [data.resourceType],
+        resourceTypeId: [data.resourceTypeId],
       };
     },
 
@@ -275,7 +279,7 @@ export default {
      * @desc 检查表单数据是否合格
      */
     handleCheckFormData() {
-      if (!this.formData.resourceType) {
+      if (!this.formData.resourceTypeId) {
         this.$toast.error('请选择资源类别');
         return false;
       } else if (!this.formData.name) {

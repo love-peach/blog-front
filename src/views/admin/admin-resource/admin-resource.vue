@@ -11,9 +11,11 @@
     <Modal v-if="isShowResourceModal" @close="handleHideResourceModal">
       <h3 slot="header">{{ editMode === 'edit' ? '修改资源' : '添加资源' }}</h3>
       <div slot="body">
-        <ZSelect v-model="formData.resourceType" placeholder="请选择文章分类" :options="resourceTypeList" labelKey="name" valueKey="_id"></ZSelect>
+        <ZSelect v-model="formData.resourceTypeId" placeholder="请选择文章分类" :options="resourceTypeList" labelKey="name" valueKey="_id"></ZSelect>
         <input class="common-input" v-model="formData.name" type="text" placeholder="资源名称" />
-        <input class="common-input" v-model="formData.poster" type="text" placeholder="资源poster" />
+        <input class="common-input" v-model="formData.poster" type="text" placeholder="资源海报" />
+        <input class="common-input" v-model="formData.url" type="text" placeholder="资源地址" />
+        <textarea class="common-textarea" v-model="formData.desc" cols="30" rows="3"></textarea>
       </div>
       <div slot="footer">
         <Btn theme="primary" long @click="handleSubmitResource">{{ editMode === 'edit' ? '确认修改' : '确认添加' }}</Btn>

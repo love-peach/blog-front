@@ -9,6 +9,8 @@ const BlogContentDetail = () => import(/* webpackChunkName: 'BlogContentDetail' 
 const BlogSideDetail = () => import(/* webpackChunkName: 'BlogContentDetail' */ '@/views/blog/blog-side-detail/');
 const BlogSideList = () => import(/* webpackChunkName: 'BlogContentDetail' */ '@/views/blog/blog-side-list/');
 
+const Resource = () => import(/* webpackChunkName: 'Resource' */ '@/views/resource/');
+
 const AdminLayout = () => import(/* webpackChunkName: 'AdminLayout' */ '@/components/framework/admin-layout/');
 const AdminHome = () => import(/* webpackChunkName: 'AdminHome' */ '@/views/admin/home/');
 const AdminWrite = () => import(/* webpackChunkName: 'AdminWrite' */ '@/views/admin/admin-write/');
@@ -59,6 +61,11 @@ export default [
             },
           },
         ],
+      },
+      {
+        path: '/resources',
+        name: '前端资源',
+        component: Resource,
       },
     ],
   },
