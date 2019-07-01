@@ -28,6 +28,7 @@ export default {
       isTagLoading: false,
       tagList: [],
       blogId: this.$route.params.blogId,
+      uploadParams: { usedFor: 'poster' },
     };
   },
   computed: {

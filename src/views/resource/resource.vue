@@ -6,10 +6,10 @@
           <div class="z-col-6" v-for="resourceItem in resource.resource" :key="resourceItem._id">
             <a class="resource-item-wrap" :href="resourceItem.url" target="_blank">
               <h4 class="resource-header">
-                  <img src="" alt="" class="header-img">
-                  {{ resourceItem.name}}
+                <img src="" alt="" class="header-img" />
+                {{ resourceItem.name }}
               </h4>
-              <p class="resource-dis">{{ resourceItem.desc}}</p>
+              <p class="resource-dis">{{ resourceItem.desc }}</p>
             </a>
           </div>
         </div>
@@ -52,7 +52,7 @@ export default {
      * @desc 请求 修改文章资源类别列表
      */
     requestResourceList() {
-       this.isLoading = true;
+      this.isLoading = true;
       api
         .GetResourceType()
         .then(res => {
@@ -61,8 +61,8 @@ export default {
         })
         .catch(() => {
           this.isLoading = false;
-        })
+        });
     },
-  }
-}
+  },
+};
 </script>

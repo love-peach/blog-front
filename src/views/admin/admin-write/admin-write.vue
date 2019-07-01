@@ -15,7 +15,15 @@
               <input v-model="formData.poster" class="poster z-input" type="text" placeholder="粘贴图片URL" />
             </div>
             <div class="z-col-5">
-              <Upload action="/api/upload" :format="['png', 'jpeg', 'jpg']" :max-size="2048" :on-format-error="handleFormatError" :on-exceeded-size="handleMaxSize" :on-success="handleUploadSuccess">
+              <Upload
+                action="/api/upload"
+                :format="['png', 'jpeg', 'jpg']"
+                :data="uploadParams"
+                :max-size="2048"
+                :on-format-error="handleFormatError"
+                :on-exceeded-size="handleMaxSize"
+                :on-success="handleUploadSuccess"
+              >
                 <Btn style="margin:5px 0;height: 38px;" long>选择文件</Btn>
               </Upload>
             </div>
