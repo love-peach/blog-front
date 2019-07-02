@@ -17,7 +17,7 @@
         <textarea class="common-textarea" v-model="formData.desc" placeholder="资源描述" cols="30" rows="3"></textarea>
       </div>
       <div slot="footer">
-        <Btn theme="primary" long @click="handleSubmitResource">{{ editMode === 'edit' ? '确认修改' : '确认添加' }}</Btn>
+        <Btn theme="primary" :loading="isAddLoading || isEditLoading" long @click="handleSubmitResource">{{ editMode === 'edit' ? '确认修改' : '确认添加' }}</Btn>
       </div>
     </Modal>
 

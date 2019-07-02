@@ -60,11 +60,15 @@ export default {
       return {
         width: col.width,
         minWidth: col.minWidth,
+        maxWidth: col.maxWidth,
         textAlign: col.align,
       };
     },
     stylesTd(col) {
       return {
+        width: col.width,
+        minWidth: col.minWidth,
+        maxWidth: col.maxWidth,
         textAlign: col.align,
       };
     },

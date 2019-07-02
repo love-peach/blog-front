@@ -47,7 +47,7 @@ export default {
           render: (h, parama) => {
             return h('img', {
               attrs: {
-                src: parama.row.poster,
+                src: parama.row.posterUrl,
               },
               style: {
                 width: '80px',
@@ -60,18 +60,23 @@ export default {
           key: 'name',
         },
         {
-          title: '地址',
-          key: 'url',
-        },
-        {
-          title: '简介',
-          key: 'desc',
-        },
-        {
           title: '资源分类',
           render: (h, params) => {
             return h('span', params.row.resourceTypeObj.name);
           },
+        },
+        {
+          title: '地址',
+          key: 'url',
+          align: 'left',
+        },
+        {
+          title: '简介',
+          key: 'desc',
+          minWidth: '100px',
+          maxWidth: '400px;',
+          align: 'left',
+          width: '400px',
         },
         {
           title: '时间',
@@ -82,7 +87,7 @@ export default {
           },
         },
         {
-          name: '操作',
+          title: '操作',
           render: (h, params) => {
             return h('div', [
               h(
@@ -252,7 +257,9 @@ export default {
     handleRecoveryFormData(data) {
       this.formData = {
         name: data.name,
-        poster: data.poster,
+        url: data.url,
+        oldUrl: data.url,
+        desc: data.desc,
         resourceTypeId: [data.resourceTypeId],
       };
     },

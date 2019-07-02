@@ -1,19 +1,23 @@
 <template>
   <div class="z-container">
     <template v-if="resourceList && resourceList.length > 0">
-      <ZPanel :title="resource.name" v-for="resource in resourceList" :key="resource._id">
-        <div class="z-row">
-          <div class="z-col-6" v-for="resourceItem in resource.resource" :key="resourceItem._id">
-            <a class="resource-item-wrap" :href="resourceItem.url" target="_blank">
-              <h4 class="resource-header">
-                <img src="" alt="" class="header-img" />
-                {{ resourceItem.name }}
-              </h4>
-              <p class="resource-dis">{{ resourceItem.desc }}</p>
-            </a>
+      <div v-for="resource in resourceList" :key="resource._id">
+        <TitleBar :title="resource.name"></TitleBar>
+        <div class="z-row" v-if="resource.resource && resource.resource.length > 0">
+          <div class="resource-item-wrap z-col-lg-6 z-col-md-8 z-col-sm-12" v-for="resourceItem in resource.resource" :key="resourceItem._id">
+            <Card padding="0">
+              <a class="" :href="resourceItem.url" target="_blank">
+                <img :src="resourceItem.posterUrl" alt="" class="resource-item-poster" />
+              </a>
+              <div class="resource-info-wrap">
+                <h4 class="resource-header">{{ resourceItem.name }}</h4>
+                <p :title="resourceItem.desc" class="resource-dis">{{ resourceItem.desc }}</p>
+              </div>
+            </Card>
           </div>
         </div>
-      </ZPanel>
+        <NoData v-else style="height: 220px;" />
+      </div>
     </template>
 
     <template v-else>
@@ -25,7 +29,7 @@
 </template>
 
 <script>
-import ZPanel from '@/components/base/panel/';
+import TitleBar from '@/components/kit/title-bar/';
 import Card from '@/components/base/card/';
 import NoData from '@/components/kit/no-data/';
 
@@ -34,7 +38,7 @@ import api from '@/api/';
 export default {
   name: 'Resource',
   components: {
-    ZPanel,
+    TitleBar,
     Card,
     NoData,
   },
@@ -66,3 +70,23 @@ export default {
   },
 };
 </script>
+
+<style lang="less" scoped>
+.resource-item-wrap {
+  position: relative;
+  .resource-item-poster {
+    width: 100%;
+  }
+  .resource-info-wrap {
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid @colorBorder;
+  }
+  .resource-dis {
+    height: 40px;
+    width: 100%;
+    margin-top: 5px;
+    overflow: hidden;
+  }
+}
+</style>
