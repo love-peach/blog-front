@@ -13,7 +13,7 @@ const externals = {
 
 const cdn = {
   dev: {
-    css: ['//at.alicdn.com/t/font_1226722_glira5nqeql.css'],
+    css: ['//at.alicdn.com/t/font_1226722_270l0zctq95.css'],
     js: [
       'https://cdn.bootcss.com/vue/2.6.6/vue.js',
       'https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js',
@@ -66,12 +66,30 @@ module.exports = {
     port: 8082,
     open: true, // 配置自动启动浏览器
     proxy: {
-      '/api': {
-        target: 'http://localhost:3000', // 测试
+      '/api/': {
+        target: 'http://localhost:3000',
         changeOrigin: true,
-        // pathRewrite: {
-        //   '^/api': '/',
-        // },
+      },
+      '/douban/': {
+        target: 'http://api.douban.com/v2',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/douban': '',
+        },
+      },
+      '/douban/movie/': {
+        target: 'http://api.douban.com/v2/movie',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/douban/movie/': '',
+        },
+      },
+      '/doubanOld/': {
+        target: 'https://movie.douban.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/doubanOld/': '',
+        },
       },
     },
   },

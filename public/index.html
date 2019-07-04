@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- 下面这个meta 记得删除；写在这里是因为图片访问受限。比如豆瓣电影图片 -->
+    <meta name="referrer", content="never">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>blog-front</title>
     <!-- CDN文件，配置在config/index.js下 -->
@@ -13,6 +15,13 @@
     <% for (var i in htmlWebpackPlugin.options.cdn.js) { %>
     <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
     <% } %>
+    <script>
+    function imgError(ele) {
+      ele.src = '/image/movie-gray.png';
+      // ele.style.opacity = 0;
+      ele.onerror = null;
+    }
+    </script>
   </head>
   <body>
     <noscript>

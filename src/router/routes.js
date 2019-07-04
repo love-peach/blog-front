@@ -21,6 +21,10 @@ const AdminResourceType = () => import(/* webpackChunkName: 'AdminResourceType' 
 const AdminResource = () => import(/* webpackChunkName: 'AdminResource' */ '@/views/admin/admin-resource/');
 const AdminUser = () => import(/* webpackChunkName: 'AdminUser' */ '@/views/admin/admin-user/');
 
+const MovieContainer = () => import(/* webpackChunkName: 'MovieContainer' */ '@/views/movie/movie-container/');
+const MovieHome = () => import(/* webpackChunkName: 'MovieHome' */ '@/views/movie/home/');
+const MovieDetail = () => import(/* webpackChunkName: 'MovieDetail' */ '@/views/movie/movie-detail/');
+
 export default [
   {
     path: '/',
@@ -66,6 +70,22 @@ export default [
         path: '/resources',
         name: '前端资源',
         component: Resource,
+      },
+      {
+        path: '/movie',
+        component: MovieContainer,
+        children: [
+          {
+            path: '',
+            name: '电影-首页',
+            component: MovieHome,
+          },
+          {
+            path: 'detail/:movieId',
+            name: '电影-详情',
+            component: MovieDetail,
+          },
+        ],
       },
     ],
   },

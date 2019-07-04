@@ -19,21 +19,21 @@ export default {
           path: '/blog',
         },
         {
-          name: '图文有感',
-          path: '/thoughts',
-        },
-        {
           name: '前端资源',
           path: '/resources',
+        },
+        {
+          name: '豆瓣电影',
+          path: '/movie',
         },
         {
           name: '后台管理',
           path: '/admin',
         },
-        {
-          name: '登录',
-          path: '/login/',
-        },
+        // {
+        //   name: '登录',
+        //   path: '/login/',
+        // },
       ],
     };
   },

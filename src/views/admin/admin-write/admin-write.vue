@@ -3,18 +3,18 @@
     <div>
       <input v-model="formData.title" class="title z-input" type="text" placeholder="标题: 月光下的奔跑" />
       <div class="z-row">
-        <div class="z-col-xl-6 z-col-lg-12">
+        <div class="z-col-xl-15 z-col-lg-30">
           <ZSelect v-model="formData.category" placeholder="请选择文章分类" :options="categoryList.slice(1)" labelKey="name" valueKey="_id"></ZSelect>
         </div>
-        <div class="z-col-xl-6 z-col-lg-12">
+        <div class="z-col-xl-15 z-col-lg-30">
           <ZSelect v-model="formData.tag" placeholder="请填写文章标签" :options="tagList" multiple labelKey="name" valueKey="_id"></ZSelect>
         </div>
-        <div class="z-col-xl-12">
+        <div class="z-col-xl-30">
           <div class="z-row">
-            <div class="z-col-19">
+            <div class="z-col-45">
               <input v-model="formData.poster" class="poster z-input" type="text" placeholder="粘贴图片URL" />
             </div>
-            <div class="z-col-5">
+            <div class="z-col-15">
               <Upload
                 action="/api/upload"
                 :format="['png', 'jpeg', 'jpg']"

@@ -6,6 +6,13 @@
           <Icon type="logo" :size="166" />
         </router-link>
         <AppMenu />
+
+        <AppSearch></AppSearch>
+
+        <div>
+          <ZBtn theme="text">登录</ZBtn>
+          <ZBtn theme="text">注册</ZBtn>
+        </div>
       </div>
     </div>
   </div>
@@ -13,13 +20,17 @@
 
 <script>
 import Icon from '@/components/base/icon/';
+import ZBtn from '@/components/base/btn/';
 import AppMenu from '@/components/framework/app-menu/';
+import AppSearch from '@/components/framework/app-search/';
 
 export default {
   name: 'AppHeader',
   components: {
     Icon,
+    ZBtn,
     AppMenu,
+    AppSearch,
   },
 };
 </script>
@@ -31,6 +42,7 @@ export default {
   .app-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
   .app-header-brand {
     margin-right: 30px;

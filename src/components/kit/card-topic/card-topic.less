@@ -32,12 +32,14 @@
       }
       .topic-info-link {
         vertical-align: middle;
-        &:before {
-          content: '：';
-        }
         &:hover {
           color: @colorPrimary;
         }
+      }
+      .topic-info-link + .topic-info-link {
+        margin-left: 3px;
+        padding-left: 4px;
+        border-left: 1px solid @colorBorder;
       }
     }
 

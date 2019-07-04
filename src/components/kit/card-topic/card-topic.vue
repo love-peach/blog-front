@@ -6,19 +6,19 @@
           <router-link class="head-title" tag="h1" :to="{ path: `/blog/detail/${topic._id}` }">{{ topic.title }}</router-link>
           <div class="topic-article-info">
             <div class="info-author">
-              <Icon type="user" title="作者" />
+              <Icon type="user" title="作者" />:
               <router-link class="topic-info-link" :to="{ path: `/search/?author=${topic.authorObj._id}` }">
                 {{ topic.authorObj.userName }}
               </router-link>
             </div>
             <div class="info-category">
-              <Icon type="category" title="分类" />
+              <Icon type="category" title="分类" />:
               <router-link class="topic-info-link" :to="{ path: `/${parentPath}/${topic.categoryObj.value}` }">
                 {{ topic.categoryObj.name }}
               </router-link>
             </div>
             <div class="info-tag ">
-              <Icon type="tag" title="标签" />
+              <Icon type="tag" title="标签" />:
               <router-link class="topic-info-link" v-for="(item, index) in topic.tagArray" :key="index" :to="{ path: `/search/?tag=${item._id}` }">
                 {{ item.name }}
               </router-link>

@@ -11,7 +11,7 @@ export default {
     handleInput(e) {
       clearTimeout(timer);
       timer = setTimeout(() => {
-        this.$emit('input', e);
+        this.$emit('input', e.target.value);
       }, 300);
     },
   },
