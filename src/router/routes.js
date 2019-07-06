@@ -23,6 +23,7 @@ const AdminUser = () => import(/* webpackChunkName: 'AdminUser' */ '@/views/admi
 
 const MovieContainer = () => import(/* webpackChunkName: 'MovieContainer' */ '@/views/movie/movie-container/');
 const MovieHome = () => import(/* webpackChunkName: 'MovieHome' */ '@/views/movie/home/');
+const MovieTop250 = () => import(/* webpackChunkName: 'MovieTop250' */ '@/views/movie/movie-top-250/');
 const MovieDetail = () => import(/* webpackChunkName: 'MovieDetail' */ '@/views/movie/movie-detail/');
 
 export default [
@@ -79,6 +80,11 @@ export default [
             path: '',
             name: '电影-首页',
             component: MovieHome,
+          },
+          {
+            path: 'top250',
+            name: 'top250',
+            component: MovieTop250,
           },
           {
             path: 'detail/:movieId',

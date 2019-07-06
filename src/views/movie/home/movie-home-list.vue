@@ -1,11 +1,15 @@
 <template>
   <div class="list-wrap">
-    <TitleBar :title="title" />
+    <TitleBar :title="title">
+      <template slot="titleRight">
+        <slot></slot>
+      </template>
+    </TitleBar>
     <template v-if="list && list.length > 0">
       <ul class="list z-row">
         <li v-for="item in list" :key="item.id" class="list-item z-col-sm-30  z-col-md-15 z-col-lg-12">
           <Card padding="0" borderRadius="5px">
-            <router-link class="list-item-poster-wrap" :to="{ path: `/movie/detail/${item.id}` }">
+            <router-link class="list-item-poster-wrap" :to="{ path: `/movie/detail/${item.id}` }" target="_blank">
               <ZImage class="list-item-poster" :src="item.images.large" />
             </router-link>
             <div class="list-item-info">

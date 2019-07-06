@@ -18,13 +18,13 @@
       <Icon class="app-search-button-icon" type="tag" />
       <span class="app-search-button-text">搜索</span>
     </button>
-    <ul class="app-search-suggest" v-show="isShowOptions" ref="zSearchOptions">
+    <div class="app-search-suggest" v-show="isShowOptions" ref="zSearchOptions">
       <router-link
-        tag="li"
         v-for="(item, index) in suggestList"
         :key="index"
-        :to="{ path: `/movie/detail/${item.id}` }"
+        :to="{ path: `/movie/detail/${item.id}`, target: '_blank' }"
         :class="`app-search-suggest-item ${cursorIndex === index ? 'app-search-suggest-item-active' : ''}`"
+        target="_blank"
         @mouseover="handleMouseoverOptionItem(index)"
       >
         <img class="app-search-suggest-item-poster" :src="item.img" alt="" />
@@ -33,7 +33,7 @@
           <p class="app-search-suggest-item-desc">{{ item.sub_title }}</p>
         </div>
       </router-link>
-    </ul>
+    </div>
   </div>
 </template>
 

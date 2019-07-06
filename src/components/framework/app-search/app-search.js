@@ -55,8 +55,11 @@ export default {
      * @desc 选择 option
      */
     handleSelect(option) {
-      console.log(option, 'option');
-      this.$router.push({ path: `/movie/detail/${option.id}` });
+      // this.$router.push({ path: `/movie/detail/${option.id}`, target: '_blank' });
+      let routeUrl = this.$router.resolve({
+        path: `/movie/detail/${option.id}`,
+      });
+      window.open(routeUrl.href, '_blank');
       this.handleHideOptions();
     },
 
@@ -139,7 +142,7 @@ export default {
       const optionsUl = this.$refs.zSearchOptions;
       const optionsUlHeight = optionsUl.clientHeight;
       const optionsUlScrollTop = optionsUl.scrollTop;
-      const optionsUlItem = optionsUl.getElementsByTagName('li')[this.cursorIndex];
+      const optionsUlItem = optionsUl.getElementsByTagName('a')[this.cursorIndex];
       const optionsUlItemHeight = optionsUlItem.clientHeight;
       const optionsUlItemOffsetTop = optionsUlItem.offsetTop;
 

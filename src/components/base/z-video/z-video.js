@@ -1,6 +1,9 @@
 import Icon from '@/components/base/icon/';
 import ZProgress from '@/components/base/z-progress';
 
+let timer = null;
+let timerClick = null;
+
 export default {
   name: 'ZVideo',
   components: {
@@ -23,27 +26,49 @@ export default {
       isPlaying: false,
       isMute: false,
       isFullScreen: false,
-      volume: 1,
-      volumeOld: 1,
-      currentTime: 1,
+      isShowControl: true,
+      videoVolume: 0,
+      videoVolumeOld: 0,
+      videoCurrentTime: 0,
       videoDuration: 1,
-      controlCurrentTime: '0:0',
+      currentTimeFormat: '00:00',
+      durationFormat: '00:00',
     };
   },
   computed: {
-    videoUrl() {
-      return '';
+    progressValue() {
+      return this.videoCurrentTime / this.videoDuration;
+    },
+  },
+  filters: {
+    formatTime(seconds) {
+      var h = parseInt(seconds / 3600);
+      var m = parseInt((seconds % 3600) / 60);
+      var s = parseInt(seconds % 60);
+      if (h) {
+        return formatZero(h) + ':' + formatZero(m) + ':' + formatZero(s);
+      } else {
+        return formatZero(m) + ':' + formatZero(s);
+      }
+      function formatZero(num) {
+        return num < 10 ? '0' + num : num;
+      }
     },
   },
   mounted() {
-    this.videoPlayer = document.getElementById('videoPlayer');
     const that = this;
+    this.videoPlayer = document.getElementById('videoPlayer');
     this.videoPlayer.onloadedmetadata = function() {
       that.videoDuration = this.duration;
+      this.volume = that.videoVolume;
       that.isReadyPlay = true;
     };
     this.videoPlayer.ontimeupdate = function() {
-      that.currentTime = this.currentTime / that.videoDuration;
+      const videoCurrentTime = this.currentTime;
+      that.videoCurrentTime = videoCurrentTime;
+      if (videoCurrentTime === that.videoDuration) {
+        that.isPlaying = false;
+      }
     };
   },
   watch: {
@@ -56,22 +81,80 @@ export default {
     },
     isMute(value) {
       if (value) {
-        this.volumeOld = this.videoPlayer.volume;
         this.videoPlayer.volume = 0;
-        this.volume = 0;
+        this.videoVolume = 0;
       } else {
-        this.videoPlayer.volume = this.volumeOld;
-        this.volume = this.volumeOld;
+        this.videoPlayer.volume = this.videoVolumeOld;
+        this.videoVolume = this.videoVolumeOld;
+      }
+    },
+    isFullScreen(value) {
+      if (value) {
+        this.launchFullscreen();
+      } else {
+        this.exitFullscreen();
       }
     },
   },
   methods: {
+    /**
+     * @desc 单击 video
+     */
+    handleClickVideo() {
+      clearTimeout(timerClick);
+      timerClick = setTimeout(() => {
+        this.handleTogglePlay();
+      }, 300);
+    },
+
+    /**
+     * @desc 双击 video
+     */
+    handleDbClickVideo() {
+      clearTimeout(timerClick);
+      this.handleToggleScreen();
+    },
+
+    /**
+     * @desc mousemove
+     */
+    handleMouseMove() {
+      this.isShowControl = true;
+      if (this.isFullScreen) {
+        this.handleDebounceIsShowControl();
+      }
+    },
+
+    /**
+     * @desc mousemove 防抖事件
+     */
+    handleDebounceIsShowControl() {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        this.isShowControl = false;
+      }, 2000);
+    },
+
+    /**
+     * @desc mouseleave
+     */
+    handleMouseLeave() {
+      this.isShowControl = false;
+    },
+
+    /**
+     * @desc 进度条点击事件
+     */
     handleChangeProgress(value) {
       this.videoPlayer.currentTime = this.videoDuration * value;
     },
+
+    /**
+     * @desc 音量条点击事件
+     */
     handleChangeVolume(value) {
-      this.volume = value;
-      this.volumeOld = value;
+      this.videoVolume = value;
+      this.videoVolumeOld = value;
       this.videoPlayer.volume = value;
       this.isMute = value <= 0;
     },
@@ -96,20 +179,55 @@ export default {
       this.isFullScreen = !this.isFullScreen;
     },
 
-    // 格式化时间 hh:mm:ss
-    formatTime(seconds) {
-      var h = parseInt(seconds / 3600);
-      var m = parseInt((seconds % 3600) / 60);
-      var s = parseInt(seconds % 60);
-      if (h) {
-        return this.formatZero(h) + ':' + this.formatZero(m) + ':' + this.formatZero(s);
+    /**
+     * @desc 进入全屏
+     */
+    launchFullscreen() {
+      const element = this.$refs.ZVideo;
+      //此方法不可以在異步任務中執行，否則火狐無法全屏
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      } else if (element.oRequestFullscreen) {
+        element.oRequestFullscreen();
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullScreen();
       } else {
-        return this.formatZero(m) + ':' + this.formatZero(s);
+        var cssText = 'width:100%;height:100%;overflow:hidden;';
+        var docHtml = document.documentElement;
+        var docBody = document.body;
+        docHtml.style.cssText = cssText;
+        docBody.style.cssText = cssText;
       }
+      element.style.cssText = 'margin:0px;padding:0px;position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 999;';
     },
-    // 格式化时间 个位数前面补 '0'
-    formatZero(num) {
-      return num < 10 ? '0' + num : num;
+
+    /**
+     * @desc 退出全屏
+     */
+    exitFullscreen() {
+      const element = this.$refs.ZVideo;
+
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.oRequestFullscreen) {
+        document.oCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else {
+        var docHtml = document.documentElement;
+        var docBody = document.body;
+        docHtml.style.cssText = '';
+        docBody.style.cssText = '';
+      }
+      element.style.cssText = '';
     },
   },
 };

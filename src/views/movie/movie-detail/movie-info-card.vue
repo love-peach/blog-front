@@ -3,7 +3,9 @@
     <ZImage :src="poster"></ZImage>
     <dl>
       <dt>评分</dt>
-      <dd>12</dd>
+      <dd>
+        <ScoreStart :value="average" />
+      </dd>
       <dt>导演</dt>
       <dd>{{ directors }}</dd>
       <dt>主演</dt>
@@ -25,12 +27,14 @@
 <script>
 import Card from '@/components/base/card/';
 import ZImage from '@/components/base/z-image/';
+import ScoreStart from '@/components/base/score-start/';
 
 export default {
   name: 'MovieInfoCard',
   components: {
     Card,
     ZImage,
+    ScoreStart,
   },
   props: {
     movieDetail: {
@@ -45,6 +49,9 @@ export default {
   computed: {
     poster() {
       return this.movieDetail.images && this.movieDetail.images.large ? this.movieDetail.images.large : '';
+    },
+    average() {
+      return this.movieDetail.rating ? this.movieDetail.rating.average : 0;
     },
     directors() {
       return this.movieDetail.directors ? this.movieDetail.directors.map(item => item.name).join(' / ') : ' ';

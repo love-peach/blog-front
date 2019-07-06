@@ -1,0 +1,70 @@
+.ranking {
+  position: relative;
+  
+  &-order {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 99;
+    width: 50px;
+    height: 52px;
+    border-radius: 25px 4px 25px 25px;
+    background: #fff;
+    &-bg-error {
+      background-color: @colorError;
+    }
+    &-bg-info {
+      background-color: @colorInfo;
+    }
+    &-number {
+      color: #fff;
+      display: block;
+      padding-top: 10px;
+      text-align: center;
+      font: bold 26px "Impact";
+    }
+  }
+  &-link {
+    display: block
+  }
+  &-poster {
+    height: 295px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 5px 0 0 5px
+  }
+  &-info {
+    padding: 15px 20px 0 0;
+    position: relative;
+    &-title {
+      font-size: 18px;
+      color: @colorTextTitle;
+    }
+    &-item {
+      font-size: 14px;
+      color: @colorTextSub;
+      margin-top: 5px;
+      label {
+        color: @colorTextContent;
+        font-weight: bold;
+        margin-right: 5px;
+        &:after {
+          content: ':';
+        }
+      }
+    }
+    &-actor {
+      text-align: justify;
+    }
+    &-type {
+
+    }
+    &-score {
+      // font-size: 16px;
+    }
+    &-score-amount {
+      font-size: 14px;
+    }
+    
+  }
+}

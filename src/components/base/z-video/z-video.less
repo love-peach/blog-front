@@ -33,12 +33,21 @@
   &-control {
     display: table;
     width: 100%;
+    &-show {
+      bottom: 0px;
+    }
+    &-hide {
+      bottom: -70px;
+    }
     &-wrap {
+      width: 100%;
+      position: absolute;
       height: 60px;
       padding-right: 15px;
       padding-left: 15px;
       color: #eaf6f9;
       background-color: #2196f3;
+      transition: all .5s ease;
     }
     & > div {
       display: table-cell;

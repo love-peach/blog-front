@@ -3,7 +3,7 @@
     <img class="reviews-item-avatar" :src="review.author.avatar" alt="" />
     <div class="reviews-item">
       <h3 class="reviews-item-title">{{ review.title }}</h3>
-      <div class="reviews-item-content">
+      <div class="reviews-item-content" v-loading="isReviewDetailLoading">
         <span :class="`reviews-item-content-text ${isShowReviewFull && reviewText ? 'reviews-item-content-html' : ''}`" v-html="reviewText"></span>
         <a href="javascript:;" class="reviews-item-toggle" @click="handleToggleReviewFull">({{ isShowReviewFull ? '收起' : '展开' }})</a>
       </div>
@@ -92,6 +92,7 @@ export default {
 
     &-text {
       color: @colorTextContent;
+      word-break: break-word;
     }
     &-html {
       display: block;

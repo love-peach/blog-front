@@ -4,17 +4,24 @@
       <MovieHomeList :title="beingShownData.title" :list="beingShownList" v-loading="isBeingShownLoading" />
       <MovieHomeList :title="rankingNewData.title" :list="rankingNewList" v-loading="isRankingNewLoading" />
       <MovieHomeList :title="rankingComingData.title" :list="rankingComingList" v-loading="isRankingComingLoading" />
+      <MovieHomeList :title="ranking250Data.title" :list="ranking250List" v-loading="isRanking250Loading">
+        <Button theme="success" :to="{ path: '/movie/top250' }" icon="danxuanfill">更多</Button>
+        <!-- <router-link :to="{ path: '/movie/top250' }" >
+        </router-link> -->
+      </MovieHomeList>
     </div>
   </div>
 </template>
 
 <script>
+import Button from '@/components/base/btn/';
 import MovieHomeList from './movie-home-list';
 import doubanApi from '@/api/api-douban';
 
 export default {
   name: 'MovieHome',
   components: {
+    Button,
     MovieHomeList,
   },
   data() {
@@ -22,9 +29,11 @@ export default {
       isBeingShownLoading: false,
       isRankingNewLoading: false,
       isRankingComingLoading: false,
+      isRanking250Loading: false,
       beingShownData: {},
       rankingNewData: {},
       rankingComingData: {},
+      ranking250Data: {},
     };
   },
   computed: {
@@ -37,11 +46,15 @@ export default {
     rankingComingList() {
       return this.rankingComingData.subjects ? this.rankingComingData.subjects.slice(0, 10) : [];
     },
+    ranking250List() {
+      return this.ranking250Data.subjects ? this.ranking250Data.subjects.slice(0, 10) : [];
+    },
   },
   mounted() {
     this.requestBeingShown();
     this.requestRankingNew();
     this.requestRankingComing();
+    this.requestRanking250();
   },
   methods: {
     /**
@@ -73,6 +86,22 @@ export default {
         })
         .catch(() => {
           this.isRankingNewLoading = false;
+        });
+    },
+
+    /**
+     * @desc 请求250
+     */
+    requestRanking250() {
+      this.isRanking250Loading = true;
+      doubanApi
+        .DoubanMovieRankingTop250({ count: 10 })
+        .then(res => {
+          this.isRanking250Loading = false;
+          this.ranking250Data = res;
+        })
+        .catch(() => {
+          this.isRanking250Loading = false;
         });
     },
 
