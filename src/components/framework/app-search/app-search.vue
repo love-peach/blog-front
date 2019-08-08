@@ -45,7 +45,7 @@
     position: relative;
   }
   &-input {
-    width: 320px;
+    width: 200px;
     height: 32px;
     padding: 0 75px 0 13px;
     font-size: 12px;

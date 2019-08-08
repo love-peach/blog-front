@@ -25,6 +25,80 @@ a {
   color: inherit;
 }
 
+.ebook-chapter-link {
+  color: @colorTextSub;
+  &:hover {
+    color: @colorTextContent;
+  }
+}
+
+.ebook-catalog-link {
+  color: @colorTextTitle;
+  &:hover {
+    color: @colorError;
+  }
+}
+
+.ebook-rank-index {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  color: #fff;
+  text-align: center;
+  background-color: @colorTextSub;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    height: 0;
+    width: 0;
+  }
+  &:before {
+    left: 0;
+    border-left: 9px solid @colorTextSub;
+    border-bottom: 3px solid transparent;
+  }
+  &:after {
+    right: 0;
+    border-right: 9px solid @colorTextSub;
+    border-bottom: 3px solid transparent;
+  }
+}
+
+.ebook-rank-index-0 {
+  background-color: @colorError;
+  &:before {
+    border-left: 9px solid @colorError;
+  }
+  &:after {
+    right: 0;
+    border-right: 9px solid @colorError;
+  }
+}
+.ebook-rank-index-1 {
+  background-color: average(@colorError, @colorWarning);
+  &:before {
+    border-left: 9px solid average(@colorError, @colorWarning);
+  }
+  &:after {
+    right: 0;
+    border-right: 9px solid average(@colorError, @colorWarning);
+  }
+}
+.ebook-rank-index-2 {
+  background-color: @colorWarning;
+  &:before {
+    border-left: 9px solid @colorWarning;
+  }
+  &:after {
+    right: 0;
+    border-right: 9px solid @colorWarning;
+  }
+}
+
 input.common-input {
   width: 100%;
   outline: none;
@@ -87,6 +161,38 @@ textarea.common-textarea:focus {
   height: 0;
   visibility: hidden;
   clear: both;
+}
+
+
+/*==== 内凹圆角样式 =====*/
+.concave-radius {
+  position: relative;
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+  &:before {
+    content: '';
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    background: radial-gradient(rgba(255,255,255,0) 0%, rgba(255,255,255,0) 69%, rgba(0,0,0,.1), 70.6%, #fff 70.7%, #fff 100%); /* 标准的语法 */
+  }
+  &.top-left:before {
+    top: 0;
+    left: 0;
+  }
+  &.top-right:before {
+    top: 0;
+    right: 0;
+  }
+  &.bottom-left:before {
+    bottom: 0;
+    left: 0;
+  }
+  &.bottom-right:before {
+    top: 0;
+    right: 0;
+  }
 }
 
 // 无限旋转

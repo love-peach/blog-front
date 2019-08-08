@@ -26,6 +26,14 @@ const MovieHome = () => import(/* webpackChunkName: 'MovieHome' */ '@/views/movi
 const MovieTop250 = () => import(/* webpackChunkName: 'MovieTop250' */ '@/views/movie/movie-top-250/');
 const MovieDetail = () => import(/* webpackChunkName: 'MovieDetail' */ '@/views/movie/movie-detail/');
 
+const EbookContainer = () => import(/* webpackChunkName: 'EbookContainer' */ '@/views/ebook/ebook-container/');
+const EbookHome = () => import(/* webpackChunkName: 'EbookHome' */ '@/views/ebook/home/');
+const EbookCategory = () => import(/* webpackChunkName: 'EbookCategory' */ '@/views/ebook/ebook-category/');
+const EbookCatalog = () => import(/* webpackChunkName: 'EbookCatalog' */ '@/views/ebook/ebook-catalog/');
+const EbookChapter = () => import(/* webpackChunkName: 'EbookChapter' */ '@/views/ebook/ebook-chapter/');
+const EbookRanking = () => import(/* webpackChunkName: 'EbookRanking' */ '@/views/ebook/ebook-ranking/');
+const EbookSearch = () => import(/* webpackChunkName: 'EbookSearch' */ '@/views/ebook/ebook-search/');
+
 export default [
   {
     path: '/',
@@ -90,6 +98,42 @@ export default [
             path: 'detail/:movieId',
             name: '电影-详情',
             component: MovieDetail,
+          },
+        ],
+      },
+      {
+        path: '/ebook',
+        component: EbookContainer,
+        children: [
+          {
+            path: '',
+            name: '电子书-首页',
+            component: EbookHome,
+          },
+          {
+            path: 'category/:categoryName',
+            name: '电子书-分类',
+            component: EbookCategory,
+          },
+          {
+            path: 'catalog/:bookId',
+            name: '电子书-章节目录信息',
+            component: EbookCatalog,
+          },
+          {
+            path: 'catalog/:bookId/chapter/:chapterId',
+            name: '电子书-正文',
+            component: EbookChapter,
+          },
+          {
+            path: 'ranking/:rankType',
+            name: '电子书-排行榜单',
+            component: EbookRanking,
+          },
+          {
+            path: 'search',
+            name: '电子书-搜索',
+            component: EbookSearch,
           },
         ],
       },

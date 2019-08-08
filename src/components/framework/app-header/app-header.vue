@@ -6,9 +6,7 @@
           <Icon type="logo" :size="166" />
         </router-link>
         <AppMenu />
-
         <AppSearch></AppSearch>
-
         <div>
           <ZBtn theme="text">登录</ZBtn>
           <ZBtn theme="text">注册</ZBtn>

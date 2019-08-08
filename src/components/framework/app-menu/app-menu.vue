@@ -27,6 +27,10 @@ export default {
           path: '/movie',
         },
         {
+          name: '电子书',
+          path: '/ebook',
+        },
+        {
           name: '后台管理',
           path: '/admin',
         },
