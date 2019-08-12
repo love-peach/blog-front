@@ -17,7 +17,7 @@ export default {
     };
   },
   mounted() {
-    // this.getChapter();
+    this.getChapter();
 
     const vm = this;
     this.throttleScroll = throttle(function() {

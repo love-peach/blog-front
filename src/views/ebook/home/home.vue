@@ -38,7 +38,7 @@
               <p class="rank-top-info-brief">{{ rank.top.brief }}</p>
             </div>
             <div class="rank-top-poster fl">
-              <router-link class="rank-top-poster-link" :to="{ path: '/demo' }">
+              <router-link class="rank-top-poster-link" :to="{ path: `/ebook/catalog/${rank.top.bookId}` }">
                 <img :src="rank.top.poster" alt="" />
               </router-link>
               <span class="rank-top-poster-shadow"></span>
