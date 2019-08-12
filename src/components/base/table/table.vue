@@ -95,8 +95,7 @@ export default {
 <style lang="less" scoped>
 .z-table {
   width: 100%;
-  border-right: 1px solid @colorBorder;
-  border-bottom: 1px solid @colorBorder;
+
   background-color: #fff;
   th,
   td {
@@ -114,6 +113,8 @@ export default {
     background-color: #ebf7ff !important;
   }
   &-border {
+    border-right: 1px solid @colorBorder;
+    border-bottom: 1px solid @colorBorder;
     th,
     td {
       border-left: 1px solid @colorBorder;

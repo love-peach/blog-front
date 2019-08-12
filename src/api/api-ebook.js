@@ -15,4 +15,7 @@ export default {
 
   // 获取章节内容
   getChapter: (params, options) => request.get(`/ebooks/chapter/${params.bookId}/${params.chapterId}`, null, options),
+
+  // 获取首页数据
+  getHomeData: (params, options) => request.get('/ebooks/', null, options),
 };

@@ -34,8 +34,7 @@ export default {
   &-wrap {
     position: relative;
     padding: 0 5%;
-    &:after {
-      z-index: -1;
+    &:before {
       content: '';
       position: absolute;
       bottom: 0;
