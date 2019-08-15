@@ -77,6 +77,9 @@ export default {
           maxWidth: '400px;',
           align: 'left',
           width: '400px',
+          render: (h, params) => {
+            return h('span', params.row.desc || params.row.metaDesc);
+          },
         },
         {
           title: '时间',
@@ -260,6 +263,7 @@ export default {
         url: data.url,
         oldUrl: data.url,
         desc: data.desc,
+        metaDesc: data.metaDesc,
         resourceTypeId: [data.resourceTypeId],
       };
     },

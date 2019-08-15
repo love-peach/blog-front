@@ -25,6 +25,7 @@ a {
   color: inherit;
 }
 
+/*==== 电子书 章节链接样式 =====*/
 .ebook-chapter-link {
   color: @colorTextSub;
   &:hover {
@@ -32,6 +33,7 @@ a {
   }
 }
 
+/*==== 电子书 目录链接样式 =====*/
 .ebook-catalog-link {
   color: @colorTextTitle;
   &:hover {
@@ -39,6 +41,8 @@ a {
   }
 }
 
+
+/*==== 电子书表格排序样式 =====*/
 .ebook-rank-index {
   position: relative;
   display: inline-block;
@@ -99,6 +103,7 @@ a {
   }
 }
 
+/*==== 输入框统一样式 =====*/
 input.common-input {
   width: 100%;
   outline: none;
@@ -133,7 +138,6 @@ textarea.common-textarea {
   min-height: 100px;
 }
 
-
 textarea.common-textarea:hover {
   background-color: lighten(@colorBgBody, 2%);
 }
@@ -142,19 +146,40 @@ textarea.common-textarea:focus {
   border-color: @colorInfo;
 }
 
+/*==== 确实背景图样式 =====*/
+.no-img-placeholder {
+  background-image: url('../assets/no-data-bg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.no-img-placeholder-colorful {
+  background-image: url('../assets/no-data-bg-colorful.png');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.no-img-placeholder-horizon {
+  background-size: auto 90%;
+}
+.no-img-placeholder-vertical {
+  background-size: 80% auto;
+}
 
+/*==== 文字居中 =====*/
 .text-center {
   text-align: center;
 }
 
+/*==== 右浮动 =====*/
 .fr {
   float: right;
 }
 
+/*==== 左浮动 =====*/
 .fl {
   float: left;
 }
 
+/*==== 清除浮动 =====*/
 .clearfix:after {
   content: "";
   display: block;
@@ -195,7 +220,7 @@ textarea.common-textarea:focus {
   }
 }
 
-// 无限旋转
+/*==== 无限旋转 =====*/
 .z-load-loop {
   -webkit-animation: ani-load-loop 1s linear infinite;
   animation: ani-load-loop 1s linear infinite

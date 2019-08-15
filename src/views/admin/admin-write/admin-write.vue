@@ -17,6 +17,7 @@
             <div class="z-col-15">
               <Upload
                 action="/api/upload"
+                accept="image/*"
                 :format="['png', 'jpeg', 'jpg']"
                 :data="uploadParams"
                 :max-size="2048"

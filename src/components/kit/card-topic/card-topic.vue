@@ -36,7 +36,7 @@
 
       <div class="topic-body clearfix">
         <div class="topic-img-wrap">
-          <router-link class="topic-img-link" :to="{ path: `/blog/detail/${topic._id}` }">
+          <router-link class="topic-img-link no-img-placeholder-colorful no-img-placeholder-horizon" :to="{ path: `/blog/detail/${topic._id}` }">
             <img class="topic-img" :src="topic.posterUrl" alt="" />
           </router-link>
         </div>

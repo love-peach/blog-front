@@ -23,7 +23,6 @@
         <div class="z-col-20">
           <ZTable :columns="columnsLastRecord" :data="ebookHomeData.tjList" size="small" :showHeader="false" :border="false" />
         </div>
-
       </div>
 
       <div class="z-row">

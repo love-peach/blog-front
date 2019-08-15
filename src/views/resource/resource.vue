@@ -6,12 +6,12 @@
         <div class="z-row" v-if="resource.resource && resource.resource.length > 0">
           <div class="resource-item-wrap z-col-lg-15 z-col-md-20 z-col-sm-30" v-for="resourceItem in resource.resource" :key="resourceItem._id">
             <Card padding="0">
-              <a class="" :href="resourceItem.url" target="_blank">
+              <a class="resource-item-link no-img-placeholder-colorful no-img-placeholder-horizon" :href="resourceItem.url" target="_blank">
                 <img :src="resourceItem.posterUrl" alt="" class="resource-item-poster" />
               </a>
               <div class="resource-info-wrap">
                 <h4 class="resource-header">{{ resourceItem.name }}</h4>
-                <p :title="resourceItem.desc" class="resource-dis">{{ resourceItem.desc }}</p>
+                <p :title="resourceItem.desc || resourceItem.metaDesc" class="resource-dis">{{ resourceItem.desc || resourceItem.metaDesc }}</p>
               </div>
             </Card>
           </div>
@@ -74,8 +74,16 @@ export default {
 <style lang="less" scoped>
 .resource-item-wrap {
   position: relative;
+  .resource-item-link {
+    position: relative;
+    display: block;
+    padding-top: 60%;
+  }
   .resource-item-poster {
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
   .resource-info-wrap {
     padding: 10px;
