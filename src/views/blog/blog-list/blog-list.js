@@ -1,15 +1,17 @@
 import CardNoData from '@/components/kit/card-no-data/';
 import CardTopic from '@/components/kit/card-topic/';
+import CardCategory from '@/components/kit/card-category/';
 
 const { mapGetters } = Vuex;
 
 import api from '@/api/';
 
 export default {
-  name: 'BlogContent',
+  name: 'BlogList',
   components: {
     CardNoData,
     CardTopic,
+    CardCategory,
   },
   data() {
     return {
@@ -21,6 +23,9 @@ export default {
   },
   computed: {
     ...mapGetters('common', ['getCategoryIdByValue']),
+    ...mapGetters('common', {
+      categoryList: 'getCategoryList',
+    }),
   },
   mounted() {
     this.requestblogList();

@@ -3,11 +3,8 @@ const AppLayout = () => import(/* webpackChunkName: 'AppLayout' */ '@/components
 const HomePage = () => import(/* webpackChunkName: 'HomePage' */ '@/views/home/');
 const LoginPage = () => import(/* webpackChunkName: 'LoginPage' */ '@/views/login/');
 
-const BlogContainer = () => import(/* webpackChunkName: 'BlogContainer' */ '@/views/blog/blog-container/');
-const BlogContentList = () => import(/* webpackChunkName: 'BlogContentList' */ '@/views/blog/blog-content-list/');
-const BlogContentDetail = () => import(/* webpackChunkName: 'BlogContentDetail' */ '@/views/blog/blog-content-detail/');
-const BlogSideDetail = () => import(/* webpackChunkName: 'BlogContentDetail' */ '@/views/blog/blog-side-detail/');
-const BlogSideList = () => import(/* webpackChunkName: 'BlogContentDetail' */ '@/views/blog/blog-side-list/');
+const BlogList = () => import(/* webpackChunkName: 'BlogList' */ '@/views/blog/blog-list/');
+const BlogDetail = () => import(/* webpackChunkName: 'BlogDetail' */ '@/views/blog/blog-detail/');
 
 const Resource = () => import(/* webpackChunkName: 'Resource' */ '@/views/resource/');
 
@@ -21,12 +18,11 @@ const AdminResourceType = () => import(/* webpackChunkName: 'AdminResourceType' 
 const AdminResource = () => import(/* webpackChunkName: 'AdminResource' */ '@/views/admin/admin-resource/');
 const AdminUser = () => import(/* webpackChunkName: 'AdminUser' */ '@/views/admin/admin-user/');
 
-const MovieContainer = () => import(/* webpackChunkName: 'MovieContainer' */ '@/views/movie/movie-container/');
 const MovieHome = () => import(/* webpackChunkName: 'MovieHome' */ '@/views/movie/home/');
 const MovieTop250 = () => import(/* webpackChunkName: 'MovieTop250' */ '@/views/movie/movie-top-250/');
 const MovieDetail = () => import(/* webpackChunkName: 'MovieDetail' */ '@/views/movie/movie-detail/');
 
-const EbookContainer = () => import(/* webpackChunkName: 'EbookContainer' */ '@/views/ebook/ebook-container/');
+// const EbookContainer = () => import(/* webpackChunkName: 'EbookContainer' */ '@/views/ebook/ebook-container/');
 const EbookHome = () => import(/* webpackChunkName: 'EbookHome' */ '@/views/ebook/home/');
 const EbookCategory = () => import(/* webpackChunkName: 'EbookCategory' */ '@/views/ebook/ebook-category/');
 const EbookCatalog = () => import(/* webpackChunkName: 'EbookCatalog' */ '@/views/ebook/ebook-catalog/');
@@ -45,97 +41,94 @@ export default [
         name: '首页',
         component: HomePage,
       },
+    ],
+  },
+  {
+    path: '/blog',
+    component: AppLayout,
+    children: [
       {
-        path: '/blog',
-        component: BlogContainer,
-        children: [
-          {
-            path: '',
-            name: '全部文章',
-            components: {
-              default: BlogContentList,
-              sidePart: BlogSideList,
-            },
-          },
-          {
-            path: ':category',
-            name: '文章',
-            components: {
-              default: BlogContentList,
-              sidePart: BlogSideList,
-            },
-          },
-          {
-            path: 'detail/:blogId',
-            name: '文章详情',
-            components: {
-              default: BlogContentDetail,
-              sidePart: BlogSideDetail,
-            },
-          },
-        ],
+        path: '',
+        name: '全部文章',
+        component: BlogList,
       },
       {
-        path: '/resources',
+        path: ':category',
+        name: '文章',
+        component: BlogList,
+      },
+      {
+        path: 'detail/:blogId',
+        name: '文章详情',
+        component: BlogDetail,
+      },
+    ],
+  },
+  {
+    path: '/resources',
+    component: AppLayout,
+    children: [
+      {
+        path: '',
         name: '前端资源',
         component: Resource,
       },
+    ],
+  },
+  {
+    path: '/movie',
+    component: AppLayout,
+    children: [
       {
-        path: '/movie',
-        component: MovieContainer,
-        children: [
-          {
-            path: '',
-            name: '电影-首页',
-            component: MovieHome,
-          },
-          {
-            path: 'top250',
-            name: 'top250',
-            component: MovieTop250,
-          },
-          {
-            path: 'detail/:movieId',
-            name: '电影-详情',
-            component: MovieDetail,
-          },
-        ],
+        path: '',
+        name: '电影-首页',
+        component: MovieHome,
       },
       {
-        path: '/ebook',
-        component: EbookContainer,
-        children: [
-          {
-            path: '',
-            name: '电子书-首页',
-            component: EbookHome,
-          },
-          {
-            path: 'category/:categoryName',
-            name: '电子书-分类',
-            component: EbookCategory,
-          },
-          {
-            path: 'catalog/:bookId',
-            name: '电子书-章节目录信息',
-            component: EbookCatalog,
-          },
-          {
-            path: 'catalog/:bookId/chapter/:chapterId',
-            name: '电子书-正文',
-            component: EbookChapter,
-          },
-          {
-            path: 'ranking/:rankType',
-            name: '电子书-排行榜单',
-            component: EbookRanking,
-          },
-          {
-            path: 'search',
-            name: '电子书-搜索',
-            component: EbookSearch,
-          },
-        ],
+        path: 'top250',
+        name: 'top250',
+        component: MovieTop250,
+      },
+      {
+        path: 'detail/:movieId',
+        name: '电影-详情',
+        component: MovieDetail,
+      },
+    ],
+  },
+  {
+    path: '/ebook',
+    component: AppLayout,
+    children: [
+      {
+        path: '',
+        name: '电子书-首页',
+        component: EbookHome,
+      },
+      {
+        path: 'category/:categoryName',
+        name: '电子书-分类',
+        component: EbookCategory,
+      },
+      {
+        path: 'catalog/:bookId',
+        name: '电子书-章节目录信息',
+        component: EbookCatalog,
+      },
+      {
+        path: 'catalog/:bookId/chapter/:chapterId',
+        name: '电子书-正文',
+        component: EbookChapter,
+      },
+      {
+        path: 'ranking/:rankType',
+        name: '电子书-排行榜单',
+        component: EbookRanking,
+      },
+      {
+        path: 'search',
+        name: '电子书-搜索',
+        component: EbookSearch,
       },
     ],
   },

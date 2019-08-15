@@ -4,14 +4,20 @@ import NoData from '@/components/kit/no-data/';
 import getMKTitles from '@/utils/getMKTitles.js';
 import { throttle } from '@/utils/tools';
 
-const { mapGetters } = Vuex;
-
 export default {
   name: 'CardMdNav',
   components: {
     Card,
     MdAnchorNav,
     NoData,
+  },
+  props: {
+    blogResult: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
   },
   data() {
     return {
@@ -20,9 +26,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({
-      blogResult: 'common/getBlogResult',
-    }),
     articleTitles() {
       return getMKTitles(this.blogResult.content || '');
     },

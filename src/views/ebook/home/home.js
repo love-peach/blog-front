@@ -1,3 +1,5 @@
+import EbookSarch from '../components/ebook-search.vue';
+import EbookCategory from '../components/ebook-category.vue';
 import TitleBar from '@/components/kit/title-bar/';
 import ZTable from '@/components/base/table/';
 import EbookPoster from '../components/ebook-poster.vue';
@@ -6,6 +8,8 @@ import api from '@/api/api-ebook';
 export default {
   name: 'EbookHome',
   components: {
+    EbookSarch,
+    EbookCategory,
     TitleBar,
     ZTable,
     EbookPoster,

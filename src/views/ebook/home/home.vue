@@ -1,5 +1,9 @@
 <template>
   <div v-loading="isLoading">
+    <EbookSarch></EbookSarch>
+    <div class="z-container">
+      <EbookCategory></EbookCategory>
+    </div>
     <div class="z-container">
       <div class="z-row">
         <div class="z-col-40">
@@ -140,8 +144,8 @@
       transform: perspective(60px) rotateY(30deg);
       box-shadow: inset 0 0 5px #888;
       background-color: #fff;
-      background-image: linear-gradient(90deg, #bbb 0.1px, transparent 0.1px);
-      background-size: 0.4px 100%;
+      background-image: linear-gradient(90deg, #bbb 0.5px, transparent 0.5px);
+      background-size: 1.6px 100%;
     }
     &-link {
       position: relative;
