@@ -3,11 +3,6 @@ body {
   height: 100%;
 }
 
-#app {
-  height: 100%;
-  overflow: hidden;
-}
-
 body {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
   font-size: 14px;
@@ -148,15 +143,17 @@ textarea.common-textarea:focus {
 }
 
 /*==== 确实背景图样式 =====*/
-.no-img-placeholder {
-  background-image: url('../assets/no-data-bg.png');
+.no-img-placeholder,
+.no-img-placeholder-colorful {
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #fafafa;
+}
+.no-img-placeholder {
+  background-image: url('../assets/no-data-bg.png');
 }
 .no-img-placeholder-colorful {
   background-image: url('../assets/no-data-bg-colorful.png');
-  background-position: center;
-  background-repeat: no-repeat;
 }
 .no-img-placeholder-horizon {
   background-size: auto 90%;

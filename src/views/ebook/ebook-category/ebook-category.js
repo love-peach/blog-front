@@ -1,3 +1,4 @@
+import EbookMenu from '../components/ebook-menu.vue';
 import EbookPoster from '../components/ebook-poster.vue';
 import TitleBar from '@/components/kit/title-bar/';
 import ZTable from '@/components/base/table/';
@@ -7,6 +8,7 @@ import api from '@/api/api-ebook';
 export default {
   name: 'EbookCategory',
   components: {
+    EbookMenu,
     EbookPoster,
     TitleBar,
     ZTable,

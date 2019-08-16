@@ -35,8 +35,13 @@ export default {
 
 <style lang="less" scoped>
 .app-header-wrap {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.5);
   margin-bottom: 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   .app-header {
     display: flex;
     justify-content: space-between;

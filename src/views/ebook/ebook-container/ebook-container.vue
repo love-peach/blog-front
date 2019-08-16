@@ -23,7 +23,7 @@
 
     <EbookSarch></EbookSarch>
     <div class="z-container">
-      <EbookCategory></EbookCategory>
+      <EbookMenu />
     </div>
 
     <router-view />
@@ -32,12 +32,12 @@
 
 <script>
 import EbookSarch from '../components/ebook-search.vue';
-import EbookCategory from '../components/ebook-category.vue';
+import EbookMenu from '../components/ebook-menu.vue';
 export default {
   name: 'EbookContainer',
   components: {
     EbookSarch,
-    EbookCategory,
+    EbookMenu,
   },
 };
 </script>

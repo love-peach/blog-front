@@ -53,7 +53,10 @@ export default {
       const t = document.documentElement.scrollTop || document.body.scrollTop;
       var jsCardMdNav = document.getElementById('jsCardMdNav');
       var jsBriefWrap = document.getElementById('briefWrap');
-      if (t >= jsBriefWrap.clientHeight + 60 + 20) {
+
+      console.log(jsBriefWrap.clientHeight, 'jsBriefWrap.clientHeight');
+      console.log(t, 't');
+      if (t >= jsBriefWrap.clientHeight - 60 - 20) {
         jsCardMdNav.classList.add('fixed-side-card');
       } else {
         jsCardMdNav.classList.remove('fixed-side-card');

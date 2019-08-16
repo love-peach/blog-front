@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'EbookCategory',
+  name: 'EbookMenu',
   data() {
     return {
       category: [

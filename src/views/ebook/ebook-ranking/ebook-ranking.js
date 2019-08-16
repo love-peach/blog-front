@@ -1,3 +1,4 @@
+import EbookMenu from '../components/ebook-menu.vue';
 import EbookRankPart from './ebook-ranking-part.vue';
 
 import api from '@/api/api-ebook';
@@ -5,6 +6,7 @@ import api from '@/api/api-ebook';
 export default {
   name: 'EbookRanking',
   components: {
+    EbookMenu,
     EbookRankPart,
   },
   data() {

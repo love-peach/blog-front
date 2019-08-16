@@ -1,5 +1,5 @@
 <template>
-  <Card title="目录" padding="0">
+  <Card title="目录" padding="10px 0 0">
     <div class="md-anchor-nav-wrap" v-if="articleTitles && articleTitles.nav && articleTitles.nav.length > 0">
       <div id="mdAnchorFloatBar" class="md-anchor-float-bar"></div>
       <MdAnchorNav :list="articleTitles.nav" :offsetTopList="offsetTopList" />
@@ -15,7 +15,7 @@
   position: relative;
   max-height: 90vh;
   overflow: auto;
-  padding-top: 10px;
+  // padding-top: 10px;
 }
 .md-anchor-float-bar {
   position: absolute;

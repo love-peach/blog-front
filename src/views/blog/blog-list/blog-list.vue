@@ -15,3 +15,8 @@
 </template>
 
 <script src="./blog-list.js"></script>
+<style lang="less" scoped>
+.z-container {
+  padding-top: @heightHeader + 20;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="book-poster-wrap">
     <div class="book-poster">
-      <router-link class="book-poster-link" :to="{ path: `/ebook/catalog/${dataSource.bookId}` }">
+      <router-link class="book-poster-link no-img-placeholder-colorful no-img-placeholder-vertical" :to="{ path: `/ebook/catalog/${dataSource.bookId}` }">
         <img class="hotlist-item-poster" :src="dataSource.poster" alt="" />
       </router-link>
     </div>

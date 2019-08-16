@@ -2,7 +2,7 @@
   <div v-loading="isLoading">
     <EbookSarch></EbookSarch>
     <div class="z-container">
-      <EbookCategory></EbookCategory>
+      <EbookMenu />
     </div>
     <div class="z-container">
       <div class="z-row">
@@ -41,7 +41,7 @@
               <p class="rank-top-info-brief">{{ rank.top.brief }}</p>
             </div>
             <div class="rank-top-poster fl">
-              <router-link class="rank-top-poster-link" :to="{ path: `/ebook/catalog/${rank.top.bookId}` }">
+              <router-link class="rank-top-poster-link no-img-placeholder-colorful no-img-placeholder-vertical" :to="{ path: `/ebook/catalog/${rank.top.bookId}` }">
                 <img :src="rank.top.poster" alt="" />
               </router-link>
               <span class="rank-top-poster-shadow"></span>
@@ -154,7 +154,6 @@
       transform: translateZ(50px);
       height: 117px;
       width: 70px;
-      background: #e7e7e7;
 
       img {
         width: 70px;

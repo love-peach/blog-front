@@ -1,21 +1,21 @@
 <template>
   <div class="app-layout-wrap">
     <AppHeader />
-    <AppContent />
+    <div class="app-content">
+      <router-view></router-view>
+    </div>
     <AppFooter />
   </div>
 </template>
 
 <script>
 import AppHeader from '@/components/framework/app-header/';
-import AppContent from '@/components/framework/app-content/';
 import AppFooter from '@/components/framework/app-footer/';
 
 export default {
   name: 'AppLayout',
   components: {
     AppHeader,
-    AppContent,
     AppFooter,
   },
   data() {
@@ -26,9 +26,16 @@ export default {
 
 <style lang="less" scoped>
 .app-layout-wrap {
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
+  // height: 100%;
+  // overflow: auto;
   height: 100%;
-  overflow: auto;
+  .app-content {
+    min-height: 100%;
+    min-height: 100%;
+    padding-bottom: @heightFooter + 20;
+    // overflow: hidden;
+  }
 }
 </style>

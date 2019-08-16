@@ -1,6 +1,7 @@
 <template>
   <div v-loading="isLoading">
     <div class="z-container">
+      <EbookMenu />
       <div class="z-row">
         <div class=" z-col-xs-30 z-col-sm-20 z-col-md-10" v-for="item in categoryData.hotList" :key="item.bookId">
           <div class="hotlist-item">
