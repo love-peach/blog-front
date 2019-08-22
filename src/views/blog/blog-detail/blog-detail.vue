@@ -1,7 +1,7 @@
 <template>
   <div class="z-container">
     <div class="z-row">
-      <div class="z-col-sm-42 z-col-xl-45">
+      <div class="z-col-lg-42 z-col-xl-45">
         <div class="blog-detail-wrap">
           <div class="blog-poster-wrap" :style="{ 'background-image': blogResult.posterUrl ? 'url(' + blogResult.posterUrl + ')' : '' }"></div>
           <h1 class="blog-content-title">{{ blogResult.title }}</h1>
@@ -9,7 +9,7 @@
           <MdPreview :content="blogResult.content" />
         </div>
       </div>
-      <div class="z-col-sm-18 z-col-xl-15">
+      <div class="z-col-lg-18 z-col-xl-15 hidden-md">
         <div id="briefWrap">
           <CardBriefBlog :blogResult="blogResult" v-if="blogResult && blogResult.content" />
           <CardNoData v-else style="height: 385px;" />

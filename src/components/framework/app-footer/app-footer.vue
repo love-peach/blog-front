@@ -1,9 +1,9 @@
 <template>
-  <div class="app-footer">
+  <footer class="app-footer">
     <div class="z-container">
       footer
     </div>
-  </div>
+  </footer>
 </template>
 
 <script src="./app-footer.js"></script>

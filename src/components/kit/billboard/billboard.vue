@@ -18,9 +18,9 @@
   width: 100%;
   height: @billboardHeight;
   text-align: center;
-  // background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #333;
   &-box {
     height: @billboardHeight;
     padding-top: @heightHeader;
@@ -37,13 +37,14 @@
     vertical-align: middle;
   }
   &-inner-slogan {
-    font-size: 20px;
+    font-size: 22px;
+    font-weight: normal;
     margin-bottom: 10px;
     color: #fff;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   }
   &-inner-slogan-sub {
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 0, 0, 0.2);
     color: #fff;
     padding: 2px 8px;
     display: inline-block;

@@ -1,47 +1,75 @@
 <template>
-  <div class="app-header-wrap">
+  <header :class="['app-header-wrap', menuTheme]">
     <div class="z-container">
       <div class="app-header">
         <router-link to="/" active-class="current" exact class="app-header-brand">
-          <Icon type="logo" :size="166" />
+          <Icon type="logo" :size="136" />
         </router-link>
-        <AppMenu />
-        <AppSearch></AppSearch>
-        <div>
-          <ZBtn theme="text">登录</ZBtn>
-          <ZBtn theme="text">注册</ZBtn>
-        </div>
+        <AppMenu :theme="menuTheme" />
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
 import Icon from '@/components/base/icon/';
-import ZBtn from '@/components/base/btn/';
 import AppMenu from '@/components/framework/app-menu/';
-import AppSearch from '@/components/framework/app-search/';
+import { throttle } from '@/utils/tools';
 
 export default {
   name: 'AppHeader',
   components: {
     Icon,
-    ZBtn,
     AppMenu,
-    AppSearch,
+  },
+  data() {
+    return {
+      scrollTop: 0,
+    };
+  },
+  computed: {
+    menuTheme() {
+      const isHomePage = this.$route.path.indexOf('/home') === 0;
+      let menuTheme = '';
+      if (isHomePage) {
+        if (this.scrollTop > 240 - 50) {
+          menuTheme = 'white';
+        } else {
+          menuTheme = 'black';
+        }
+      } else {
+        menuTheme = 'white';
+      }
+      return menuTheme;
+    },
+  },
+  mounted() {
+    const vm = this;
+    this.throttleScroll = throttle(function() {
+      vm.scrollHandler();
+    }, 0);
+    window.addEventListener('scroll', this.throttleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.throttleScroll);
+  },
+  methods: {
+    scrollHandler() {
+      let t = document.documentElement.scrollTop || document.body.scrollTop;
+      this.scrollTop = t;
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
 .app-header-wrap {
-  background-color: rgba(255, 255, 255, 0.5);
   margin-bottom: 20px;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 999;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  transition: background ease 0.3s;
   .app-header {
     display: flex;
     justify-content: space-between;
@@ -49,7 +77,6 @@ export default {
   }
   .app-header-brand {
     margin-right: 30px;
-    color: @colorTextContent;
     .iconfont {
       line-height: @heightHeader;
       &:before {
@@ -57,5 +84,18 @@ export default {
       }
     }
   }
+}
+.app-header-wrap.white {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  .app-header-brand {
+    color: @colorTextContent;
+  }
+}
+.app-header-wrap.black {
+  .app-header-brand {
+    color: @colorTextSilver;
+  }
+  background-color: rgba(0, 0, 0, 0.5);
 }
 </style>

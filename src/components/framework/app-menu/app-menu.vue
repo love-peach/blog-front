@@ -1,14 +1,31 @@
 <template>
-  <div class="app-menu-wrap">
-    <router-link v-for="(nav, index) in navList" :key="index" :to="nav.path" active-class="current" class="menu-link">{{ nav.name }}</router-link>
+  <div :class="classes">
+    <Icon class="app-menu-handle" type="liebiao" :size="24" @click="handleToggleMenu" />
+    <ul class="app-menu-list">
+      <router-link class="app-menu-link" active-class="current" v-for="(nav, index) in navList" :key="index" :to="nav.path" tag="li">{{ nav.name }}</router-link>
+    </ul>
   </div>
 </template>
 
 <script>
+import Icon from '@/components/base/icon/';
+
+const prefixCls = 'app-menu';
+
 export default {
   name: 'AppMenu',
+  components: {
+    Icon,
+  },
+  props: {
+    theme: {
+      type: String,
+      default: 'white',
+    },
+  },
   data() {
     return {
+      isShowMenu: false,
       navList: [
         {
           name: '首页',
@@ -34,26 +51,45 @@ export default {
           name: '后台管理',
           path: '/admin',
         },
-        // {
-        //   name: '登录',
-        //   path: '/login/',
-        // },
       ],
     };
+  },
+  computed: {
+    classes() {
+      return [
+        `${prefixCls}`,
+        `${prefixCls}-${this.theme}`,
+        {
+          [`${prefixCls}-show`]: this.isShowMenu,
+        },
+      ];
+    },
+  },
+  methods: {
+    /**
+     * @desc 小屏下 切换显示
+     */
+    handleToggleMenu() {
+      this.isShowMenu = !this.isShowMenu;
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
-.app-menu-wrap {
-  color: @colorTextTitle;
-  .menu-link {
-    font-size: 15px;
+.app-menu {
+  &-handle {
+    display: none;
+    padding: 15px;
+  }
+  &-link {
     position: relative;
+    display: inline-block;
     padding: 0 15px;
     margin: 0 10px;
-    display: inline-block;
     line-height: @heightHeader;
+    font-size: 15px;
+    cursor: pointer;
     transition: color 0.25s ease;
     &:after {
       content: '';
@@ -65,18 +101,87 @@ export default {
       border-bottom: 2px solid @colorPrimary;
       transition: all 0.3s ease;
     }
-  }
-  .menu-link:hover {
-    &:after {
-      width: 100%;
-      left: 0;
+    &:hover {
+      &:after {
+        width: 100%;
+        left: 0;
+      }
+    }
+    &.current {
+      &:after {
+        width: 100%;
+        left: 0;
+      }
     }
   }
-  .menu-link.current {
-    color: @colorPrimary;
+}
+
+.app-menu-white {
+  .app-menu-link {
+    &.current {
+      color: @colorPrimary;
+    }
     &:after {
+      border-bottom: 2px solid @colorPrimary;
+    }
+    &:hover {
+      color: @colorPrimary;
+    }
+  }
+}
+
+.app-menu-black {
+  color: @colorTextSilver;
+  .app-menu-link {
+    &.current {
+      color: @colorTextWhite;
+    }
+    &:after {
+      border-bottom: 2px solid @colorTextWhite;
+    }
+    &:hover {
+      color: @colorTextWhite;
+    }
+  }
+}
+
+@media only screen and (max-width: @breakpoints-lg) {
+  .app-menu {
+    &-handle {
+      display: block;
+    }
+    &-list {
+      height: 0;
+      position: absolute;
       width: 100%;
+      top: 0;
       left: 0;
+      overflow: hidden;
+      background-color: #323232;
+    }
+    &-show &-list {
+      height: auto;
+      overflow: inherit;
+      top: 50px;
+    }
+  }
+  .app-menu-black,
+  .app-menu-white {
+    color: @colorTextLight;
+    .app-menu-link {
+      display: block;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+      &:after {
+        display: none;
+      }
+      &.current {
+        color: #fff;
+      }
+      &:hover {
+        color: #fff;
+      }
     }
   }
 }

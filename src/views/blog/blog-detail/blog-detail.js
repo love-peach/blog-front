@@ -54,9 +54,7 @@ export default {
       var jsCardMdNav = document.getElementById('jsCardMdNav');
       var jsBriefWrap = document.getElementById('briefWrap');
 
-      console.log(jsBriefWrap.clientHeight, 'jsBriefWrap.clientHeight');
-      console.log(t, 't');
-      if (t >= jsBriefWrap.clientHeight - 60 - 20) {
+      if (t >= jsBriefWrap.clientHeight - 50) {
         jsCardMdNav.classList.add('fixed-side-card');
       } else {
         jsCardMdNav.classList.remove('fixed-side-card');

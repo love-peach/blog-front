@@ -2,22 +2,23 @@
   <div class="page">
     <BillBoard />
     <div class="page-content">
-      <div style="background-color: #fff;min-height: 300px;padding: 20px;">
+      <section style="background-color: #fff;min-height: 300px;padding: 20px;">
         <div class="z-container">
           fefe
         </div>
-      </div>
+      </section>
 
-      <div style="min-height: 300px;padding: 20px;">
+      <section style="min-height: 300px;padding: 20px;">
         <div class="z-container">
           homePage
         </div>
-      </div>
-      <div style="background-color: #ccc;min-height: 300px;padding: 20px;">
+      </section>
+
+      <section style="background-color: #ccc;min-height: 300px;padding: 20px;">
         <div class="z-container">
           homePage
         </div>
-      </div>
+      </section>
     </div>
   </div>
 </template>

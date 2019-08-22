@@ -18,6 +18,7 @@ export default {
 
 <style lang="less" scoped>
 .admin-header-wrap {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

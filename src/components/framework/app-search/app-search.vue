@@ -13,6 +13,7 @@
       @keyup.enter="handleEnter"
       @keyup.up="handleKeyupUp"
       @keyup.down="handleKeyupDown"
+      autocomplete="off"
     />
     <button class="app-search-button" @click="requestSearchMovieFull">
       <Icon class="app-search-button-icon" type="tag" />
