@@ -80,7 +80,7 @@ export default {
 .app-menu {
   &-handle {
     display: none;
-    padding: 15px;
+    padding: 12px;
   }
   &-link {
     position: relative;
@@ -162,7 +162,7 @@ export default {
     &-show &-list {
       height: auto;
       overflow: inherit;
-      top: 50px;
+      top: @heightHeader;
     }
   }
   .app-menu-black,

@@ -9,7 +9,7 @@
           <MdPreview :content="blogResult.content" />
         </div>
       </div>
-      <div class="z-col-lg-18 z-col-xl-15 hidden-md">
+      <div class="z-col-lg-18 z-col-xl-15 visible-lg visible-xl">
         <div id="briefWrap">
           <CardBriefBlog :blogResult="blogResult" v-if="blogResult && blogResult.content" />
           <CardNoData v-else style="height: 385px;" />
