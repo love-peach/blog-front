@@ -3,12 +3,16 @@
     <Icon class="app-menu-handle" type="liebiao" :size="24" @click="handleToggleMenu" />
     <ul class="app-menu-list">
       <router-link class="app-menu-link" active-class="current" v-for="(nav, index) in navList" :key="index" :to="nav.path" tag="li">{{ nav.name }}</router-link>
+      <li class="app-menu-link app-menu-login">
+        <LoginControl :theme="theme" />
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
 import Icon from '@/components/base/icon/';
+import LoginControl from './login-control.vue';
 
 const prefixCls = 'app-menu';
 
@@ -16,6 +20,7 @@ export default {
   name: 'AppMenu',
   components: {
     Icon,
+    LoginControl,
   },
   props: {
     theme: {
@@ -98,7 +103,7 @@ export default {
       left: 50%;
       height: 0;
       width: 0;
-      border-bottom: 2px solid @colorPrimary;
+      border-bottom: 1px solid @colorPrimary;
       transition: all 0.3s ease;
     }
     &:hover {
@@ -122,7 +127,7 @@ export default {
       color: @colorPrimary;
     }
     &:after {
-      border-bottom: 2px solid @colorPrimary;
+      border-bottom: 1px solid @colorPrimary;
     }
     &:hover {
       color: @colorPrimary;
@@ -137,7 +142,7 @@ export default {
       color: @colorTextWhite;
     }
     &:after {
-      border-bottom: 2px solid @colorTextWhite;
+      border-bottom: 1px solid @colorTextWhite;
     }
     &:hover {
       color: @colorTextWhite;
@@ -183,6 +188,11 @@ export default {
         color: #fff;
       }
     }
+  }
+}
+.app-menu-login {
+  &:after {
+    display: none;
   }
 }
 </style>

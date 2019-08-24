@@ -7,7 +7,7 @@ const common = {
     blogResult: {},
     showSignInModal: false,
     showSignUpModal: false,
-    userInfo: {},
+    userInfo: null,
     highLightIndex: 0, // markdown 目录高亮索引
   },
   getters: {

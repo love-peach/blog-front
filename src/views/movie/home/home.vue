@@ -6,8 +6,6 @@
       <MovieHomeList :title="rankingComingData.title" :list="rankingComingList" v-loading="isRankingComingLoading" />
       <MovieHomeList :title="ranking250Data.title" :list="ranking250List" v-loading="isRanking250Loading">
         <Button theme="success" :to="{ path: '/movie/top250' }" icon="danxuanfill">更多</Button>
-        <!-- <router-link :to="{ path: '/movie/top250' }" >
-        </router-link> -->
       </MovieHomeList>
     </div>
   </div>

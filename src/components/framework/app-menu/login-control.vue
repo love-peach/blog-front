@@ -1,0 +1,110 @@
+<template>
+  <div>
+    <div class="dropdown-menu-wrap" v-if="userInfo">
+      <Zbtn theme="success" size="small" shape="circle" icon="user">{{ userInfo.userName }}</Zbtn>
+      <div :class="['dropdown-menu', `dropdown-menu-${theme}`]">
+        <ConcaveRadiusBox :size="15" :theme="theme">
+          <Zbtn :theme="theme === 'white' ? 'text' : 'white'" icon="signout" shape="rect" long @click="handleSignOut">退出账号</Zbtn>
+          <Zbtn :theme="theme === 'white' ? 'text' : 'white'" icon="signout" shape="rect" long @click="handleSignOut">退出账号</Zbtn>
+          <Zbtn :theme="theme === 'white' ? 'text' : 'white'" icon="signout" shape="rect" long @click="handleSignOut">退出账号</Zbtn>
+        </ConcaveRadiusBox>
+      </div>
+    </div>
+    <ZbtnGroup v-else>
+      <Zbtn theme="success" size="small" shape="circle" icon="signin" @click="handleSignIn">登录</Zbtn>
+      <Zbtn theme="primary" size="small" shape="circle" icon="signup" @click="handleSignUp">注册</Zbtn>
+    </ZbtnGroup>
+  </div>
+</template>
+
+<script>
+// import Icon from '@/components/base/icon/';
+import Zbtn from '@/components/base/btn/';
+import ZbtnGroup from '@/components/base/btn-group/';
+import ConcaveRadiusBox from '@/components/kit/concave-radius-box/';
+
+import webStore from '@/utils/storage';
+
+const { mapGetters, mapActions } = Vuex;
+
+export default {
+  name: 'LoginControl',
+  components: {
+    Zbtn,
+    ZbtnGroup,
+    ConcaveRadiusBox,
+  },
+  props: {
+    theme: String,
+  },
+  computed: {
+    ...mapGetters('common', {
+      userInfo: 'getUserInfo',
+    }),
+  },
+  mounted() {
+    const userInfo = webStore.getUserInfo();
+    if (userInfo) {
+      this.handleChangeUserInfo(userInfo);
+    }
+  },
+  methods: {
+    ...mapActions({
+      toggleSignUpModal: 'common/toggleSignUpModal',
+      toggleSignInModal: 'common/toggleSignInModal',
+      handleChangeUserInfo: 'common/changeUserInfo',
+    }),
+
+    /**
+     * @desc 登录
+     */
+    handleSignIn() {
+      this.toggleSignInModal(true);
+      this.toggleSignUpModal(false);
+    },
+
+    /**
+     * @desc 注册
+     */
+    handleSignUp() {
+      this.toggleSignInModal(false);
+      this.toggleSignUpModal(true);
+    },
+
+    /**
+     * @desc 退出登录
+     */
+    handleSignOut() {
+      webStore.removeUserInfo();
+      webStore.removeBlogToken();
+      this.handleChangeUserInfo(null);
+    },
+  },
+};
+</script>
+
+<style lang="less" scoped>
+.dropdown-menu-wrap {
+  position: relative;
+  .dropdown-menu {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 99;
+    display: none;
+    color: #fff;
+    line-height: initial;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .dropdown-menu-white {
+    background-color: #fff;
+  }
+  .dropdown-menu-black {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  &:hover .dropdown-menu {
+    display: block;
+  }
+}
+</style>

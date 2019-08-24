@@ -23,7 +23,7 @@ export default {
     theme: {
       type: String,
       validator(value) {
-        return oneOf(value, ['default', 'primary', 'info', 'success', 'warning', 'error', 'dashed', 'text']);
+        return oneOf(value, ['default', 'primary', 'info', 'success', 'warning', 'error', 'dashed', 'text', 'white']);
       },
       default: 'default',
     },
@@ -115,4 +115,4 @@ export default {
 };
 </script>
 
-<style lang="less" scoped src="./btn.less"></style>
+<style lang="less" src="./btn.less"></style>

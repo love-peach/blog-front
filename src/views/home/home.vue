@@ -26,7 +26,9 @@
 <script src="./home.js"></script>
 
 <style lang="less" scoped>
-@billboardHeight: 240px;
+.page {
+  margin-top: -@heightHeader - 20;
+}
 .page-content {
   position: relative;
   min-height: 500px;

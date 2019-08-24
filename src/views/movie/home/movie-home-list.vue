@@ -7,7 +7,7 @@
     </TitleBar>
     <template v-if="list && list.length > 0">
       <ul class="list z-row">
-        <li v-for="item in list" :key="item.id" class="list-item z-col-sm-30  z-col-md-15 z-col-lg-12">
+        <li v-for="item in list" :key="item.id" class="list-item z-col-xs-30 z-col-sm-20 z-col-md-15 z-col-lg-12">
           <Card padding="0" borderRadius="5px">
             <router-link class="list-item-poster-wrap" :to="{ path: `/movie/detail/${item.id}` }" target="_blank">
               <ZImage class="list-item-poster" :src="item.images.large" />

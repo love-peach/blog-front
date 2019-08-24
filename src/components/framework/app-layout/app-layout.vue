@@ -28,6 +28,7 @@ export default {
 .app-layout-wrap {
   height: 100%;
   .app-content {
+    padding-top: @heightHeader + 20;
     min-height: 100%;
     padding-bottom: @heightFooter + 20;
   }

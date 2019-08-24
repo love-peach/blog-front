@@ -14,7 +14,6 @@
 <script>
 import Icon from '@/components/base/icon/';
 import AppMenu from '@/components/framework/app-menu/';
-import { throttle } from '@/utils/tools';
 
 export default {
   name: 'AppHeader',
@@ -25,39 +24,8 @@ export default {
   data() {
     return {
       scrollTop: 0,
+      menuTheme: 'black',
     };
-  },
-  computed: {
-    menuTheme() {
-      const isHomePage = this.$route.path.indexOf('/home') === 0;
-      let menuTheme = '';
-      if (isHomePage) {
-        if (this.scrollTop > 240 - 50) {
-          menuTheme = 'white';
-        } else {
-          menuTheme = 'black';
-        }
-      } else {
-        menuTheme = 'white';
-      }
-      return menuTheme;
-    },
-  },
-  mounted() {
-    const vm = this;
-    this.throttleScroll = throttle(function() {
-      vm.scrollHandler();
-    }, 0);
-    window.addEventListener('scroll', this.throttleScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.throttleScroll);
-  },
-  methods: {
-    scrollHandler() {
-      let t = document.documentElement.scrollTop || document.body.scrollTop;
-      this.scrollTop = t;
-    },
   },
 };
 </script>
@@ -96,6 +64,6 @@ export default {
   .app-header-brand {
     color: @colorTextSilver;
   }
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 </style>
