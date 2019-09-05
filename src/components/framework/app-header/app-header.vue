@@ -45,6 +45,7 @@ export default {
   }
   .app-header-brand {
     margin-right: 30px;
+    overflow: hidden;
     .iconfont {
       line-height: @heightHeader;
       &:before {

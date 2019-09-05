@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <BillBoard />
+    <BillBoard sticky isHomePage />
     <div class="page-content">
       <section style="background-color: #fff;min-height: 300px;padding: 20px;">
         <div class="z-container">

@@ -1,9 +1,9 @@
 <template>
-  <div class="billboard" :style="{ 'background-image': `url(${bgSrc})`, 'background-position': `center ${bgPosition}px` }">
-    <div class="billboard-box">
+  <div class="billboard" :style="wrapStyles">
+    <div :class="['billboard-box', isHomePage ? 'billboard-box-homepage' : '']" :style="boxStyle">
       <div class="billboard-inner">
-        <h1 class="billboard-inner-slogan">不积跬步，无以至千里</h1>
-        <p class="billboard-inner-slogan-sub">No step, no mile.</p>
+        <h1 class="billboard-inner-slogan">{{ title }}</h1>
+        <p class="billboard-inner-slogan-sub">{{ titleSub }}</p>
       </div>
     </div>
   </div>
@@ -12,14 +12,41 @@
 <script>
 export default {
   name: 'billboard',
+  props: {
+    title: {
+      type: String,
+      default: '不积跬步，无以至千里',
+    },
+    titleSub: {
+      type: String,
+      default: 'No step, no mile.',
+    },
+    height: {
+      type: [Number, String],
+      default: '250px',
+    },
+    poster: String,
+    sticky: Boolean,
+    isHomePage: Boolean,
+  },
   data() {
-    return {
-      bgPosition: 0,
-    };
+    return {};
   },
   computed: {
     bgSrc() {
-      return 'https://picsum.photos/1280/240?image=' + this.getDate();
+      return this.poster || 'https://picsum.photos/1280/240?image=' + this.getDate();
+    },
+    wrapStyles() {
+      return {
+        position: this.sticky ? 'sticky' : 'relative',
+        top: 0,
+        backgroundImage: `url(${this.bgSrc})`,
+      };
+    },
+    boxStyle() {
+      return {
+        height: typeof this.height === 'number' ? `${this.height}px` : this.height,
+      };
     },
   },
   methods: {
@@ -46,8 +73,10 @@ export default {
   &-box {
     display: inline-table;
     height: @billboardHeight;
-    padding-top: @heightHeader;
     width: 100%;
+  }
+  &-box-homepage {
+    padding-top: @heightHeader;
   }
   &-inner {
     width: 100%;

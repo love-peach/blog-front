@@ -48,7 +48,7 @@
                   <p class="ranking-info-item ranking-info-score">
                     <label for="">评分</label>
                     <ScoreStart :value="item.rating ? item.rating.average : 0" />
-                    <span class="ranking-info-score-amount">（{{ item.collect_count }}人评价）</span>   
+                    <span class="ranking-info-score-amount">（{{ item.collect_count }}人评价）</span>
                   </p>
                 </div>
               </div>

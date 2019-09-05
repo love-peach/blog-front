@@ -108,4 +108,36 @@ export default {
 
   // 删除资源
   DeleteResource: (params, options) => request.delete(`/resources/${params.resourceId}`, params, options),
+
+  /**
+   * @desc 评论
+   */
+
+  // 获取评论列表
+  GetComments: (params, options) => request.get('/comments', params, options),
+
+  // 新增评论
+  PostComments: (params, options) => request.post('/Comments', params, options),
+
+  // 修改评论
+  PutComments: (params, options) => request.put(`/Comments/${params.commentId}`, params, options),
+
+  // 删除评论
+  DeleteComments: (params, options) => request.delete(`/Comments/${params.commentId}`, params, options),
+
+  /**
+   * @desc 回复
+   */
+
+  // 获取回复列表
+  GetReplys: (params, options) => request.get('/replys', params, options),
+
+  // 新增回复
+  PostReplys: (params, options) => request.post('/replys', params, options),
+
+  // 修改回复
+  PutReplys: (params, options) => request.put(`/replys/${params.commentId}`, params, options),
+
+  // 删除回复
+  DeleteReplys: (params, options) => request.delete(`/replys/${params.commentId}`, params, options),
 };

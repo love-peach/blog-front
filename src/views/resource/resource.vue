@@ -4,7 +4,7 @@
       <div v-for="resource in resourceList" :key="resource._id">
         <TitleBar :title="resource.name"></TitleBar>
         <div class="z-row" v-if="resource.resource && resource.resource.length > 0">
-          <div class="resource-item-wrap z-col-lg-15 z-col-md-20 z-col-sm-30" v-for="resourceItem in resource.resource" :key="resourceItem._id">
+          <div class="resource-item-wrap z-col-lg-15 z-col-md-20 z-col-sm-30 z-col-xs-30" v-for="resourceItem in resource.resource" :key="resourceItem._id">
             <Card padding="0">
               <a class="resource-item-link no-img-placeholder-colorful no-img-placeholder-horizon" :href="resourceItem.url" target="_blank">
                 <img :src="resourceItem.posterUrl" alt="" class="resource-item-poster" />

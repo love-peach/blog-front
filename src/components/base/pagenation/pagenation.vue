@@ -1,6 +1,12 @@
 <template>
   <div class="page-bar">
     <ul>
+      <li v-if="totalEle">
+        <a style="border: 0;"
+          >共<i>{{ totalEle }}</i
+          >条</a
+        >
+      </li>
       <li v-if="cur != 1"><a @click="callback(cur - 1)">上一页</a></li>
       <li v-else><a style="cursor: default">上一页</a></li>
       <li v-for="index in indexs" :key="index" :class="{ active: cur == index }">
@@ -26,6 +32,7 @@ export default {
       type: [String, Number],
       required: true,
     },
+    totalEle: [String, Number],
     all: {
       type: [String, Number],
       required: true,

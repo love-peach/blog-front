@@ -2,13 +2,22 @@
   <div class="z-container">
     <div class="z-row">
       <div class="z-col-lg-42 z-col-xl-45">
-        <div class="blog-detail-wrap">
-          <div class="blog-poster-wrap" :style="{ 'background-image': blogResult.posterUrl ? 'url(' + blogResult.posterUrl + ')' : '' }"></div>
-          <h1 class="blog-content-title">{{ blogResult.title }}</h1>
-          <p class="blog-content-time">{{ blogResult.createdAt | dateFormatFilter('YYYY 年 MM 月 DD 日') }}</p>
+        <Card padding="0">
+          <Billboard :poster="blogResult.posterUrl" :title="blogResult.title" :titleSub="blogResult.createdAt | dateFormatFilter('YYYY 年 MM 月 DD 日')"></Billboard>
+        </Card>
+        <Card padding="0">
           <MdPreview :content="blogResult.content" />
-        </div>
+        </Card>
+        <Card>
+          <CommentsForm @on-success="handleCommentsSuccess"></CommentsForm>
+        </Card>
+
+        <Card v-loading="isCommentsListLoading" v-if="commentsList && commentsList.length > 0">
+          <CommentsList @on-fresh="requestCommentsList" :commentsList="commentsList"></CommentsList>
+          <Pagenation :totalEle="totalEle" :all="pageTotal" :cur="page" :callback="changePage" style="margin-top: 20px;" />
+        </Card>
       </div>
+
       <div class="z-col-lg-18 z-col-xl-15 visible-lg visible-xl">
         <div id="briefWrap">
           <CardBriefBlog :blogResult="blogResult" v-if="blogResult && blogResult.content" />

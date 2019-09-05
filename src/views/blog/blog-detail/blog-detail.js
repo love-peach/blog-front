@@ -1,14 +1,16 @@
 import api from '@/api/';
 const { mapActions } = Vuex;
 import Btn from '@/components/base/btn/';
-// import { on, throttle } from '@/utils/tools';
-import ZInputDebounce from '@/components/base/z-input-debounce/';
-
+import Card from '@/components/base/card/';
+import Billboard from '@/components/kit/billboard/';
 import MdPreview from '@/components/kit/md-preview/';
 
 import CardBriefBlog from '@/components/kit/card-brief-blog/';
 import CardMdNav from '@/components/kit/card-md-nav';
 import CardNoData from '@/components/kit/card-no-data/';
+import CommentsForm from '@/components/kit/comments-form/';
+import CommentsList from '@/components/kit/comments-list/';
+import Pagenation from '@/components/base/pagenation/';
 
 import { throttle } from '@/utils/tools';
 
@@ -16,23 +18,33 @@ export default {
   name: 'BlogDetail',
   components: {
     Btn,
-    ZInputDebounce,
+    Card,
+    Billboard,
     MdPreview,
     CardBriefBlog,
     CardMdNav,
     CardNoData,
+    CommentsForm,
+    CommentsList,
+    Pagenation,
   },
   data() {
     return {
       isLoading: false,
+      isCommentsListLoading: false,
       blogResult: {},
+      commentsList: [],
+      page: 1,
+      limit: 10,
+      pageTotal: 0,
+      totalEle: 0,
     };
   },
   created() {
     this.requestBlogDetail();
+    this.requestCommentsList();
   },
   mounted() {
-    // on(window, 'scroll', throttle(this.handleScrollEvent));
     const vm = this;
     this.throttleScroll = throttle(function() {
       vm.scrollHandler();
@@ -41,8 +53,6 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.throttleScroll);
-
-    // off(window, 'scroll', this.handleScroll());
   },
   methods: {
     ...mapActions({
@@ -61,16 +71,19 @@ export default {
       }
     },
 
-    handleChange(e) {
-      console.log(e.target.value, '33');
+    /**
+     * @desc 评论发表成功 回调
+     */
+    handleCommentsSuccess() {
+      this.requestCommentsList();
     },
 
-    handleScrollEvent(e) {
-      console.log(e, 'e');
-    },
-
-    handleLogin() {
-      this.toggleSignInModal(true);
+    /**
+     * @desc 分页点击
+     */
+    changePage(page) {
+      this.page = page;
+      this.requestCommentsList();
     },
 
     /**
@@ -89,6 +102,29 @@ export default {
         })
         .catch(() => {
           this.isLoading = false;
+        });
+    },
+
+    /**
+     * @desc 请求 评论列表
+     */
+    requestCommentsList() {
+      this.isCommentsListLoading = true;
+      const params = {
+        blogId: this.$route.params.blogId,
+        page: this.page,
+        limit: this.limit,
+      };
+      api
+        .GetComments(params)
+        .then(res => {
+          this.isCommentsListLoading = false;
+          this.commentsList = res.result.list;
+          this.pageTotal = res.result.pages;
+          this.totalEle = res.result.total;
+        })
+        .catch(() => {
+          this.isCommentsListLoading = false;
         });
     },
   },

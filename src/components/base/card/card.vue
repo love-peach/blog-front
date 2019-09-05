@@ -1,29 +1,42 @@
 <template>
-  <div class="card-wrap" :style="stylesWrap">
-    <h3 class="card-header" v-if="title">{{ title }}</h3>
-    <div class="card-body" :style="stylesBody">
+  <div :class="classes" :style="stylesWrap">
+    <h3 class="z-card-header" v-if="title">{{ title }}</h3>
+    <div class="z-card-body" :style="stylesBody">
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
+const prefixCls = 'z-card';
+
 export default {
   name: 'Card',
   props: {
     title: {
       type: String,
     },
+    hover: Boolean,
+    shadow: Boolean,
     padding: {
       type: [String, Number],
       default: '15px',
     },
     borderRadius: {
       type: [String, Number],
-      default: '10px',
+      default: '5px',
     },
   },
   computed: {
+    classes() {
+      return [
+        `${prefixCls}`,
+        {
+          [`${prefixCls}-hover`]: this.hover,
+          [`${prefixCls}-shadow`]: this.shadow,
+        },
+      ];
+    },
     stylesWrap() {
       return {
         borderRadius: typeof this.borderRadius === 'number' ? `${this.borderRadius}px` : this.borderRadius,
@@ -39,24 +52,28 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.card-wrap {
+.z-card {
   background-color: #fff;
   margin-bottom: 15px;
   overflow: hidden;
-  // border-radius: 10px;
   transition: all 0.2s linear;
-  &:hover {
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    transform: translate3d(0, -2px, 0);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+
+  &-shadow {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   }
-  .card-header {
+  &-hover:hover {
+    transform: translate3d(0, -2px, 0);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  &-header {
     font-size: 18px;
     line-height: 40px;
     text-align: center;
     border-bottom: 1px solid @colorBorderLight;
     color: @colorTextTitle;
   }
-  .card-body {
+  &-body {
     height: 100%;
   }
 }
