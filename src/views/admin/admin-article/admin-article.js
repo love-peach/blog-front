@@ -81,12 +81,13 @@ export default {
         {
           title: '作者',
           render: (h, parama) => {
-            return h('span', parama.row.authorObj.userName);
+            return h('span', parama.row.authorObj ? parama.row.authorObj.userName : '未知');
           },
         },
         {
           title: '分类',
           key: 'category',
+          align: 'left',
           render: (h, parama) => {
             return h('span', parama.row.categoryObj.name);
           },
@@ -95,7 +96,7 @@ export default {
           title: '标签',
           key: 'tagArr',
           width: '',
-          align: 'center',
+          align: 'left',
           class: 'hidden-xs',
           type: 'array',
           render: (h, parama) => {
@@ -139,7 +140,7 @@ export default {
           },
         },
         {
-          name: '操作',
+          title: '操作',
           render: (h, params) => {
             return h('div', [
               h(

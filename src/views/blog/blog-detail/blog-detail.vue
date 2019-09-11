@@ -3,7 +3,15 @@
     <div class="z-row">
       <div class="z-col-lg-42 z-col-xl-45">
         <Card padding="0">
-          <Billboard :poster="blogResult.posterUrl" :title="blogResult.title" :titleSub="blogResult.createdAt | dateFormatFilter('YYYY 年 MM 月 DD 日')"></Billboard>
+          <Billboard :poster="blogResult.posterUrl" :title="blogResult.title" :titleSub="blogResult.createdAt | dateFormatFilter('YYYY 年 MM 月 DD 日')">
+            <div>
+              <Tag size="small" theme="error" icon="user" shape="rect"> {{ blogResult.authorObj ? blogResult.authorObj.userName : '' }}</Tag>
+              <Tag size="small" theme="info" shape="rect" v-for="(tag, index) in blogResult.tagArray" :key="index">{{ tag.name }}</Tag>
+              <Btn v-if="isLiked" size="small" theme="success" shape="rect" icon="liked" @click="handleUnLike" :loading="isLikeLoading"></Btn>
+              <Btn v-else size="small" theme="success" shape="rect" icon="like" @click="handleLike" :loading="isLikeLoading"></Btn>
+              <Btn size="small" theme="primary" shape="rect" icon="download"></Btn>
+            </div>
+          </Billboard>
         </Card>
         <Card padding="0">
           <MdPreview :content="blogResult.content" />

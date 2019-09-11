@@ -7,7 +7,7 @@
           <div class="topic-article-info">
             <div class="info-author">
               <Icon type="user" title="作者" />:
-              <router-link class="topic-info-link" :to="{ path: `/search/?author=${topic.authorObj._id}` }">
+              <router-link class="topic-info-link" :to="{ path: `/search/?author=${topic.authorObj._id}` }" v-if="topic.authorObj">
                 {{ topic.authorObj.userName }}
               </router-link>
             </div>

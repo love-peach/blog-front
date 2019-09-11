@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <BillBoard sticky isHomePage />
+    <BillBoard posterBlue="0" title="不积跬步，无以至千里" titleSub="No step, no mile." sticky isHomePage />
     <div class="page-content">
       <section style="background-color: #fff;min-height: 300px;padding: 20px;">
         <div class="z-container">

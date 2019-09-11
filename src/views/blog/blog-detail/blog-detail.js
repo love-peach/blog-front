@@ -1,6 +1,7 @@
 import api from '@/api/';
-const { mapActions } = Vuex;
+const { mapGetters, mapActions } = Vuex;
 import Btn from '@/components/base/btn/';
+import Tag from '@/components/base/tag/';
 import Card from '@/components/base/card/';
 import Billboard from '@/components/kit/billboard/';
 import MdPreview from '@/components/kit/md-preview/';
@@ -18,6 +19,7 @@ export default {
   name: 'BlogDetail',
   components: {
     Btn,
+    Tag,
     Card,
     Billboard,
     MdPreview,
@@ -30,6 +32,7 @@ export default {
   },
   data() {
     return {
+      isLikeLoading: false,
       isLoading: false,
       isCommentsListLoading: false,
       blogResult: {},
@@ -39,6 +42,18 @@ export default {
       pageTotal: 0,
       totalEle: 0,
     };
+  },
+  computed: {
+    ...mapGetters('common', {
+      userInfo: 'getUserInfo',
+    }),
+    isLiked() {
+      const likes = this.blogResult.likes;
+      if (likes && likes.length > 0 && this.userInfo && this.userInfo._id) {
+        return likes.includes(this.userInfo._id);
+      }
+      return false;
+    },
   },
   created() {
     this.requestBlogDetail();
@@ -126,6 +141,70 @@ export default {
         .catch(() => {
           this.isCommentsListLoading = false;
         });
+    },
+
+    /**
+     * @desc 请求 点赞
+     */
+    requestLike() {
+      const params = {
+        blogId: this.blogResult.id,
+        userId: this.userInfo._id,
+      };
+      this.isLikeLoading = true;
+      api
+        .PostBlogLike(params)
+        .then(res => {
+          this.blogResult.likes = res.result.likes;
+          this.isLikeLoading = false;
+        })
+        .catch(() => {
+          this.isLikeLoading = false;
+        });
+    },
+
+    /**
+     * @desc 请求 取消点赞
+     */
+    requestUnLike() {
+      const params = {
+        blogId: this.blogResult.id,
+        userId: this.userInfo._id,
+      };
+      this.isLikeLoading = true;
+      api
+        .PostBlogUnLike(params)
+        .then(res => {
+          this.blogResult.likes = res.result.likes;
+          this.isLikeLoading = false;
+        })
+        .catch(() => {
+          this.isLikeLoading = false;
+        });
+    },
+
+    /**
+     * @desc 点击事件 点赞
+     */
+    handleLike() {
+      if (this.userInfo && this.userInfo._id) {
+        this.requestLike();
+      } else {
+        this.$toast.info('请登录');
+        this.toggleSignInModal(true);
+      }
+    },
+
+    /**
+     * @desc 点击事件 取消点赞
+     */
+    handleUnLike() {
+      if (this.userInfo && this.userInfo._id) {
+        this.requestUnLike();
+      } else {
+        this.$toast.info('请登录');
+        this.toggleSignInModal(true);
+      }
     },
   },
 };

@@ -8,7 +8,7 @@
           </div>
           <div class="comments-main">
             <div class="comments-mate">
-              <span class="comments-mate-username">{{ comments.from.userName }}</span>
+              <span class="comments-mate-username">{{ comments.from ? comments.from.userName : '未知' }}</span>
               <span class="comments-mate-time">{{ comments.updatedAt | dateFormatFilter }}</span>
               <span v-if="commentId && commentId === comments.id" class="comments-mate-unrepay" @click="handleUnRepay(comments)">取消回复</span>
               <span v-else class="comments-mate-repay" @click="handleRepay(comments)">回复</span>
@@ -18,7 +18,7 @@
             <ul class="repay-list" v-if="comments.reply && comments.reply.length > 0">
               <li class="repay-list-item" v-for="repay in comments.reply" :key="repay.id">
                 <div class="comments-mate">
-                  <span class="comments-mate-username">{{ repay.from.userName }}</span>
+                  <span class="comments-mate-username">{{ repay.from ? repay.from.userName : '未知' }}</span>
                   <span class="comments-mate-time">{{ repay.updatedAt | dateFormatFilter }}</span>
                 </div>
                 <div class="comments-content">{{ repay.content }}</div>

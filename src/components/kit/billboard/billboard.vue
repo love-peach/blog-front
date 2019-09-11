@@ -1,9 +1,11 @@
 <template>
-  <div class="billboard" :style="wrapStyles">
-    <div :class="['billboard-box', isHomePage ? 'billboard-box-homepage' : '']" :style="boxStyle">
+  <div :class="['billboard', isHomePage ? 'billboard-homepage' : '']" :style="wrapStyles">
+    <div class="billboard-poster" :style="posterStyles"></div>
+    <div class="billboard-box">
       <div class="billboard-inner">
-        <h1 class="billboard-inner-slogan">{{ title }}</h1>
-        <p class="billboard-inner-slogan-sub">{{ titleSub }}</p>
+        <h1 v-if="title" class="billboard-inner-slogan">{{ title }}</h1>
+        <p v-if="titleSub" class="billboard-inner-slogan-sub">{{ titleSub }}</p>
+        <slot></slot>
       </div>
     </div>
   </div>
@@ -13,17 +15,15 @@
 export default {
   name: 'billboard',
   props: {
-    title: {
-      type: String,
-      default: '不积跬步，无以至千里',
-    },
-    titleSub: {
-      type: String,
-      default: 'No step, no mile.',
-    },
+    title: String,
+    titleSub: String,
     height: {
       type: [Number, String],
       default: '250px',
+    },
+    posterBlue: {
+      type: [Number, String],
+      default: '15px',
     },
     poster: String,
     sticky: Boolean,
@@ -39,13 +39,17 @@ export default {
     wrapStyles() {
       return {
         position: this.sticky ? 'sticky' : 'relative',
-        top: 0,
-        backgroundImage: `url(${this.bgSrc})`,
+        height: typeof this.height === 'number' ? `${this.height}px` : this.height,
       };
     },
-    boxStyle() {
+    posterStyles() {
       return {
-        height: typeof this.height === 'number' ? `${this.height}px` : this.height,
+        backgroundImage: `url(${this.bgSrc})`,
+        filter: typeof this.height === 'number' ? `blur(${this.posterBlue}px)` : `blur(${this.posterBlue})`,
+        top: typeof this.height === 'number' ? `-${this.posterBlue}px` : `-${this.posterBlue}`,
+        bottom: typeof this.height === 'number' ? `-${this.posterBlue}px` : `-${this.posterBlue}`,
+        left: typeof this.height === 'number' ? `-${this.posterBlue}px` : `-${this.posterBlue}`,
+        right: typeof this.height === 'number' ? `-${this.posterBlue}px` : `-${this.posterBlue}`,
       };
     },
   },
@@ -64,20 +68,39 @@ export default {
 <style lang="less" scoped>
 @billboardHeight: 250px;
 .billboard {
-  position: sticky;
+  position: relative;
   top: 0;
   width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: #333;
-  &-box {
-    display: inline-table;
-    height: @billboardHeight;
-    width: 100%;
-  }
-  &-box-homepage {
+  height: @billboardHeight;
+  &-homepage {
     padding-top: @heightHeader;
   }
+  &-poster {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #333;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+  &-box {
+    position: relative;
+    display: inline-table;
+    width: 100%;
+    height: 100%;
+  }
+
   &-inner {
     width: 100%;
     height: 100%;
@@ -86,7 +109,7 @@ export default {
     text-align: center;
   }
   &-inner-slogan {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: normal;
     margin-bottom: 5px;
     color: #fff;
@@ -99,6 +122,7 @@ export default {
     padding: 2px 8px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.2);
+    margin-bottom: 5px;
   }
 }
 </style>

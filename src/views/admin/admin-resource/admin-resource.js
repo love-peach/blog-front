@@ -58,9 +58,11 @@ export default {
         {
           title: '名称',
           key: 'name',
+          align: 'left',
         },
         {
           title: '资源分类',
+          align: 'left',
           render: (h, params) => {
             return h('span', params.row.resourceTypeObj.name);
           },
@@ -76,7 +78,7 @@ export default {
           minWidth: '100px',
           maxWidth: '400px;',
           align: 'left',
-          width: '400px',
+          width: '300px',
           render: (h, params) => {
             return h('span', params.row.desc || params.row.metaDesc);
           },

@@ -133,7 +133,7 @@ export default {
         {
           title: '序号',
           width: '45px',
-          class: ['hidden-xs'],
+          // class: ['hidden-xs'],
           render: (h, params) => {
             return h(
               'span',

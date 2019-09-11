@@ -46,6 +46,12 @@ export default {
   // 发布文章
   PostBlog: (params, options) => request.post('/blogs', params, options),
 
+  // 点赞
+  PostBlogLike: (params, options) => request.post('/blogs/like', params, options),
+
+  // 取消点赞
+  PostBlogUnLike: (params, options) => request.post('/blogs/unlike', params, options),
+
   // 修改文章
   PutBlog: (params, options) => request.put(`/blogs/${params.blogId}`, params, options),
 

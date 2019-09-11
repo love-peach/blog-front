@@ -4,7 +4,7 @@
     <div class="reviews-item">
       <h3 class="reviews-item-title">{{ review.title }}</h3>
       <div class="reviews-item-content" v-loading="isReviewDetailLoading">
-        <span :class="`reviews-item-content-text ${isShowReviewFull && reviewText ? 'reviews-item-content-html' : ''}`" v-html="reviewText"></span>
+        <div :class="`reviews-item-content-text ${isShowReviewFull && reviewText ? 'reviews-item-content-html' : ''}`" v-html="reviewText"></div>
         <a href="javascript:;" class="reviews-item-toggle" @click="handleToggleReviewFull">({{ isShowReviewFull ? '收起' : '展开' }})</a>
       </div>
     </div>
@@ -93,6 +93,7 @@ export default {
     &-text {
       color: @colorTextContent;
       word-break: break-word;
+      display: inline;
     }
     &-html {
       display: block;
@@ -100,6 +101,8 @@ export default {
       margin-bottom: 10px;
       max-height: 500px;
       overflow: auto;
+      // overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
       /deep/ p {
         margin: 0 0 20px 0;
         line-height: 1.8;

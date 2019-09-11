@@ -13,7 +13,7 @@ const externals = {
 
 const cdn = {
   dev: {
-    css: ['//at.alicdn.com/t/font_1226722_vmrc0kwscei.css'],
+    css: ['//at.alicdn.com/t/font_1226722_3y2yzousivp.css'],
     js: [
       'https://cdn.bootcss.com/vue/2.6.6/vue.js',
       'https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js',

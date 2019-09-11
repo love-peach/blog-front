@@ -6,10 +6,10 @@
     </div>
     <div class="z-container">
       <div class="z-row">
-        <div class="z-col-40">
+        <div class="z-col-sm-40">
           <div style="background-color: #fff;clear:both;">
             <div class="z-row">
-              <div class=" z-col-xs-30 hotlist-item" v-for="item in ebookHomeData.hotList" :key="item.bookId">
+              <div class=" z-col-sm-30 hotlist-item" v-for="item in ebookHomeData.hotList" :key="item.bookId">
                 <div class="row">
                   <div class="z-col-20">
                     <EbookPoster :dataSource="item" />
@@ -24,7 +24,8 @@
             </div>
           </div>
         </div>
-        <div class="z-col-20">
+        <div class="z-col-sm-20">
+          <TitleBar title="推荐Top9" class="visible-xs"></TitleBar>
           <ZTable :columns="columnsLastRecord" :data="ebookHomeData.tjList" size="small" :showHeader="false" :border="false" />
         </div>
       </div>

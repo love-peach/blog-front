@@ -55,6 +55,7 @@ export default {
         {
           title: '姓名',
           key: 'userName',
+          align: 'left',
         },
         {
           title: '手机号',
@@ -63,6 +64,7 @@ export default {
         {
           title: '邮箱',
           key: 'email',
+          align: 'left',
         },
         {
           title: '创建时间',
@@ -271,19 +273,19 @@ export default {
         this.$toast.error('请正确填写邮箱！');
         return false;
       }
-      if (!password && isAddMode) {
+      if (!password) {
         this.$toast.error('请填写密码！');
         return false;
       }
-      if (password.length < 6 && isAddMode) {
+      if (password.length < 6) {
         this.$toast.error('密码至少为 6 位');
         return false;
       }
-      if (!confirmPassword && isAddMode) {
+      if (isAddMode && !confirmPassword) {
         this.$toast.error('请再次确认密码');
         return false;
       }
-      if (password !== confirmPassword && isAddMode) {
+      if (isAddMode && password !== confirmPassword) {
         this.$toast.error('密码不一致');
         return false;
       }

@@ -1,6 +1,7 @@
 <template>
-  <div :class="classes" :style="styles">
+  <div :class="classes">
     <div class="z-tag-content">
+      <Icon :type="icon" v-if="icon"></Icon>
       <slot></slot>
     </div>
     <icon v-if="closeable" type="close" @click.native.stop="handleClose"></icon>
@@ -25,6 +26,17 @@ export default {
       },
       default: 'default',
     },
+    icon: {
+      type: String,
+      default: '',
+    },
+    shape: {
+      type: String,
+      validator(value) {
+        return oneOf(value, ['rect', 'radius', 'circle']);
+      },
+      default: 'radius',
+    },
     size: {
       type: String,
       validator(value) {
@@ -39,10 +51,6 @@ export default {
       },
       default: 'default',
     },
-    radius: {
-      type: [Number, String],
-      default: '0.3em',
-    },
     closeable: {
       type: Boolean,
       default: false,
@@ -55,15 +63,11 @@ export default {
         `${prefixCls}-${this.theme}`,
         {
           [`${prefixCls}-closeable`]: this.closeable,
+          [`${prefixCls}-${this.shape}`]: !!this.shape,
           [`${prefixCls}-${this.type}`]: this.type !== 'default',
           [`${prefixCls}-${this.size}`]: this.size !== 'default',
         },
       ];
-    },
-    styles() {
-      return {
-        borderRadius: typeof this.radius === 'number' ? `${this.radius}px` : this.radius,
-      };
     },
   },
   methods: {

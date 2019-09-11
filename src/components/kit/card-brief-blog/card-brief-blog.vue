@@ -6,7 +6,7 @@
         <div class="author-avatar-box" :style="{ 'background-image': 'url(' + avatarUrl + ')' }"></div>
       </div>
       <h3 class="brief-title">{{ blogResult.title }}</h3>
-      <p class="brief-title-sub">oajowejfoaw</p>
+      <p class="brief-title-sub">{{ blogResult.createdAt | dateFormatFilter('YYYY 年 MM 月 DD 日') }}</p>
       <div class="brief-interaction">
         <div class="brief-interaction-item">
           <span>{{ blogResult.likes ? blogResult.likes.length : 0 }}</span>

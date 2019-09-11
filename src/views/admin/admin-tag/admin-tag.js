@@ -39,10 +39,12 @@ export default {
         {
           title: '名称',
           key: 'name',
+          align: 'left',
         },
         {
           title: '属性值',
           key: 'value',
+          align: 'left',
         },
         {
           title: '创建时间',
@@ -57,7 +59,7 @@ export default {
           },
         },
         {
-          name: '操作',
+          title: '操作',
           render: (h, params) => {
             return h('div', [
               h(
