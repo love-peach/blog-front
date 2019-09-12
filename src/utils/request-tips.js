@@ -1,5 +1,6 @@
 // 根据请求报错状态码 格式化错误信息
 import store from '@/store/';
+import webStore from '@/utils/storage';
 
 function transformErrMsg(response) {
   let message = '';
@@ -56,6 +57,8 @@ function checkHttpStatus(response) {
   }
   if (response && response.status === 401) {
     console.log('登录过期了', 'response');
+    webStore.sessionClear();
+    store.dispatch('common/changeUserInfo', null);
     store.dispatch('common/toggleSignInModal', true);
   }
   if (response && response.data) {

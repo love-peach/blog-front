@@ -5,6 +5,7 @@ const LoginPage = () => import(/* webpackChunkName: 'LoginPage' */ '@/views/logi
 
 const BlogList = () => import(/* webpackChunkName: 'BlogList' */ '@/views/blog/blog-list/');
 const BlogDetail = () => import(/* webpackChunkName: 'BlogDetail' */ '@/views/blog/blog-detail/');
+const BlogSearch = () => import(/* webpackChunkName: 'BlogSearch' */ '@/views/blog/blog-search/');
 
 const Resource = () => import(/* webpackChunkName: 'Resource' */ '@/views/resource/');
 
@@ -51,6 +52,11 @@ export default [
         path: '',
         name: '全部文章',
         component: BlogList,
+      },
+      {
+        path: 'search',
+        name: '搜索',
+        component: BlogSearch,
       },
       {
         path: ':category',

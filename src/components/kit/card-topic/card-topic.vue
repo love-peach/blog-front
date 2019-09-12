@@ -7,7 +7,7 @@
           <div class="topic-article-info">
             <div class="info-author">
               <Icon type="user" title="作者" />:
-              <router-link class="topic-info-link" :to="{ path: `/search/?author=${topic.authorObj._id}` }" v-if="topic.authorObj">
+              <router-link class="topic-info-link" :to="{ path: `/blog/search/?author=${topic.authorObj._id}` }" v-if="topic.authorObj">
                 {{ topic.authorObj.userName }}
               </router-link>
             </div>
@@ -19,7 +19,7 @@
             </div>
             <div class="info-tag ">
               <Icon type="tag" title="标签" />:
-              <router-link class="topic-info-link" v-for="(item, index) in topic.tagArray" :key="index" :to="{ path: `/search/?tag=${item._id}` }">
+              <router-link class="topic-info-link" v-for="(item, index) in topic.tagArray" :key="index" :to="{ path: `/blog/search/?tag=${item._id}` }">
                 {{ item.name }}
               </router-link>
             </div>

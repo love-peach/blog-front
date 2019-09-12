@@ -75,8 +75,7 @@ export default {
      * @desc 退出登录
      */
     handleSignOut() {
-      webStore.removeUserInfo();
-      webStore.removeBlogToken();
+      webStore.sessionClear();
       this.handleChangeUserInfo(null);
     },
   },

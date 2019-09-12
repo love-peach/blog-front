@@ -155,6 +155,7 @@ export default {
       api
         .PostBlogLike(params)
         .then(res => {
+          this.$toast.success('已赞！');
           this.blogResult.likes = res.result.likes;
           this.isLikeLoading = false;
         })
@@ -175,6 +176,7 @@ export default {
       api
         .PostBlogUnLike(params)
         .then(res => {
+          this.$toast.warning('已取消赞！');
           this.blogResult.likes = res.result.likes;
           this.isLikeLoading = false;
         })

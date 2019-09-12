@@ -122,7 +122,7 @@ export default {
     padding: 2px 8px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.2);
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 }
 </style>

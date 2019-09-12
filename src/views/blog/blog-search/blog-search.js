@@ -5,13 +5,16 @@ import CardTopic from '@/components/kit/card-topic/';
 import CardCategory from '@/components/kit/card-category/';
 import AppSearch from '@/components/framework/app-search/';
 import SearchBlog from '@/components/kit/search-blog/';
+import FilterSelect from '../components/filter-select/';
+
+import ZSelect from '@/components/base/z-select/';
 
 const { mapGetters } = Vuex;
 
 import api from '@/api/';
 
 export default {
-  name: 'BlogList',
+  name: 'BlogSearch',
   components: {
     Card,
     TopicItem,
@@ -20,13 +23,17 @@ export default {
     CardCategory,
     AppSearch,
     SearchBlog,
+    ZSelect,
+    FilterSelect,
   },
   data() {
     return {
+      formData: {},
       page: 1,
       limit: 10,
       blogList: [],
       isLoading: false,
+      tagList: [],
     };
   },
   computed: {
@@ -35,9 +42,6 @@ export default {
       categoryList: 'getCategoryList',
     }),
   },
-  mounted() {
-    this.requestblogList();
-  },
   watch: {
     $route: {
       handler() {
@@ -45,6 +49,10 @@ export default {
       },
       deep: true,
     },
+  },
+  mounted() {
+    this.requestblogList();
+    this.requestTagList();
   },
   methods: {
     /**
@@ -55,7 +63,7 @@ export default {
       const params = {
         page: this.page,
         limit: this.limit,
-        category: this.getCategoryIdByValue(this.$route.params.category),
+        keyword: this.$route.query.keyword,
       };
       api
         .GetBlogList(params)
@@ -69,10 +77,26 @@ export default {
     },
 
     /**
+     * @desc 请求 标签列表
+     */
+    requestTagList() {
+      this.isTagLoading = true;
+      api
+        .GetTag()
+        .then(res => {
+          this.tagList = res.result;
+          this.isTagLoading = false;
+        })
+        .catch(() => {
+          this.isTagLoading = false;
+        });
+    },
+
+    /**
      * @desc 搜索
      */
     handleSearch(keyword) {
-      this.$router.push({ path: '/blog/search', query: { keyword } });
+      this.$router.replace({ path: '/blog/search', query: { keyword: keyword } });
     },
   },
 };

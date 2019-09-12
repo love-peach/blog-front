@@ -31,4 +31,7 @@ Object.keys(storeListSession).forEach(funName => {
   storeFactory(funName, storeListSession[funName], 'session');
 });
 
+store.localClear = () => storageFun.local.clear();
+store.sessionClear = () => storageFun.session.clear();
+
 export default store;
