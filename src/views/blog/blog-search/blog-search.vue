@@ -2,20 +2,20 @@
   <div class="z-container">
     <div class="filter-bar">
       <div class="z-row">
-        <div class="z-col-10">
-          <FilterSelect v-model="formData.category" :options="categoryList" placeholder="不限分类" labelKey="name" valueKey="_id"></FilterSelect>
+        <div class="z-col-sm-10">
+          <FilterSelect v-model="formData.category" :options="categoryListFormat" placeholder="不限分类" labelKey="name" valueKey="_id"></FilterSelect>
         </div>
-        <div class="z-col-10">
+        <div class="z-col-sm-10">
           <FilterSelect v-model="formData.tag" :options="tagList" multiple placeholder="不限标签" labelKey="name" valueKey="_id"></FilterSelect>
         </div>
-        <div class="z-col-10">
+        <!-- <div class="z-col-10">
           <FilterSelect v-model="formData.tag" :options="tagList" multiple placeholder="不限时间" labelKey="name" valueKey="_id"></FilterSelect>
-        </div>
+        </div> -->
       </div>
     </div>
 
     <div class="z-row">
-      <div class="z-col-md-42 z-col-xl-45">
+      <div class="z-col-md-42 z-col-xl-45" v-loading="isLoading">
         <template v-if="blogList.length > 0">
           <Card v-for="(blog, index) in blogList" :key="index">
             <TopicItem :topic="blog"></TopicItem>
@@ -39,10 +39,12 @@
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid darken(@colorBorder, 5%);
+  background-color: @colorBgBody;
 }
 .list-side {
   position: sticky;
   top: @heightHeader + 20;
+  z-index: 10;
 }
 .z-card.search-wrap {
   margin: 5px 0;

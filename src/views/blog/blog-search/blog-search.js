@@ -41,6 +41,9 @@ export default {
     ...mapGetters('common', {
       categoryList: 'getCategoryList',
     }),
+    categoryListFormat() {
+      return this.categoryList.filter(item => item.value !== '/');
+    },
   },
   watch: {
     $route: {
@@ -49,8 +52,20 @@ export default {
       },
       deep: true,
     },
+    formData: {
+      handler() {
+        this.requestblogList();
+      },
+      deep: true,
+    },
   },
   mounted() {
+    if (this.$route.query.keyword) {
+      this.formData.keyword = this.$route.query.keyword;
+    }
+    if (this.$route.query.tag) {
+      this.formData.tag = [this.$route.query.tag];
+    }
     this.requestblogList();
     this.requestTagList();
   },
@@ -63,7 +78,7 @@ export default {
       const params = {
         page: this.page,
         limit: this.limit,
-        keyword: this.$route.query.keyword,
+        ...this.formData,
       };
       api
         .GetBlogList(params)
@@ -96,7 +111,9 @@ export default {
      * @desc 搜索
      */
     handleSearch(keyword) {
-      this.$router.replace({ path: '/blog/search', query: { keyword: keyword } });
+      this.formData.keyword = keyword;
+      // this.requestblogList();
+      this.$router.replace({ path: '/blog/search', query: { keyword } });
     },
   },
 };

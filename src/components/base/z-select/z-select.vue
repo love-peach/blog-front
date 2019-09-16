@@ -124,7 +124,7 @@ button {
   }
   &-options-item&-cursor&-checked {
     color: #fff;
-    background-color: @colorError;
+    background-color: @colorSuccess;
   }
 }
 </style>

@@ -26,6 +26,11 @@ export default {
       searchWord: '',
     };
   },
+  mounted() {
+    if (this.$route.query.keyword) {
+      this.searchWord = this.$route.query.keyword;
+    }
+  },
   methods: {
     /**
      * @desc 回车事件

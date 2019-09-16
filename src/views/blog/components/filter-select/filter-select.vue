@@ -237,7 +237,7 @@ export default {
       color: #fff;
       background-color: @colorSuccess;
       &:hover {
-        background-color: @colorError;
+        background-color: @colorSuccess;
         color: #fff;
       }
       .options-check-icon {

@@ -29,7 +29,7 @@ export default {
     handleInput(e) {
       clearTimeout(timer);
       timer = setTimeout(() => {
-        this.$emit('input', e.target.value);
+        this.$emit('input', e.target.value.replace(/\r\n?/g, '\n'));
       }, 300);
     },
   },

@@ -37,7 +37,7 @@ export default {
           path: '/home',
         },
         {
-          name: '前端技术',
+          name: '前端文章',
           path: '/blog',
         },
         {
@@ -101,9 +101,10 @@ export default {
       position: absolute;
       bottom: 0;
       left: 50%;
-      height: 0;
+      height: 2px;
       width: 0;
-      border-bottom: 1px solid @colorPrimary;
+      border-radius: 2px;
+      background-image: linear-gradient(90deg, @colorSuccess, @colorInfo);
       transition: all 0.3s ease;
     }
     &:hover {
@@ -126,9 +127,6 @@ export default {
     &.current {
       color: @colorPrimary;
     }
-    &:after {
-      border-bottom: 1px solid @colorPrimary;
-    }
     &:hover {
       color: @colorPrimary;
     }
@@ -140,9 +138,6 @@ export default {
   .app-menu-link {
     &.current {
       color: @colorTextWhite;
-    }
-    &:after {
-      border-bottom: 1px solid @colorTextWhite;
     }
     &:hover {
       color: @colorTextWhite;
