@@ -1,5 +1,5 @@
 <template>
-  <div class="md-preview-box markdown-body" v-html="articleHtml" v-highlight></div>
+  <div class="markdown-body" :style="styles" v-html="articleHtml" v-highlight></div>
 </template>
 
 <script>
@@ -26,6 +26,10 @@ export default {
       type: String,
       default: '',
     },
+    padding: {
+      type: [String, Number],
+      default: '10px',
+    },
   },
   computed: {
     articleHtml() {
@@ -35,6 +39,11 @@ export default {
         return `<h${level} id="titleAnchor-${index++}">${text}</h${level}>`;
       };
       return marked(this.content || '', { renderer: renderer });
+    },
+    styles() {
+      return {
+        padding: typeof this.padding === 'number' ? `${this.padding}px` : this.padding,
+      };
     },
   },
   directives: {
@@ -49,10 +58,9 @@ export default {
 </script>
 
 <style lang="less">
-.md-preview-box {
-  padding: 10px;
+.markdown-body {
+  text-align: justify;
 }
-
 .markdown-body pre {
   background: #23241f !important;
   border-radius: 0 !important;

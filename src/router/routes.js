@@ -1,7 +1,6 @@
 const AppLayout = () => import(/* webpackChunkName: 'AppLayout' */ '@/components/framework/app-layout/');
 
 const HomePage = () => import(/* webpackChunkName: 'HomePage' */ '@/views/home/');
-const LoginPage = () => import(/* webpackChunkName: 'LoginPage' */ '@/views/login/');
 
 const BlogList = () => import(/* webpackChunkName: 'BlogList' */ '@/views/blog/blog-list/');
 const BlogDetail = () => import(/* webpackChunkName: 'BlogDetail' */ '@/views/blog/blog-detail/');
@@ -23,13 +22,20 @@ const MovieHome = () => import(/* webpackChunkName: 'MovieHome' */ '@/views/movi
 const MovieTop250 = () => import(/* webpackChunkName: 'MovieTop250' */ '@/views/movie/movie-top-250/');
 const MovieDetail = () => import(/* webpackChunkName: 'MovieDetail' */ '@/views/movie/movie-detail/');
 
-// const EbookContainer = () => import(/* webpackChunkName: 'EbookContainer' */ '@/views/ebook/ebook-container/');
 const EbookHome = () => import(/* webpackChunkName: 'EbookHome' */ '@/views/ebook/home/');
 const EbookCategory = () => import(/* webpackChunkName: 'EbookCategory' */ '@/views/ebook/ebook-category/');
 const EbookCatalog = () => import(/* webpackChunkName: 'EbookCatalog' */ '@/views/ebook/ebook-catalog/');
 const EbookChapter = () => import(/* webpackChunkName: 'EbookChapter' */ '@/views/ebook/ebook-chapter/');
 const EbookRanking = () => import(/* webpackChunkName: 'EbookRanking' */ '@/views/ebook/ebook-ranking/');
 const EbookSearch = () => import(/* webpackChunkName: 'EbookSearch' */ '@/views/ebook/ebook-search/');
+
+const UserLayout = () => import(/* webpackChunkName: 'UserLayout' */ '@/views/user/components/user-layout.vue');
+const UserHome = () => import(/* webpackChunkName: 'UserHome' */ '@/views/user/home/');
+const UserProfile = () => import(/* webpackChunkName: 'UserProfile' */ '@/views/user/profile/');
+const UserAvatar = () => import(/* webpackChunkName: 'UserAvatar' */ '@/views/user/avatar/');
+const UserBlog = () => import(/* webpackChunkName: 'UserBlog' */ '@/views/user/blog/');
+const UserFavorites = () => import(/* webpackChunkName: 'UserFavorites' */ '@/views/user/favorites/');
+const UserComment = () => import(/* webpackChunkName: 'UserComment' */ '@/views/user/comment/');
 
 export default [
   {
@@ -139,9 +145,82 @@ export default [
     ],
   },
   {
-    path: '/login',
-    name: 'login',
-    component: LoginPage,
+    path: '/user',
+    component: AppLayout,
+    children: [
+      {
+        path: '',
+        name: '',
+        component: UserLayout,
+        children: [
+          {
+            path: '',
+            name: '用户中心',
+            component: UserHome,
+          },
+        ],
+      },
+      {
+        path: 'profile',
+        name: '',
+        component: UserLayout,
+        children: [
+          {
+            path: '',
+            name: '个人资料',
+            component: UserProfile,
+          },
+        ],
+      },
+      {
+        path: 'avatar',
+        name: '',
+        component: UserLayout,
+        children: [
+          {
+            path: '',
+            name: '修改头像',
+            component: UserAvatar,
+          },
+        ],
+      },
+      {
+        path: 'blog',
+        name: '',
+        component: UserLayout,
+        children: [
+          {
+            path: '',
+            name: '我的作品',
+            component: UserBlog,
+          },
+        ],
+      },
+      {
+        path: 'favorites',
+        name: '',
+        component: UserLayout,
+        children: [
+          {
+            path: '',
+            name: '我的喜欢',
+            component: UserFavorites,
+          },
+        ],
+      },
+      {
+        path: 'comment',
+        name: '',
+        component: UserLayout,
+        children: [
+          {
+            path: '',
+            name: '我的评论',
+            component: UserComment,
+          },
+        ],
+      },
+    ],
   },
   {
     path: '/admin',

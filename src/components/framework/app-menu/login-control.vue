@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="dropdown-menu-wrap" v-if="userInfo">
-      <Zbtn theme="success" size="small" shape="circle" icon="user">{{ userInfo.userName }}</Zbtn>
+      <Zbtn theme="success" size="small" shape="circle" icon="user" :to="{ path: '/user' }">{{ userInfo.userName }}</Zbtn>
       <div :class="['dropdown-menu', `dropdown-menu-${theme}`]">
         <ConcaveRadiusBox :size="15" :theme="theme">
           <Zbtn :theme="theme === 'white' ? 'text' : 'white'" icon="signout" shape="rect" long @click="handleSignOut">退出账号</Zbtn>

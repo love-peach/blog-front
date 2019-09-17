@@ -27,7 +27,7 @@
       <div class="topic-head-time">
         <div class="time-day">{{ topic.createdAt | dateFormatFilter('DD') }}</div>
         <div class="time-month-year">
-          <div class="time-month">{{ topic.createdAt | dateFormatFilter('MMM') }}</div>
+          <div class="time-month">{{ topic.createdAt | dateFormatFilter('MM') }}月</div>
           <div class="time-year">{{ topic.createdAt | dateFormatFilter('YYYY') }}</div>
         </div>
       </div>
@@ -39,9 +39,7 @@
           <img class="topic-img" :src="topic.posterUrl" alt="" />
         </router-link>
       </div>
-      <div class="topic-text-wrap">
-        <div class="topic-text">{{ topic.content }}</div>
-      </div>
+      <MdPreview :content="firstParagraph" :padding="0" />
     </div>
   </div>
 </template>

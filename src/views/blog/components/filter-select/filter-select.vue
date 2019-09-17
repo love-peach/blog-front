@@ -109,7 +109,6 @@ export default {
         this.handleSelectMultiple(option);
       } else {
         this.handleSelectSingle(option);
-        // this.handleHideOptions();
       }
     },
 

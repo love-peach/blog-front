@@ -79,7 +79,7 @@ export default {
       var jsCardMdNav = document.getElementById('jsCardMdNav');
       var jsBriefWrap = document.getElementById('briefWrap');
 
-      if (t >= jsBriefWrap.clientHeight - 50) {
+      if (t >= jsBriefWrap.clientHeight + 20) {
         jsCardMdNav.classList.add('fixed-side-card');
       } else {
         jsCardMdNav.classList.remove('fixed-side-card');

@@ -1,7 +1,6 @@
 import Card from '@/components/base/card/';
 import TopicItem from '../components/topic-item/';
 import CardNoData from '@/components/kit/card-no-data/';
-import CardTopic from '@/components/kit/card-topic/';
 import CardCategory from '@/components/kit/card-category/';
 import AppSearch from '@/components/framework/app-search/';
 import SearchBlog from '@/components/kit/search-blog/';
@@ -16,7 +15,6 @@ export default {
     Card,
     TopicItem,
     CardNoData,
-    CardTopic,
     CardCategory,
     AppSearch,
     SearchBlog,
