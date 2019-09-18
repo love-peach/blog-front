@@ -5,7 +5,7 @@
       <div class="author-avatar">
         <div class="author-avatar-box" :style="{ 'background-image': 'url(' + avatar + ')' }"></div>
       </div>
-      <h3 class="brief-title">{{ userInfo.userName }}</h3>
+      <h3 class="brief-title">{{ userInfo ? userInfo.nicName || userInfo.userName : '' }}</h3>
     </div>
   </Card>
 </template>
@@ -24,7 +24,7 @@ export default {
       userInfo: 'getUserInfo',
     }),
     avatar() {
-      return this.userInfo ? this.userInfo.posterUrl : '';
+      return this.userInfo ? this.userInfo.avatar : '';
     },
   },
 };

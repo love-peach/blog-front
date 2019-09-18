@@ -3,7 +3,7 @@
     <UserPageTitle title="用户中心">
       <template v-slot:titleSub>
         <div>
-          亲爱的 <span class="color-info">{{ userInfo.userName }}</span> {{ greetings }}
+          亲爱的 <span class="color-info">{{ userInfo ? userInfo.nicName || userInfo.userName : '' }}</span> {{ greetings }}
         </div>
       </template>
     </UserPageTitle>

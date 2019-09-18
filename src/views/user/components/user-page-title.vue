@@ -34,7 +34,7 @@ export default {
 
 <style lang="less" scoped>
 .user-page-title-wrap {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 .user-page-title {
   font-size: 16px;

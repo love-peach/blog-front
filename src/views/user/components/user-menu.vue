@@ -45,7 +45,7 @@ export default {
   .menu-link {
     text-align: center;
     padding: 10px;
-    background-color: @colorBg;
+    // background-color: @colorBg;
     cursor: pointer;
     &:hover {
       color: #fff;
