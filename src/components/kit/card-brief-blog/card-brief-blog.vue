@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     avatarUrl() {
-      return this.blogResult.author ? this.blogResult.author.avatarUrl : '';
+      return this.blogResult.authorObj ? this.blogResult.authorObj.avatar : '';
     },
   },
 };
