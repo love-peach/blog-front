@@ -45,6 +45,10 @@ export default {
           path: '/admin/resource',
         },
         {
+          name: '评论管理',
+          path: '/admin/comment',
+        },
+        {
           name: '用户管理',
           path: '/admin/user',
         },

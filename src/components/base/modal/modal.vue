@@ -2,7 +2,7 @@
   <transition name="modal">
     <div class="modal-mask" @click="$emit('close')">
       <div class="modal-wrapper">
-        <div class="modal-container" @click.stop="">
+        <div class="modal-container" :style="modalContainerStyle" @click.stop="">
           <div class="modal-header">
             <slot name="header"></slot>
           </div>
@@ -27,6 +27,19 @@
 <script>
 export default {
   name: 'modal',
+  props: {
+    width: {
+      type: [Number, String],
+      default: '300px',
+    },
+  },
+  computed: {
+    modalContainerStyle() {
+      return {
+        width: typeof this.width === 'number' ? `${this.width}px` : this.width,
+      };
+    },
+  },
 };
 </script>
 

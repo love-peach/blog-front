@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls">
-    <div :class="`${prefixCls}-header`">
+    <div :class="`${prefixCls}-header`" v-if="showHeaderRight || title">
       <div :class="`${prefixCls}-header-left`">
         <span :class="`${prefixCls}-title`">{{ title }}</span>
       </div>
@@ -26,7 +26,11 @@ export default {
   data() {
     return {
       prefixCls: prefixCls,
+      showHeaderRight: true,
     };
+  },
+  mounted() {
+    this.showHeaderRight = this.$slots.headerRight !== undefined;
   },
 };
 </script>

@@ -3,14 +3,14 @@
     <div class="comments-form-body">
       <div class="comments-form-user">
         <div class="comments-form-user-avatar no-img-placeholder-colorful no-img-placeholder-horizon">
-          <img class="no-img-placeholder" src="12" alt="" />
+          <img :src="userInfo ? userInfo.avatar : ''" alt="" />
         </div>
         <span v-if="userInfo" class="comments-form-user-name">{{ userInfo.userName }}</span>
         <Btn v-else theme="text" @click="handleLogin">请登录</Btn>
       </div>
       <div class="comments-form-content">
         <div class="comments-form-content-input">
-          <textarea v-model="formData.content" placeholder="说点什么。。。" rows="7"></textarea>
+          <textarea v-model="formData.content" placeholder="说点什么。。。（评论需要审核通过才可以展示哦~）" rows="7"></textarea>
         </div>
         <span style="position: absolute;left: 0;top: 105%;color: #ccc;">{{ formData.content ? formData.content.length : 0 }} / 500</span>
       </div>
@@ -39,6 +39,7 @@
       img {
         height: 100%;
         width: 100%;
+        object-fit: cover;
       }
     }
   }

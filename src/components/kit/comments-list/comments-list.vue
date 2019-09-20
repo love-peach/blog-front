@@ -4,7 +4,7 @@
       <li class="comments-list-item" v-for="comments in commentsList" :key="comments.id">
         <div class="comments-body">
           <div class="comments-user no-img-placeholder-colorful no-img-placeholder-horizon">
-            <img src="12" alt="" />
+            <img class="comments-user-avatar" :src="comments.from ? comments.from.avatar : ''" alt="" />
           </div>
           <div class="comments-main">
             <div class="comments-mate">
@@ -70,6 +70,11 @@
     height: 50px;
     width: 50px;
     margin-right: 15px;
+  }
+  .comments-user-avatar {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
   .comments-main {
     flex: 1;

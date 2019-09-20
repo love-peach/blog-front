@@ -72,7 +72,7 @@ export default {
     initValue() {
       let { value, options } = this;
       if (value && value.length > 0 && options && options.length > 0) {
-        this.selectedArray = options.filter(item => value.includes(item._id));
+        this.selectedArray = options.filter(item => value.includes(item[this.valueKey]));
       }
     },
 
@@ -123,7 +123,7 @@ export default {
      * @desc 判断 val 是否 在 values 中
      */
     includeSomeValue(val, values) {
-      return values.some(item => item._id === val._id);
+      return values && values.some(item => item[this.valueKey] === val[this.valueKey]);
     },
 
     /**
@@ -132,7 +132,7 @@ export default {
     removeSomeValue(val, values) {
       let rmIndex = -1;
       values.forEach((item, index) => {
-        if (item._id === val._id) {
+        if (item[this.valueKey] === val[this.valueKey]) {
           rmIndex = index;
         }
       });

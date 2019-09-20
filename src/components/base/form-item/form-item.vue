@@ -1,8 +1,10 @@
 <template>
   <div class="form-item">
-    <label class="form-item-label">{{ label }} <small v-if="required">*</small></label>
-    <slot></slot>
-    <span class="tip" v-if="tip">{{ tip }}</span>
+    <label v-if="labelWidth" class="form-item-label" :style="labelStyle">{{ label }} <small v-if="required">*</small></label>
+    <div class="form-item-content">
+      <slot></slot>
+      <span class="tip" v-if="tip">{{ tip }}</span>
+    </div>
   </div>
 </template>
 
@@ -18,21 +20,32 @@ export default {
     tip: String,
     required: Boolean,
   },
+  computed: {
+    labelStyle() {
+      return {
+        width: typeof this.labelWidth === 'number' ? `${this.labelWidth}px` : this.labelWidth,
+      };
+    },
+  },
 };
 </script>
 
 <style lang="less" scoped>
 .form-item {
   position: relative;
-  margin-bottom: 10px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
   .form-item-label {
     font-size: 14px;
     display: inline-block;
     text-align: right;
-    width: 120px;
     margin-right: 20px;
     vertical-align: middle;
     color: @colorTextSub;
+  }
+  .form-item-content {
+    flex: 1;
   }
   .tip {
     font-size: 12px;

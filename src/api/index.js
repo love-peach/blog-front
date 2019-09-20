@@ -142,8 +142,8 @@ export default {
   PostReplys: (params, options) => request.post('/replys', params, options),
 
   // 修改回复
-  PutReplys: (params, options) => request.put(`/replys/${params.commentId}`, params, options),
+  PutReplys: (params, options) => request.put(`/replys/${params.replyId}`, params, options),
 
   // 删除回复
-  DeleteReplys: (params, options) => request.delete(`/replys/${params.commentId}`, params, options),
+  DeleteReplys: (params, options) => request.delete(`/replys/${params.replyId}`, params, options),
 };

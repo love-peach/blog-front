@@ -17,6 +17,7 @@ const AdminTag = () => import(/* webpackChunkName: 'AdminTag' */ '@/views/admin/
 const AdminResourceType = () => import(/* webpackChunkName: 'AdminResourceType' */ '@/views/admin/admin-resource-type/');
 const AdminResource = () => import(/* webpackChunkName: 'AdminResource' */ '@/views/admin/admin-resource/');
 const AdminUser = () => import(/* webpackChunkName: 'AdminUser' */ '@/views/admin/admin-user/');
+const AdminComment = () => import(/* webpackChunkName: 'AdminComment' */ '@/views/admin/admin-comment/');
 
 const MovieHome = () => import(/* webpackChunkName: 'MovieHome' */ '@/views/movie/home/');
 const MovieTop250 = () => import(/* webpackChunkName: 'MovieTop250' */ '@/views/movie/movie-top-250/');
@@ -265,6 +266,11 @@ export default [
         path: 'resource',
         name: '前端资源管理',
         component: AdminResource,
+      },
+      {
+        path: 'comment',
+        name: '评论管理',
+        component: AdminComment,
       },
       {
         path: 'user',
