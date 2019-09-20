@@ -47,7 +47,7 @@ export default {
               [
                 h('img', {
                   attrs: {
-                    src: parama.row.posterUrl,
+                    src: parama.row.poster,
                   },
                   style: {
                     width: '80px',

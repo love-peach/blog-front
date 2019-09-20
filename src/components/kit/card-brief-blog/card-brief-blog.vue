@@ -1,7 +1,7 @@
 <template>
   <Card :padding="0">
     <div class="card-brief-blog-wrap">
-      <div class="brief-poster" :style="{ 'background-image': blogResult.posterUrl ? 'url(' + blogResult.posterUrl + ')' : '' }"></div>
+      <div class="brief-poster" :style="{ 'background-image': blogResult.poster ? 'url(' + blogResult.poster + ')' : '' }"></div>
       <div class="author-avatar">
         <div class="author-avatar-box" :style="{ 'background-image': 'url(' + avatarUrl + ')' }"></div>
       </div>

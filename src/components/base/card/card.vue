@@ -54,7 +54,7 @@ export default {
 <style lang="less" scoped>
 .z-card {
   background-color: #fff;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   overflow: hidden;
   transition: all 0.2s linear;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);

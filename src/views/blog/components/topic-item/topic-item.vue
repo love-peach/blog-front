@@ -36,7 +36,7 @@
     <div class="topic-body clearfix">
       <div class="topic-img-wrap">
         <router-link class="topic-img-link no-img-placeholder-colorful no-img-placeholder-horizon" :to="{ path: `/blog/detail/${topic._id}` }">
-          <img class="topic-img" :src="topic.posterUrl" alt="" />
+          <img class="topic-img" :src="topic.poster" alt="" />
         </router-link>
       </div>
       <MdPreview :content="firstParagraph" :padding="0" />

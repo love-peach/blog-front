@@ -69,7 +69,7 @@ export default {
               [
                 h('img', {
                   attrs: {
-                    src: parama.row.posterUrl,
+                    src: parama.row.poster,
                   },
                   style: {
                     width: '80px',
@@ -211,7 +211,6 @@ export default {
   methods: {
     ...mapActions({
       toggleSignInModal: 'common/toggleSignInModal',
-      handleChangeUserInfo: 'common/changeUserInfo',
     }),
 
     /**
