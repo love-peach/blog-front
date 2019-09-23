@@ -1,37 +1,40 @@
-import ZPanel from '@/components/base/panel/';
+import Card from '@/components/base/card/';
+import UserPageTitle from '../components/user-page-title.vue';
 import ZTable from '@/components/base/table/';
+import Pagenation from '@/components/base/pagenation/';
 import Btn from '@/components/base/btn/';
 import ZSwitch from '@/components/base/z-switch/';
-import Pagenation from '@/components/base/pagenation/';
 import Modal from '@/components/base/modal/';
 
 import api from '@/api/';
-
 const { mapGetters, mapActions } = Vuex;
 
 export default {
-  name: 'AdminArticle',
+  name: 'UserBlog',
   components: {
-    ZPanel,
+    Card,
+    UserPageTitle,
     ZTable,
     Pagenation,
-    Modal,
     Btn,
+    ZSwitch,
+    Modal,
   },
   data() {
     return {
       page: 1,
       limit: 10,
       pageTotal: 0,
-      tableData: [],
+      totalEle: 0,
+      blogList: [],
       isLoading: false,
-      isDeleteLoading: false,
-      currentRow: {},
       isShowDeleteModal: false,
+      currentRow: {},
       columns: [
         {
           title: '海报',
           key: 'poster',
+          class: 'hidden-xs hidden-sm',
           width: '80px',
           render: (h, parama) => {
             return h(
@@ -81,12 +84,6 @@ export default {
           },
         },
         {
-          title: '作者',
-          render: (h, parama) => {
-            return h('span', parama.row.authorObj ? parama.row.authorObj.userName : '未知');
-          },
-        },
-        {
           title: '分类',
           key: 'category',
           align: 'left',
@@ -108,29 +105,28 @@ export default {
         {
           title: '时间',
           key: 'createAt',
+          class: 'visible-lg visible-xl',
           render: (h, params) => {
-            const createdAtFormat = this.$options.filters.dateFormatFilter(params.row.createdAt, 'YYYY-MM-DD HH:mm');
-            const updatedAtFormat = this.$options.filters.dateFormatFilter(params.row.updatedAt, 'YYYY-MM-DD HH:mm');
+            const createdAtFormat = this.$options.filters.dateFormatFilter(params.row.createdAt, 'YYYY-MM-DD HH:mm:ss');
+            const updatedAtFormat = this.$options.filters.dateFormatFilter(params.row.updatedAt, 'YYYY-MM-DD HH:mm:ss');
             return h('div', [h('div', createdAtFormat), h('div', updatedAtFormat)]);
           },
         },
-        {
-          title: '浏览',
-          key: 'viewed',
-        },
-        {
-          title: '赞',
-          key: 'liked',
-          render: (h, params) => {
-            return h('span', params.row.likes.length);
-          },
-        },
+        // {
+        //   title: '浏览',
+        //   key: 'viewed',
+        // },
+        // {
+        //   title: '赞',
+        //   key: 'liked',
+        // },
         // {
         //   title: '评论',
         //   key: 'comment',
         // },
         {
           title: '状态',
+          class: 'hidden-xs',
           render: (h, params) => {
             return h(ZSwitch, {
               props: {
@@ -138,7 +134,7 @@ export default {
               },
               on: {
                 change: value => {
-                  this.handleRowToggleStatus(value, params.row);
+                  this.requestToggleBlogStatus(value, params.row);
                 },
               },
             });
@@ -152,16 +148,12 @@ export default {
                 Btn,
                 {
                   props: {
+                    to: { path: `/user/write/${params.row._id}` },
                     theme: 'primary',
                     size: 'small',
                   },
                   style: {
                     marginRight: '5px',
-                  },
-                  on: {
-                    click: () => {
-                      this.handleRowEdit(params.row);
-                    },
                   },
                 },
                 '编辑'
@@ -178,7 +170,8 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.handleRowDel(params.row);
+                      this.currentRow = params.row;
+                      this.handleShowDeleteBlogModal();
                     },
                   },
                 },
@@ -215,17 +208,24 @@ export default {
      * @desc 请求 文章列表
      */
     requestblogList() {
-      this.isLoading = true;
+      if (!this.userInfo || !this.userInfo._id) {
+        this.$toast.info('请登录');
+        this.toggleSignInModal(true);
+        return;
+      }
       const params = {
         page: this.page,
         limit: this.limit,
         status: 'all',
+        author: this.userInfo._id,
       };
+      this.isLoading = true;
       api
         .GetBlogList(params)
         .then(res => {
-          this.tableData = res.result.list;
+          this.blogList = res.result.list;
           this.pageTotal = res.result.pages;
+          this.totalEle = res.result.total;
           this.isLoading = false;
         })
         .catch(() => {
@@ -270,53 +270,6 @@ export default {
         .catch(() => {
           this.isDeleteLoading = false;
         });
-    },
-
-    /**
-     * @desc 验证是否已登录，是否为 admin 用户
-     */
-    handleValidateUserAuth() {
-      let isUserAuth = false;
-      if (this.userInfo) {
-        if (this.userInfo.userName === 'admin') {
-          isUserAuth = true;
-        } else {
-          this.$toast.warning('非admin，无权限！');
-        }
-      } else {
-        this.$toast.info('请登录');
-        this.toggleSignInModal(true);
-      }
-      return isUserAuth;
-    },
-
-    /**
-     * @desc 表格点击事件 上下架状态
-     */
-    handleRowToggleStatus(value, row) {
-      if (this.handleValidateUserAuth()) {
-        this.requestToggleBlogStatus(value, row);
-      }
-    },
-
-    /**
-     * @desc 表格点击事件 编辑
-     */
-    handleRowEdit(row) {
-      this.currentRow = row;
-      if (this.handleValidateUserAuth()) {
-        this.$router.push(`/admin/write/${row._id}`);
-      }
-    },
-
-    /**
-     * @desc 表格点击事件 删除
-     */
-    handleRowDel(row) {
-      this.currentRow = row;
-      if (this.handleValidateUserAuth()) {
-        this.handleShowDeleteBlogModal();
-      }
     },
 
     /**

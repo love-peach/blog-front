@@ -34,7 +34,9 @@ const UserLayout = () => import(/* webpackChunkName: 'UserLayout' */ '@/views/us
 const UserHome = () => import(/* webpackChunkName: 'UserHome' */ '@/views/user/home/');
 const UserProfile = () => import(/* webpackChunkName: 'UserProfile' */ '@/views/user/profile/');
 const UserAvatar = () => import(/* webpackChunkName: 'UserAvatar' */ '@/views/user/avatar/');
+const UserPassword = () => import(/* webpackChunkName: 'UserPassword' */ '@/views/user/password/');
 const UserBlog = () => import(/* webpackChunkName: 'UserBlog' */ '@/views/user/blog/');
+const UserWrite = () => import(/* webpackChunkName: 'UserWrite' */ '@/views/user/write/');
 const UserFavorites = () => import(/* webpackChunkName: 'UserFavorites' */ '@/views/user/favorites/');
 const UserComment = () => import(/* webpackChunkName: 'UserComment' */ '@/views/user/comment/');
 
@@ -186,6 +188,18 @@ export default [
         ],
       },
       {
+        path: 'password',
+        name: '',
+        component: UserLayout,
+        children: [
+          {
+            path: '',
+            name: '修改密码',
+            component: UserPassword,
+          },
+        ],
+      },
+      {
         path: 'blog',
         name: '',
         component: UserLayout,
@@ -194,6 +208,30 @@ export default [
             path: '',
             name: '我的作品',
             component: UserBlog,
+          },
+        ],
+      },
+      {
+        path: 'write',
+        name: '',
+        component: UserLayout,
+        children: [
+          {
+            path: '',
+            name: '发布文章',
+            component: UserWrite,
+          },
+        ],
+      },
+      {
+        path: 'write/:blogId',
+        name: '',
+        component: UserLayout,
+        children: [
+          {
+            path: '',
+            name: '编辑文章',
+            component: UserWrite,
           },
         ],
       },

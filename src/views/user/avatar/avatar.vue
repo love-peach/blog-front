@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <Card :padding="20" style="height: 100%;">
     <UserPageTitle title="修改头像" titleSub="提示：有一个好的头像会有意想不到的收获哦。"></UserPageTitle>
 
     <div class="z-row">
@@ -37,10 +37,11 @@
         <Btn :theme="formData.avatar ? 'success' : 'default'" style="margin-top: 30px;" @click="handleConfirm">确定</Btn>
       </div>
     </div>
-  </div>
+  </Card>
 </template>
 
 <script>
+import Card from '@/components/base/card/';
 import UserPageTitle from '../components/user-page-title.vue';
 import Btn from '@/components/base/btn/';
 import Upload from '@/components/base/upload/';
@@ -53,6 +54,7 @@ const { mapGetters, mapActions } = Vuex;
 export default {
   name: 'UserProfile',
   components: {
+    Card,
     Btn,
     Upload,
     UserPageTitle,

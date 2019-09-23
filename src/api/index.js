@@ -74,6 +74,9 @@ export default {
   // 用户 - 删除
   DeleteUser: (params, options) => request.delete(`/users/${params.userId}`, params, options),
 
+  // 用户 - 修改密码
+  PostChangePwd: (params, options) => request.post('/users/changePwd', params, options),
+
   // 用户 - 注册
   PostUserSignup: (params, options) => request.post('/users/signup', params, options),
 

@@ -6,6 +6,8 @@ import Modal from '@/components/base/modal/';
 
 import api from '@/api/';
 
+const { mapGetters, mapActions } = Vuex;
+
 export default {
   name: 'AdminCategory',
   components: {
@@ -49,13 +51,13 @@ export default {
         {
           title: '创建时间',
           render: (h, params) => {
-            return h('div', this.$options.filters.dateFormatFilter(params.row.createdAt, 'YYYY-MM-DD HH:MM'));
+            return h('div', this.$options.filters.dateFormatFilter(params.row.createdAt, 'YYYY-MM-DD HH:mm'));
           },
         },
         {
           title: '修改时间',
           render: (h, params) => {
-            return h('div', this.$options.filters.dateFormatFilter(params.row.updatedAt, 'YYYY-MM-DD HH:MM'));
+            return h('div', this.$options.filters.dateFormatFilter(params.row.updatedAt, 'YYYY-MM-DD HH:mm'));
           },
         },
         {
@@ -74,7 +76,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.handleEditCategory(params.row);
+                      this.handleRowEdit(params.row);
                     },
                   },
                 },
@@ -92,8 +94,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.currentRow = params.row;
-                      this.handleShowDeleteModal();
+                      this.handleRowDel(params.row);
                     },
                   },
                 },
@@ -105,10 +106,19 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapGetters('common', {
+      userInfo: 'getUserInfo',
+    }),
+  },
   mounted() {
     this.requestCategoryList();
   },
   methods: {
+    ...mapActions({
+      toggleSignInModal: 'common/toggleSignInModal',
+    }),
+
     /**
      * @desc 请求 获取文章分类列表
      */
@@ -225,13 +235,25 @@ export default {
     },
 
     /**
-     * @desc 编辑文章分类
+     * @desc 表格点击事件 编辑
      */
-    handleEditCategory(row) {
+    handleRowEdit(row) {
       this.editMode = 'edit';
       this.currentRow = row;
-      this.handleRecoveryFormData(row);
-      this.handleShowCategoryModal();
+      if (this.handleValidateUserAuth()) {
+        this.handleRecoveryFormData(row);
+        this.handleShowCategoryModal();
+      }
+    },
+
+    /**
+     * @desc 表格点击事件 删除
+     */
+    handleRowDel(row) {
+      this.currentRow = row;
+      if (this.handleValidateUserAuth()) {
+        this.handleShowDeleteModal();
+      }
     },
 
     /**
@@ -249,10 +271,31 @@ export default {
     },
 
     /**
+     * @desc 验证是否已登录，是否为 admin 用户
+     */
+    handleValidateUserAuth() {
+      let isUserAuth = false;
+      if (this.userInfo) {
+        if (this.userInfo.userName === 'admin') {
+          isUserAuth = true;
+        } else {
+          this.$toast.warning('非admin，无权限！');
+        }
+      } else {
+        this.$toast.info('请登录');
+        this.toggleSignInModal(true);
+      }
+      return isUserAuth;
+    },
+
+    /**
      * @desc 提交文章分类表单
      */
     handleSubmitCategory() {
       if (!this.handleCheckFormData()) {
+        return;
+      }
+      if (!this.handleValidateUserAuth()) {
         return;
       }
       if (this.editMode === 'edit') {

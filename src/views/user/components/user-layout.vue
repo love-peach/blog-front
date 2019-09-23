@@ -1,18 +1,16 @@
 <template>
   <div class="z-container">
-    <div class="z-row">
-      <div class="z-col-sm-20 z-col-md-17 z-col-lg-15 z-col-xl-13">
+    <div class="user-page-wrap">
+      <div class="user-page-side">
         <div class="hidden-xs">
           <UserBrief />
         </div>
-        <Card :padding="0">
+        <Card :padding="0" style="margin-bottom: 0;">
           <UserMenu></UserMenu>
         </Card>
       </div>
-      <div class="z-col-sm-40 z-col-md-43 z-col-lg-45 z-col-xl-47">
-        <Card :padding="20">
-          <router-view></router-view>
-        </Card>
+      <div class="user-page-main">
+        <router-view></router-view>
       </div>
     </div>
   </div>
@@ -35,3 +33,16 @@ export default {
   },
 };
 </script>
+
+<style lang="less" scoped>
+.user-page-wrap {
+  display: flex;
+}
+.user-page-side {
+  width: 240px;
+  margin-right: 20px;
+}
+.user-page-main {
+  flex: 1;
+}
+</style>

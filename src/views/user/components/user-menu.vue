@@ -23,6 +23,14 @@ export default {
           path: '/user/avatar',
         },
         {
+          name: '修改密码',
+          path: '/user/password',
+        },
+        {
+          name: '发布文章',
+          path: '/user/write',
+        },
+        {
           name: '我的作品',
           path: '/user/blog',
         },

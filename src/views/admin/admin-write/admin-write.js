@@ -3,7 +3,6 @@ import Btn from '@/components/base/btn/';
 import Upload from '@/components/base/upload/';
 import MdEditor from '@/components/kit/md-editor/';
 import ZSwitch from '@/components/base/z-switch/';
-import webStore from '@/utils/storage';
 
 import api from '@/api/';
 
@@ -34,6 +33,7 @@ export default {
   computed: {
     ...mapGetters('common', {
       categoryList: 'getCategoryList',
+      userInfo: 'getUserInfo',
     }),
   },
   created() {
@@ -124,8 +124,10 @@ export default {
      */
     checkIsReadyPost() {
       const { title, category, tag, poster, content } = this.formData;
-      const userInfo = webStore.getUserInfo();
-      if (!title) {
+      if (!this.userInfo) {
+        this.$toast.info('请登录');
+        this.toggleSignInModal(true);
+      } else if (!title) {
         this.$toast.error('请填写文章标题');
       } else if (!category) {
         this.$toast.error('请选择文章分类');
@@ -135,9 +137,6 @@ export default {
         this.$toast.error('请选择文章海报');
       } else if (!content) {
         this.$toast.error('请填写文章内容');
-      } else if (!userInfo) {
-        this.$toast.info('请登录');
-        this.toggleSignInModal(true);
       } else {
         return true;
       }
@@ -164,7 +163,7 @@ export default {
     requestArticle() {
       const params = {
         ...this.formData,
-        author: webStore.getUserInfo()._id,
+        author: this.userInfo._id,
       };
       this.isPostBlogLoading = true;
       api
@@ -185,7 +184,7 @@ export default {
       const params = {
         ...this.formData,
         blogId: this.blogId,
-        author: webStore.getUserInfo()._id,
+        author: this.userInfo._id,
       };
       this.isPostBlogLoading = true;
       api

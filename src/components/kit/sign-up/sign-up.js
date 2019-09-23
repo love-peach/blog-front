@@ -34,10 +34,9 @@ export default {
      * @desc 请求 去注册
      */
     requestSingUp() {
-      const { userName, phone, email, password } = this.formData;
+      const { userName, email, password } = this.formData;
       const params = {
         userName,
-        phone,
         email,
         password,
       };
@@ -79,14 +78,10 @@ export default {
      * @desc 校验表单数据是否符合要求
      */
     validateFormData() {
-      const { userName, phone, email, password, confirmPassword } = this.formData;
+      const { userName, email, password, confirmPassword } = this.formData;
       return new Promise(resolve => {
         if (!userName) {
           this.$toast.error('请填写昵称！');
-          return resolve(false);
-        }
-        if (!validatorsExp.phone.test(phone)) {
-          this.$toast.error('请正确填写手机号！');
           return resolve(false);
         }
         if (!validatorsExp.email.test(email)) {

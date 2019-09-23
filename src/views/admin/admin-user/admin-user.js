@@ -7,6 +7,8 @@ import { validatorsExp } from '@/utils/validate';
 
 import api from '@/api/';
 
+const { mapGetters, mapActions } = Vuex;
+
 export default {
   name: 'AdminUser',
   components: {
@@ -69,13 +71,13 @@ export default {
         {
           title: '创建时间',
           render: (h, params) => {
-            return h('div', this.$options.filters.dateFormatFilter(params.row.createdAt, 'YYYY-MM-DD HH:MM'));
+            return h('div', this.$options.filters.dateFormatFilter(params.row.createdAt, 'YYYY-MM-DD HH:mm'));
           },
         },
         {
           title: '修改时间',
           render: (h, params) => {
-            return h('div', this.$options.filters.dateFormatFilter(params.row.updatedAt, 'YYYY-MM-DD HH:MM'));
+            return h('div', this.$options.filters.dateFormatFilter(params.row.updatedAt, 'YYYY-MM-DD HH:mm'));
           },
         },
         {
@@ -94,7 +96,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.handleEditUser(params.row);
+                      this.handleRowEdit(params.row);
                     },
                   },
                 },
@@ -112,8 +114,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.currentRow = params.row;
-                      this.handleShowDeleteModal();
+                      this.handleRowDel(params.row);
                     },
                   },
                 },
@@ -125,10 +126,19 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapGetters('common', {
+      userInfo: 'getUserInfo',
+    }),
+  },
   mounted() {
     this.requestUserList();
   },
   methods: {
+    ...mapActions({
+      toggleSignInModal: 'common/toggleSignInModal',
+    }),
+
     /**
      * @desc 请求 获取标签列表
      */
@@ -246,13 +256,25 @@ export default {
     },
 
     /**
-     * @desc 编辑标签
+     * @desc 表格点击事件 编辑
      */
-    handleEditUser(row) {
+    handleRowEdit(row) {
       this.editMode = 'edit';
       this.currentRow = row;
-      this.handleRecoveryFormData(row);
-      this.handleShowUserModal();
+      if (this.handleValidateUserAuth()) {
+        this.handleRecoveryFormData(row);
+        this.handleShowUserModal();
+      }
+    },
+
+    /**
+     * @desc 表格点击事件 删除
+     */
+    handleRowDel(row) {
+      this.currentRow = row;
+      if (this.handleValidateUserAuth()) {
+        this.handleShowDeleteModal();
+      }
     },
 
     /**
@@ -293,10 +315,31 @@ export default {
     },
 
     /**
+     * @desc 验证是否已登录，是否为 admin 用户
+     */
+    handleValidateUserAuth() {
+      let isUserAuth = false;
+      if (this.userInfo) {
+        if (this.userInfo.userName === 'admin') {
+          isUserAuth = true;
+        } else {
+          this.$toast.warning('非admin，无权限！');
+        }
+      } else {
+        this.$toast.info('请登录');
+        this.toggleSignInModal(true);
+      }
+      return isUserAuth;
+    },
+
+    /**
      * @desc 提交标签表单
      */
     handleSubmitUser() {
       if (!this.handleCheckFormData()) {
+        return;
+      }
+      if (!this.handleValidateUserAuth()) {
         return;
       }
       if (this.editMode === 'edit') {

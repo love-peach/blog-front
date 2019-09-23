@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <Card :padding="20" style="height: 100%;">
     <UserPageTitle :title="`您已送出${totalEle}个爱心`" titleSub="提示：赞美别人就是肯定自己。"></UserPageTitle>
     <div class="z-row">
       <div class="z-col-15" v-for="(item, index) in blogList" :key="index">
@@ -15,10 +15,11 @@
         <Btn theme="error" long @click="requestUnLike" :loading="isUnLikeLoading">确认取消</Btn>
       </div>
     </Modal>
-  </div>
+  </Card>
 </template>
 
 <script>
+import Card from '@/components/base/card/';
 import UserPageTitle from '../components/user-page-title.vue';
 import Pagenation from '@/components/base/pagenation/';
 import Btn from '@/components/base/btn/';
@@ -31,6 +32,7 @@ const { mapGetters, mapActions } = Vuex;
 export default {
   name: 'UserFavorites',
   components: {
+    Card,
     UserPageTitle,
     Pagenation,
     Btn,

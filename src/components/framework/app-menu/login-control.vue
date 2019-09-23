@@ -4,6 +4,7 @@
       <Zbtn theme="success" size="small" shape="circle" icon="user" :to="{ path: '/user' }">{{ userInfo.nicName || userInfo.userName }}</Zbtn>
       <div :class="['dropdown-menu', `dropdown-menu-${theme}`]">
         <ConcaveRadiusBox :size="15" :theme="theme">
+          <Zbtn :theme="theme === 'white' ? 'text' : 'white'" icon="signout" shape="rect" long :to="{ path: '/user/write' }">发布文章</Zbtn>
           <Zbtn :theme="theme === 'white' ? 'text' : 'white'" icon="signout" shape="rect" long :to="{ path: '/user/avatar' }">修改头像</Zbtn>
           <Zbtn :theme="theme === 'white' ? 'text' : 'white'" icon="signout" shape="rect" long :to="{ path: '/user/profile' }">编辑资料</Zbtn>
           <Zbtn :theme="theme === 'white' ? 'text' : 'white'" icon="signout" shape="rect" long @click="handleSignOut">退出账号</Zbtn>

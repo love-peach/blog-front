@@ -8,6 +8,8 @@ import AdminCommentFilter from './admin-comment-filter.vue';
 
 import api from '@/api/';
 
+const { mapGetters, mapActions } = Vuex;
+
 export default {
   name: 'AdminComment',
   components: {
@@ -110,8 +112,8 @@ export default {
           key: 'createAt',
           minWidth: '170px',
           render: (h, params) => {
-            const createdAtFormat = this.$options.filters.dateFormatFilter(params.row.createdAt, 'YYYY-MM-DD HH:MM');
-            const updatedAtFormat = this.$options.filters.dateFormatFilter(params.row.updatedAt, 'YYYY-MM-DD HH:MM');
+            const createdAtFormat = this.$options.filters.dateFormatFilter(params.row.createdAt, 'YYYY-MM-DD HH:mm');
+            const updatedAtFormat = this.$options.filters.dateFormatFilter(params.row.updatedAt, 'YYYY-MM-DD HH:mm');
             return h('div', [h('div', createdAtFormat), h('div', updatedAtFormat)]);
           },
         },
@@ -125,7 +127,9 @@ export default {
               },
               on: {
                 change: value => {
-                  this.requestToggleCommentStatus(value, params.row);
+                  if (this.handleValidateUserAuth()) {
+                    this.requestToggleCommentStatus(value, params.row);
+                  }
                 },
               },
             });
@@ -149,7 +153,9 @@ export default {
                   on: {
                     click: () => {
                       this.currentRow = params.row;
-                      this.handleShowDeleteCommentModal();
+                      if (this.handleValidateUserAuth()) {
+                        this.handleShowDeleteCommentModal();
+                      }
                     },
                   },
                 },
@@ -192,8 +198,8 @@ export default {
           key: 'createAt',
           minWidth: '170px',
           render: (h, params) => {
-            const createdAtFormat = this.$options.filters.dateFormatFilter(params.row.createdAt, 'YYYY-MM-DD HH:MM');
-            const updatedAtFormat = this.$options.filters.dateFormatFilter(params.row.updatedAt, 'YYYY-MM-DD HH:MM');
+            const createdAtFormat = this.$options.filters.dateFormatFilter(params.row.createdAt, 'YYYY-MM-DD HH:mm');
+            const updatedAtFormat = this.$options.filters.dateFormatFilter(params.row.updatedAt, 'YYYY-MM-DD HH:mm');
             return h('div', [h('div', createdAtFormat), h('div', updatedAtFormat)]);
           },
         },
@@ -215,7 +221,9 @@ export default {
                   on: {
                     click: () => {
                       this.currentReplyRow = params.row;
-                      this.handleShowDeleteCommentModal();
+                      if (this.handleValidateUserAuth()) {
+                        this.handleShowDeleteCommentModal();
+                      }
                     },
                   },
                 },
@@ -227,10 +235,19 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapGetters('common', {
+      userInfo: 'getUserInfo',
+    }),
+  },
   mounted() {
     this.requestCommentList();
   },
   methods: {
+    ...mapActions({
+      toggleSignInModal: 'common/toggleSignInModal',
+    }),
+
     /**
      * @desc 表单检索
      */
@@ -328,12 +345,33 @@ export default {
         });
     },
 
+    /**
+     * @desc 确认删除
+     */
     handleConfirmDelete() {
       if (this.isShowReplyModal) {
         this.requestDeleteReply();
       } else {
         this.requestDeleteComment();
       }
+    },
+
+    /**
+     * @desc 验证是否已登录，是否为 admin 用户
+     */
+    handleValidateUserAuth() {
+      let isUserAuth = false;
+      if (this.userInfo) {
+        if (this.userInfo.userName === 'admin') {
+          isUserAuth = true;
+        } else {
+          this.$toast.warning('非admin，无权限！');
+        }
+      } else {
+        this.$toast.info('请登录');
+        this.toggleSignInModal(true);
+      }
+      return isUserAuth;
     },
 
     /**

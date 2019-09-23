@@ -1,13 +1,20 @@
 <template>
-  <div>
+  <Card :padding="20" style="height: 100%;">
     <UserPageTitle :title="`您已发表 ${totalEle} 条评论。`" titleSub="提示：认真填写的点评会帮助到别人哦。"></UserPageTitle>
+    <template v-if="commentsList && commentsList.length">
+      <UserCommentItem v-for="(item, index) in commentsList" :key="index" :comment="item"></UserCommentItem>
+      <Pagenation :totalEle="totalEle" :all="pageTotal" :cur="page" :callback="changePage" style="margin-top: 20px;" />
+    </template>
 
-    <UserCommentItem v-for="(item, index) in commentsList" :key="index" :comment="item"></UserCommentItem>
-    <Pagenation :totalEle="totalEle" :all="pageTotal" :cur="page" :callback="changePage" style="margin-top: 20px;" />
-  </div>
+    <template v-else>
+      <NoData style="height: 300px;"></NoData>
+    </template>
+  </Card>
 </template>
 
 <script>
+import Card from '@/components/base/card/';
+import NoData from '@/components/kit/no-data/';
 import UserPageTitle from '../components/user-page-title.vue';
 import UserCommentItem from '../components/user-comment-item.vue';
 import Pagenation from '@/components/base/pagenation/';
@@ -19,6 +26,8 @@ const { mapGetters, mapActions } = Vuex;
 export default {
   name: 'UserComment',
   components: {
+    Card,
+    NoData,
     UserPageTitle,
     UserCommentItem,
     Pagenation,

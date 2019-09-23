@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <Card :padding="20" style="height: 100%;">
     <UserPageTitle title="用户中心">
       <template v-slot:titleSub>
         <div>
@@ -21,16 +21,18 @@
         <div class="info-item info-item-theme-success"></div>
       </div>
     </div>
-  </div>
+  </Card>
 </template>
 
 <script>
+import Card from '@/components/base/card/';
 import UserPageTitle from '../components/user-page-title.vue';
 const { mapGetters } = Vuex;
 
 export default {
   name: 'UserHome',
   components: {
+    Card,
     UserPageTitle,
   },
   computed: {
