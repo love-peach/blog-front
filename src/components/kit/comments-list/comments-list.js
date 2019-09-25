@@ -23,7 +23,6 @@ export default {
     handleRepay(data) {
       this.commentId = data.id;
       this.toUserId = data.from.id;
-      console.log(data, 'data');
     },
     handleUnRepay() {
       this.commentId = '';

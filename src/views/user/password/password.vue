@@ -118,7 +118,6 @@ export default {
         userId: this.userInfo._id,
         userName: this.userInfo.userName,
       };
-      console.log(params, 'params');
       this.isEditLoading = true;
       api
         .PostChangePwd(params)
@@ -137,7 +136,7 @@ export default {
      * @desc 点击忘记密码
      */
     handleForgetPasswrod() {
-      console.log('点击忘记密码');
+      // console.log('点击忘记密码');
     },
 
     /**

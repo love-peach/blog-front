@@ -2,7 +2,6 @@ import Card from '@/components/base/card/';
 import TopicItem from '../components/topic-item/';
 import CardNoData from '@/components/kit/card-no-data/';
 import CardCategory from '@/components/kit/card-category/';
-import AppSearch from '@/components/framework/app-search/';
 import SearchBlog from '@/components/kit/search-blog/';
 
 const { mapGetters } = Vuex;
@@ -16,7 +15,6 @@ export default {
     TopicItem,
     CardNoData,
     CardCategory,
-    AppSearch,
     SearchBlog,
   },
   data() {

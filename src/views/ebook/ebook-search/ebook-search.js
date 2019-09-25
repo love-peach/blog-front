@@ -121,8 +121,7 @@ export default {
           this.isLoading = false;
           this.searchData = res.result;
         })
-        .catch(err => {
-          console.log(err, 'err');
+        .catch(() => {
           this.isLoading = false;
         });
     },

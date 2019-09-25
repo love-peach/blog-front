@@ -42,7 +42,6 @@ export const off = (function() {
  * @desc 防抖 如 input。核心：在给定的时间间隔内 只触发一次 取消上一次。连续的操作 只触发一次。
  */
 export const debounce = (fn, wait = 500) => {
-  console.log(fn);
   var timer = null;
 
   return function() {

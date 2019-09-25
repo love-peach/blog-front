@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="z-container">
-      <MovieHomeList :title="beingShownData.title" :list="beingShownList" v-loading="isBeingShownLoading" />
+      <MovieHomeList :title="beingShownData.title" :list="beingShownList" v-loading="isBeingShownLoading">
+        <div style="width: 320px;float: right;">
+          <SearchMovie></SearchMovie>
+        </div>
+      </MovieHomeList>
       <MovieHomeList :title="rankingNewData.title" :list="rankingNewList" v-loading="isRankingNewLoading" />
       <MovieHomeList :title="rankingComingData.title" :list="rankingComingList" v-loading="isRankingComingLoading" />
       <MovieHomeList :title="ranking250Data.title" :list="ranking250List" v-loading="isRanking250Loading">
@@ -12,6 +16,7 @@
 </template>
 
 <script>
+import SearchMovie from '@/components/kit/search-movie/';
 import Button from '@/components/base/btn/';
 import MovieHomeList from './movie-home-list';
 import doubanApi from '@/api/api-douban';
@@ -19,6 +24,7 @@ import doubanApi from '@/api/api-douban';
 export default {
   name: 'MovieHome',
   components: {
+    SearchMovie,
     Button,
     MovieHomeList,
   },

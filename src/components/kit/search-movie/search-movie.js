@@ -4,7 +4,7 @@ import doubanApi from '@/api/api-douban';
 let timer = null;
 
 export default {
-  name: 'AppSearch',
+  name: 'SearchMovie',
   components: {
     Icon,
   },
@@ -24,30 +24,33 @@ export default {
       var params = {
         q: this.searchWord,
       };
+      this.isSearchLoading = true;
       doubanApi
         .DoubanMovieSearch(params)
         .then(res => {
+          this.isSearchLoading = false;
           this.suggestList = res;
         })
-        .catch(err => {
-          console.log(err);
+        .catch(() => {
+          this.isSearchLoading = false;
         });
     },
 
     /**
-     * @desc 请求搜索结果
+     * @desc 请求搜索结果 这个接口暂时没找到
      */
     requestSearchMovieFull() {
       var params = {
         q: this.searchWord,
       };
+      this.isSearchLoading = true;
       doubanApi
         .DoubanMovieSearchFull(params)
-        .then(res => {
-          console.log(res, 'res');
+        .then(() => {
+          this.isSearchLoading = false;
         })
-        .catch(err => {
-          console.log(err);
+        .catch(() => {
+          this.isSearchLoading = false;
         });
     },
 
@@ -83,7 +86,7 @@ export default {
     handleBlur() {
       setTimeout(() => {
         this.handleHideOptions();
-      }, 100);
+      }, 1000);
     },
 
     /**
@@ -93,7 +96,7 @@ export default {
       clearTimeout(timer);
       timer = setTimeout(() => {
         this.requestSearchMovie();
-      }, 300);
+      }, 600);
     },
 
     /**

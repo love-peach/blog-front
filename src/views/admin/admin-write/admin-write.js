@@ -115,7 +115,6 @@ export default {
      * @desc 上传 成功
      */
     handleUploadSuccess(res) {
-      console.log(res.result.path, 'res.result.path');
       this.formData.poster = res.result.path;
     },
 

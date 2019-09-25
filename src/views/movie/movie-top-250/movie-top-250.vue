@@ -113,9 +113,8 @@ export default {
           this.tableData = res.subjects;
           this.pageTotal = Math.ceil(res.total / res.count);
         })
-        .catch(err => {
+        .catch(() => {
           this.isLoading = false;
-          console.log(err, 'err');
         });
     },
 

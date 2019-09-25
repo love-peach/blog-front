@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 // 根据请求报错状态码 格式化错误信息
 import store from '@/store/';
 import webStore from '@/utils/storage';

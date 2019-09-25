@@ -1,9 +1,9 @@
 <template>
-  <div class="app-search-wrap">
+  <div class="search-movie-wrap">
     <input
       v-model="searchWord"
       ref="zSearch"
-      class="app-search-input"
+      class="search-movie-input"
       id="searchInput"
       type="text"
       @click="handleClick"
@@ -15,44 +15,44 @@
       @keyup.down="handleKeyupDown"
       autocomplete="off"
     />
-    <button class="app-search-button" @click="requestSearchMovieFull">
-      <Icon class="app-search-button-icon" type="tag" />
-      <span class="app-search-button-text">搜索</span>
+    <button class="search-movie-button" @click="requestSearchMovieFull">
+      <Icon class="search-movie-button-icon" type="tag" />
+      <span class="search-movie-button-text">搜索</span>
     </button>
-    <div class="app-search-suggest" v-show="isShowOptions" ref="zSearchOptions">
+    <div class="search-movie-suggest" v-show="isShowOptions" ref="zSearchOptions">
       <router-link
         v-for="(item, index) in suggestList"
         :key="index"
         :to="{ path: `/movie/detail/${item.id}`, target: '_blank' }"
-        :class="`app-search-suggest-item ${cursorIndex === index ? 'app-search-suggest-item-active' : ''}`"
+        :class="`search-movie-suggest-item ${cursorIndex === index ? 'search-movie-suggest-item-active' : ''}`"
         target="_blank"
         @mouseover="handleMouseoverOptionItem(index)"
       >
-        <img class="app-search-suggest-item-poster" :src="item.img" alt="" />
+        <img class="search-movie-suggest-item-poster" :src="item.img" alt="" />
         <div>
-          <p class="app-search-suggest-item-title">{{ item.title }}（{{ item.year }}）</p>
-          <p class="app-search-suggest-item-desc">{{ item.sub_title }}</p>
+          <p class="search-movie-suggest-item-title">{{ item.title }}（{{ item.year }}）</p>
+          <p class="search-movie-suggest-item-desc">{{ item.sub_title }}</p>
         </div>
       </router-link>
     </div>
   </div>
 </template>
 
-<script src="./app-search.js"></script>
+<script src="./search-movie.js"></script>
 
 <style lang="less" scoped>
-.app-search {
+.search-movie {
   &-wrap {
     position: relative;
   }
   &-input {
-    width: 200px;
+    width: 100%;
     height: 32px;
     padding: 0 75px 0 13px;
     font-size: 12px;
     color: @colorTextContent;
     border-radius: 100px;
-    border: 1px solid @colorPrimary;
+    border: 1px solid @colorInfo;
     outline: 0;
     background-color: transparent;
     transition: width 0.3s ease;
@@ -68,7 +68,7 @@
     cursor: pointer;
     color: #fff;
     // font-weight: bold;
-    background-color: @colorPrimary;
+    background-color: @colorInfo;
     border: 0;
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;

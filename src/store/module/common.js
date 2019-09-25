@@ -44,7 +44,6 @@ const common = {
   actions: {
     async getCategoryList({ commit }) {
       const res = await api.GetCategory();
-      console.log(res, 'res');
       commit('setCatgoryList', res && res.result ? res.result : []);
     },
     toggleSignInModal({ commit }, isShow) {
