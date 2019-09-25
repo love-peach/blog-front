@@ -16,7 +16,7 @@
       autocomplete="off"
     />
     <button class="search-movie-button" @click="requestSearchMovieFull">
-      <Icon class="search-movie-button-icon" type="tag" />
+      <Icon class="search-movie-button-icon" type="search" />
       <span class="search-movie-button-text">搜索</span>
     </button>
     <div class="search-movie-suggest" v-show="isShowOptions" ref="zSearchOptions">
