@@ -23,7 +23,7 @@
           class="upload-input"
           action="/api/upload"
           accept="image/*"
-          :format="['png', 'jpeg', 'jpg']"
+          :format="['png', 'jpeg', 'jpg', 'gif']"
           :data="uploadParams"
           :max-size="2048"
           :on-format-error="handleFormatError"
@@ -90,7 +90,7 @@ export default {
      * @desc 上传 格式出错
      */
     handleFormatError(file) {
-      this.$toast.warning(`文件 ${file.name} 格式不对, 请选择 jpg or png.`, { duration: 4000 });
+      this.$toast.warning(`文件 ${file.name} 格式不对, 请选择 JPG、GIF、JPEG or PNG.`, { duration: 4000 });
     },
 
     /**

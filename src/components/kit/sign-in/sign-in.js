@@ -66,6 +66,15 @@ export default {
     },
 
     /**
+     * @desc 按钮点击事件 忘记密码
+     */
+    handleForgetPwd() {
+      this.$router.push('/forget_pwd');
+      this.$store.dispatch('common/toggleSignInModal', false);
+      this.$store.dispatch('common/toggleSignUpModal', false);
+    },
+
+    /**
      * @desc 按钮点击事件 去注册
      */
     goToRegister() {

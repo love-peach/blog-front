@@ -2,6 +2,8 @@ const AppLayout = () => import(/* webpackChunkName: 'AppLayout' */ '@/components
 
 const HomePage = () => import(/* webpackChunkName: 'HomePage' */ '@/views/home/');
 
+const ForgetPwd = () => import(/* webpackChunkName: 'ForgetPwd' */ '@/views/forget-password/');
+
 const BlogList = () => import(/* webpackChunkName: 'BlogList' */ '@/views/blog/blog-list/');
 const BlogDetail = () => import(/* webpackChunkName: 'BlogDetail' */ '@/views/blog/blog-detail/');
 const BlogSearch = () => import(/* webpackChunkName: 'BlogSearch' */ '@/views/blog/blog-search/');
@@ -52,6 +54,10 @@ export default [
         component: HomePage,
       },
     ],
+  },
+  {
+    path: '/forget_pwd',
+    component: ForgetPwd,
   },
   {
     path: '/blog',
@@ -277,7 +283,7 @@ export default [
       },
       {
         path: 'write/:blogId',
-        name: '编辑文章',
+        name: '编辑文章作品',
         component: AdminWrite,
       },
       {

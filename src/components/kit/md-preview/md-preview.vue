@@ -7,7 +7,7 @@ import marked from 'marked';
 import highlight from 'highlight.js';
 
 import 'github-markdown-css/github-markdown.css';
-import 'highlight.js/styles/monokai-sublime.css';
+import 'highlight.js/styles/github-gist.css';
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -58,13 +58,7 @@ export default {
 </script>
 
 <style lang="less">
-.markdown-body {
+.markdown-body p {
   text-align: justify;
-}
-.markdown-body pre {
-  background: #23241f !important;
-  border-radius: 0 !important;
-  margin-left: -10px;
-  margin-right: -10px;
 }
 </style>

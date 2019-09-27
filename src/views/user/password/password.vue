@@ -3,7 +3,7 @@
     <UserPageTitle title="修改密码" titleSub="提示：密码强度为中等以上才能进行保存修改操作。"></UserPageTitle>
     <FormItem required label="当前密码">
       <input v-model.trim="formData.passwordOld" class="form-item-input" type="password" />
-      <Btn theme="text" @click="handleForgetPasswrod">忘记密码？</Btn>
+      <Btn theme="text" :to="{ path: '/forget_pwd' }">忘记密码？</Btn>
     </FormItem>
     <FormItem required label="新密码">
       <input v-model.trim="formData.password" class="form-item-input" type="password" />
@@ -106,6 +106,7 @@ export default {
   },
   methods: {
     ...mapActions({
+      toggleSignInModal: 'common/toggleSignInModal',
       handleChangeUserInfo: 'common/changeUserInfo',
     }),
 
@@ -114,9 +115,7 @@ export default {
      */
     requestUpdatePassword() {
       const params = {
-        ...this.formData,
-        userId: this.userInfo._id,
-        userName: this.userInfo.userName,
+        ...this.userInfo,
       };
       this.isEditLoading = true;
       api
@@ -130,13 +129,6 @@ export default {
         .catch(() => {
           this.isEditLoading = false;
         });
-    },
-
-    /**
-     * @desc 点击忘记密码
-     */
-    handleForgetPasswrod() {
-      // console.log('点击忘记密码');
     },
 
     /**
@@ -156,6 +148,11 @@ export default {
     validateFormData() {
       const { passwordOld, password, passwordConfirm } = this.formData;
       return new Promise(resolve => {
+        if (!this.userInfo || !this.userInfo._id) {
+          this.$toast.error('请登录');
+          this.toggleSignInModal(true);
+          return resolve(false);
+        }
         if (!passwordOld) {
           this.$toast.error('请填写当前密码！');
           return resolve(false);

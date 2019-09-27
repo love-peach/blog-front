@@ -15,6 +15,7 @@
     </FormItem>
     <FormItem label="个人说明">
       <textarea v-model.trim="formData.briefDesc" class="form-item-textarea" cols="60" rows="5" placeholder="介绍下自己吧"></textarea>
+      <div style="color: #999;">{{ formData.briefDesc ? formData.briefDesc.length : 0 }} / 100</div>
     </FormItem>
     <FormItem>
       <Btn theme="info" @click="handleUpdate" :loading="isEditLoading">更新个人资料</Btn>
@@ -89,7 +90,7 @@ export default {
      * @desc 校验参数
      */
     handleValidete() {
-      const { userName, phone, email } = this.formData;
+      const { userName, phone, email, briefDesc } = this.formData;
       if (!userName) {
         this.$toast.error('请填写用户名！');
         return false;
@@ -104,6 +105,10 @@ export default {
       }
       if (!validatorsExp.email.test(email)) {
         this.$toast.error('请正确填写邮箱！');
+        return false;
+      }
+      if (briefDesc && briefDesc.length > 100) {
+        this.$toast.error('请用不超过100个字介绍自己');
         return false;
       }
       return true;
@@ -151,7 +156,8 @@ export default {
 }
 .form-item-textarea {
   padding: 8px 10px;
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 1.5;
   color: @colorTextContent;
   outline: none;
   vertical-align: middle;

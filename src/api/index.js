@@ -77,6 +77,9 @@ export default {
   // 用户 - 修改密码
   PostChangePwd: (params, options) => request.post('/users/changePwd', params, options),
 
+  // 用户 - 忘记密码
+  PostForgetPwd: (params, options) => request.post('/users/forgetPwd', params, options),
+
   // 用户 - 注册
   PostUserSignup: (params, options) => request.post('/users/signup', params, options),
 
@@ -126,13 +129,13 @@ export default {
   GetComments: (params, options) => request.get('/comments', params, options),
 
   // 新增评论
-  PostComments: (params, options) => request.post('/Comments', params, options),
+  PostComments: (params, options) => request.post('/comments', params, options),
 
   // 修改评论
-  PutComments: (params, options) => request.put(`/Comments/${params.commentId}`, params, options),
+  PutComments: (params, options) => request.put(`/comments/${params.commentId}`, params, options),
 
   // 删除评论
-  DeleteComments: (params, options) => request.delete(`/Comments/${params.commentId}`, params, options),
+  DeleteComments: (params, options) => request.delete(`/comments/${params.commentId}`, params, options),
 
   /**
    * @desc 回复

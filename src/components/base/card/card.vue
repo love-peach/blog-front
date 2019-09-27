@@ -68,10 +68,11 @@ export default {
   }
   &-header {
     font-size: 18px;
-    line-height: 40px;
+    line-height: 50px;
     text-align: center;
     border-bottom: 1px solid @colorBorderLight;
     color: @colorTextTitle;
+    font-weight: normal;
   }
   &-body {
     height: 100%;
