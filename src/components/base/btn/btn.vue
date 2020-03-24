@@ -1,8 +1,9 @@
 <template>
   <component :is="tagName" :class="classes" :disabled="disabled" @click="handleClickLink" v-bind="tagProps">
     <Icon class="z-load-loop" type="loading" v-if="loading"></Icon>
-    <Icon :type="icon" v-if="icon && !loading"></Icon>
+    <Icon :type="icon" v-if="icon && !loading && !iconOnRight"></Icon>
     <span v-if="showSlot" ref="slot"><slot></slot></span>
+    <Icon :type="icon" v-if="icon && !loading && iconOnRight"></Icon>
   </component>
 </template>
 
@@ -48,6 +49,10 @@ export default {
     icon: {
       type: String,
       default: '',
+    },
+    iconOnRight: {
+      type: Boolean,
+      default: false,
     },
     disabled: {
       type: Boolean,
