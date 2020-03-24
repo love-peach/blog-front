@@ -227,7 +227,7 @@
 .section-part-profile {
   position: relative;
   background-color: #333;
-  background-image: url(./components/bg1.jpg);
+  background-image: url(./img/bg1.jpg);
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
@@ -327,7 +327,7 @@
   background-color: #333;
   position: relative;
   background-color: #333;
-  background-image: url(./components/bg2.jpg);
+  background-image: url(./img/bg2.jpg);
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;

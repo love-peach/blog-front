@@ -6,10 +6,11 @@ import Icon from '@/components/base/icon/';
 import SectionCard from './components/section-card.vue';
 import SectionTitle from './components/section-title.vue';
 import SectionTimeline from './components/section-timeline.vue';
-import demoImg from './components/demo1.jpg';
-import demoImg2 from './components/demo2.jpg';
-import demoImg3 from './components/demo3.png';
-import demoImg4 from './components/demo4.png';
+import banneImg from './img/banner.jpg';
+import demoImg from './img/demo1.jpg';
+import demoImg2 from './img/demo2.jpg';
+import demoImg3 from './img/demo3.png';
+import demoImg4 from './img/demo4.png';
 
 export default {
   name: 'HomePage',
@@ -25,6 +26,7 @@ export default {
   },
   data() {
     return {
+      banneImg,
       poster: demoImg,
       poster2: demoImg2,
       poster3: demoImg3,
