@@ -10,8 +10,9 @@
     </BillBoard>
     <div class="page-content">
       <section class="section-part section-part-module">
+        <section-title title="WEB OVERVIEW" titleSub="网站模块介绍" desc="主要介绍网站各个模块用到了那些技术"></section-title>
+
         <div class="z-container">
-          <section-title title="WEB OVERVIEW" titleSub="网站模块介绍" desc="主要介绍网站各个模块用到了那些技术"></section-title>
           <div class="z-row">
             <div class="z-col-sm-30 z-col-md-30 z-col-lg-12">
               <section-card title="前端文章" icon="artical" path="/blog">
@@ -106,8 +107,9 @@
       </section>
 
       <section class="section-part section-part-career">
+        <section-title title="MY CAREER" titleSub="职业经历"></section-title>
+
         <div class="z-container">
-          <section-title title="MY CAREER" titleSub="职业经历"></section-title>
           <section-timeline :times="times"></section-timeline>
         </div>
       </section>
@@ -159,8 +161,9 @@
       </section>
 
       <section class="section-part section-part-contact">
+        <section-title title="FIND ME" titleSub="我的社区"></section-title>
+
         <div class="z-container">
-          <section-title title="FIND ME" titleSub="我的社区"></section-title>
           <ul class="contact-list">
             <li class="contact-list-item">
               <a class="contact-list-item-link contact-list-item-link-github" target="_blank" rel="noopener noreferrer" href="https://github.com/love-peach/blog-front">

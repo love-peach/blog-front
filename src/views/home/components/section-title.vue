@@ -13,6 +13,7 @@
 
 <style lang="less" scoped>
 .section-title {
+  position: relative;
   margin-bottom: 30px;
   text-align: center;
   &-arrow {
